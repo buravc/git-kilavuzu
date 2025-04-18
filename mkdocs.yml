@@ -1,0 +1,9 @@
+site_name: Git Notları
+site_url: https://github.com/buravc
+theme:
+  name: material
+
+nav:
+  - index.md
+  - Temeller:
+    - "Hello World": temeller/hello-world.md

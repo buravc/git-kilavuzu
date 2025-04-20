@@ -6,7 +6,7 @@ theme:
 nav:
   - index.md
   - Temeller:
-    - "Hello World": temeller/hello-world.md
+    - "Repository Olusturmak": temeller/repository-olusturmak.md
 
 markdown_extensions:
   - admonition

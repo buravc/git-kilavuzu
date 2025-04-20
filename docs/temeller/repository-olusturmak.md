@@ -14,6 +14,9 @@ $ git init
 Initialized empty Git repository in ...../git-notlari-calisma/.git/
 ```
 
+!!! tip "Unix Bilgisi"
+    Shell ortaminda iki komutu `&&` operatoru ile zincirleme olarak calistirabilirsiniz. Boylece ilk komut basarisiz olursa ikinci komut hic calismayacaktir.
+
 Peki `git init` komutu bize ne sagladi? Ilk bakista klasorun icinde degisen hicbir sey goremiyor olabilirsiniz. Ancak artik klasorun icinde `.git` isminde gizli bir klasor olusmus durumda. 
 
 !!! tip "Unix Bilgisi"

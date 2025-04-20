@@ -7,3 +7,8 @@ nav:
   - index.md
   - Temeller:
     - "Hello World": temeller/hello-world.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences

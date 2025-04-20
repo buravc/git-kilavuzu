@@ -8,7 +8,7 @@ nav:
   - Temeller:
     - "Repository Olusturmak": temeller/repository-olusturmak.md
     - "Branch Olusturmak": temeller/branch-olusturmak.md
-    - "Git Aslinda Bir Graf Motoru": temeller/git-graf-motoru.md
+    - "Commit History": temeller/commit-history.md
 
 markdown_extensions:
   - admonition

@@ -4,6 +4,9 @@ Git ile calismaya baslamadan once ilk yapmamiz gereken sey ya zaten repository o
 
 Biz yeni bir klasor olusturup repository olusturarak baslayacagiz. Oncelikle `git-notlari-calisma` adinda bir klasor olusturup icine girerek bir git repository'si olusturacagiz.
 
+!!! note "Komutlar"
+    `$` baslayan satirlardaki komutlari terminalde calistirabilirsiniz. Yazi boyunca bu formati surdurmeye devam edecegim. Boylece komutlar ile ciktilari ayirt etmek kolaylasacaktir.
+
 ```bash
 $ mkdir git-notlari-calisma && cd git-notlari-calisma
 $ git init

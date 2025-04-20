@@ -17,12 +17,15 @@ $ git log --graph
       Ilk commit
 ```
 
-Simdi ise git'in bir baska temeli olan bir *branch* olusturalim. Branch'imizin adina `yeni-branch` diyelim. Hemen ardindan ise git'i bu branch'e gecirelim, yani *checkout* ettirelim.
+Simdi ise git'in bir baska temeli olan bir **branch** olusturalim. Branch'imizin adina `yeni-branch` diyelim. Hemen ardindan ise git'i bu branch'e gecirelim, yani **checkout** ettirelim. Son olarak da repository'de bulunan butun branch'leri listeleyelim.
 
 ```bash
 $ git branch yeni-branch
 $ git checkout yeni-branch
 Switched to branch 'yeni-branch'
+$ git branch
+  main
+* yeni-branch
 ```
 
 !!! tip "Kisayol"

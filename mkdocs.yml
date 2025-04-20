@@ -7,6 +7,7 @@ nav:
   - index.md
   - Temeller:
     - "Repository Olusturmak": temeller/repository-olusturmak.md
+    - "Branch Olusturmak": temeller/branch-olusturmak.md
 
 markdown_extensions:
   - admonition

@@ -5,13 +5,13 @@ Ilk commitlerimizi attik ve artik 2 committen olusan bir git repository'sine sah
 ```bash
 $ git log --graph
 * commit 419a640a88ca3d23399c51c5f398f2d3684a66bf (HEAD -> main)
-| Author: username <email>
+| Author: <username> <email>
 | Date:   Sun Apr 20 14:07:41 2025 +0200
 | 
 |     Dosyaya Merhaba Dunya ekledim
 | 
 * commit beddf6b7c7155af30f8a73f349094c72bfa93a43
-  Author: username <email>
+  Author: <username> <email>
   Date:   Sun Apr 20 13:48:57 2025 +0200
   
       Ilk commit
@@ -102,4 +102,4 @@ $ cat .git/refs/heads/yeni-branch
 c973c9d315307caedfb39a99413067c4a2f3e1ff
 ```
 
-Yukarisi bize gosteriyor ki sadece `yeni-branch` dosyasinin icindeki hash degismis durumda. Yani git terminolojisinde branch dedigimiz temel yapi aslinda sadece bir commit isaretcisi olarak calisiyor. Yani biz o branch'teyken ne kadar commit atarsak atalim aslinda sadece son attigimiz commit'in hash'ina isaret eden bir dosyadan ibaretmis. Yani branch yapisi onceki attigimiz commit'lerin bir listesini herhangi bir yerde tutmuyor. Peki o zaman git bu commit'lerin ve branch'lerin takibini nasil yapiyor?
+Yukarisi bize gosteriyor ki sadece `yeni-branch` dosyasinin icindeki hash degismis durumda. Yani git terminolojisinde branch dedigimiz temel yapi aslinda sadece bir commit isaretcisi olarak calisiyor. Biz o branch'teyken ne kadar commit atarsak atalim aslinda sadece son attigimiz commit'in hash'ina isaret eden bir dosyadan ibaretmis. Yani branch yapisi onceki attigimiz commit'lerin bir listesini herhangi bir yerde tutmuyor. Peki o zaman git bu commit'lerin ve branch'lerin takibini nasil yapiyor?

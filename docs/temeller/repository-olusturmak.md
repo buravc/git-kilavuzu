@@ -160,13 +160,13 @@ Artik repository'mizin en son haline bakabiliriz. Bu sefer `git log` komutumuza 
 ```bash
 $ git log --graph
 * commit 419a640a88ca3d23399c51c5f398f2d3684a66bf (HEAD -> main)
-| Author: username <email>
+| Author: <username> <email>
 | Date:   Sun Apr 20 14:07:41 2025 +0200
 | 
 |     Dosyaya Merhaba Dunya ekledim
 | 
 * commit beddf6b7c7155af30f8a73f349094c72bfa93a43
-  Author: username <email>
+  Author: <username> <email>
   Date:   Sun Apr 20 13:48:57 2025 +0200
   
       Ilk commit

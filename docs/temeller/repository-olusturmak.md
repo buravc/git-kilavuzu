@@ -9,6 +9,7 @@ Biz yeni bir klasor olusturup repository olusturarak baslayacagiz. Oncelikle `gi
 
 ```bash
 $ mkdir git-notlari-calisma && cd git-notlari-calisma
+
 $ git init
 
 Initialized empty Git repository in ...../git-notlari-calisma/.git/
@@ -89,6 +90,7 @@ Burada gorulebilecegi uzere git olusturdugumuz `test.txt` dosyasini `Untracked f
 
 ```bash
 $ git add test.txt
+
 $ git status
 On branch main
 
@@ -123,6 +125,7 @@ Artik repository'mizde hash'i `beddf6b7c7155af30f8a73f349094c72bfa93a43` olan bi
 
 ```bash
 $ echo "Merhaba Dunya" >> test.txt
+
 $ git status
 On branch main
 Changes not staged for commit:
@@ -140,6 +143,7 @@ Gordugunuz uzere bu sefer yaptigimiz degisikliklere ragmen dosya `Untracked` ola
 
 ```bash
 $ git add test.txt
+
 $ git status
 On branch main
 Changes to be committed:

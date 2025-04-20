@@ -2,12 +2,12 @@ from manim import *
 
 class Commit():
     circle: Circle
-    message: Text
+    message: Paragraph
     parent: 'Commit'
     arrow: Arrow
     def __init__(self, msg: str, pos: Vector, parent: 'Commit' = None):
         self.circle = Circle().move_to(pos)
-        self.message = Text(msg).move_to(self.circle.get_center())
+        self.message = Paragraph(msg, alignment="center").move_to(self.circle.get_center())
         self.message.color = BLACK
         self.message.scale_to_fit_width(self.circle.width*0.9)
         self.parent = parent
@@ -33,16 +33,16 @@ class Commit():
 
 
 
-class SimpleDiagram(Scene):
+class GitCommitDiagram(Scene):
     def construct(self):
         self.camera.background_color = WHITE
-        commit1 = Commit("Initial Commit", LEFT*5)
-        commit2 = Commit("fix bug", 0, commit1)
-        commit3 = Commit("add new feature", RIGHT*5, commit2)
+        commit1 = Commit("Ilk commit", LEFT*5)
+        commit2 = Commit("Dosyaya Merhaba\nDunya ekledim", 0, commit1)
+        commit3 = Commit("yeni-branch icin\nilk commitimi atiyorum", RIGHT*5, commit2)
         
-        gitInitCommitText = self.create_shell_command_prompt("git commit -m \"Initial Commit\"")
-        gitFixBugCommitText = self.create_shell_command_prompt("git commit -m \"fix bug\"")
-        gitAddNewFeatureCommitText = self.create_shell_command_prompt("git commit -m \"add new feature\"")
+        gitInitCommitText = self.create_shell_command_prompt("git commit -m \"Ilk commit\"")
+        gitFixBugCommitText = self.create_shell_command_prompt("git commit -m \"Dosyaya Merhaba\nDunya ekledim\"")
+        gitAddNewFeatureCommitText = self.create_shell_command_prompt("git commit -m \"yeni-branch icin\nilk commitimi atiyorum\"")
         
         self.spawn_commit(commit1, None, gitInitCommitText)
 
@@ -56,7 +56,7 @@ class SimpleDiagram(Scene):
         
         self.wait(3)
 
-    def spawn_commit(self, commit: Commit, prevPrompt: Text, newPrompt: Text):
+    def spawn_commit(self, commit: Commit, prevPrompt: Paragraph, newPrompt: Paragraph):
         if prevPrompt is not None:
             self.remove(prevPrompt)
         
@@ -65,7 +65,7 @@ class SimpleDiagram(Scene):
         
     
     def create_shell_command_prompt(self, msg: str):
-        text = Text(msg).move_to(UP*2)
+        text = Paragraph("$ " + msg, alignment="center").scale_to_fit_width(6).move_to(UP*2)
         text.color = BLACK
         return text
 

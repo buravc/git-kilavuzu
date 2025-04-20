@@ -1,1 +1,0 @@
-# Bir Commit Aslinda Nedir?

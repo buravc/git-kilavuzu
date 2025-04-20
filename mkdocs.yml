@@ -8,7 +8,7 @@ nav:
   - Temeller:
     - "Repository Olusturmak": temeller/repository-olusturmak.md
     - "Branch Olusturmak": temeller/branch-olusturmak.md
-    - "Bir Commit Aslinda Nedir?": temeller/bir-commit-aslinda-nedir.md
+    - "Git Aslinda Bir Graf Motoru": temeller/git-graf-motoru.md
 
 markdown_extensions:
   - admonition

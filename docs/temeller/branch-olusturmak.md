@@ -21,8 +21,10 @@ Simdi ise git'in bir baska temeli olan bir **branch** olusturalim. Branch'imizin
 
 ```bash
 $ git branch yeni-branch
+
 $ git checkout yeni-branch
 Switched to branch 'yeni-branch'
+
 $ git branch
   main
 * yeni-branch
@@ -45,6 +47,7 @@ Burada 2 adet dosya olusmus gorunuyor. Dosyalarin isimleri ise repository'mizdek
 ```bash
 $ cat .git/refs/heads/main
 419a640a88ca3d23399c51c5f398f2d3684a66bf
+
 $ cat .git/refs/heads/yeni-branch
 419a640a88ca3d23399c51c5f398f2d3684a66bf
 ```
@@ -76,6 +79,7 @@ $ git add test.txt
 $ git commit -m "yeni-branch icin ilk commitimi atiyorum"
 [yeni-branch c973c9d] yeni-branch icin ilk commitimi atiyorum
  1 file changed, 1 insertion(+)
+
 $ git log --graph
 * commit c973c9d315307caedfb39a99413067c4a2f3e1ff (HEAD -> yeni-branch)
 | Author: <username> <email>
@@ -101,8 +105,27 @@ $ git log --graph
 ```bash
 $ cat .git/refs/heads/main
 419a640a88ca3d23399c51c5f398f2d3684a66bf
+
 $ cat .git/refs/heads/yeni-branch
 c973c9d315307caedfb39a99413067c4a2f3e1ff
 ```
 
-Yukarisi bize gosteriyor ki sadece `yeni-branch` dosyasinin icindeki hash degismis durumda. Yani git terminolojisinde branch dedigimiz temel yapi aslinda sadece bir commit isaretcisi olarak calisiyor. Biz o branch'teyken ne kadar commit atarsak atalim aslinda sadece son attigimiz commit'in hash'ina isaret eden bir dosyadan ibaretmis. Yani branch yapisi onceki attigimiz commit'lerin bir listesini herhangi bir yerde tutmuyor. Peki o zaman git bu commit'lerin ve branch'lerin takibini nasil yapiyor?
+Yukarisi bize gosteriyor ki sadece `yeni-branch` dosyasinin icindeki hash degismis durumda. Yani git terminolojisinde branch dedigimiz temel yapi aslinda sadece bir commit isaretcisi olarak calisiyor. Biz o branch'teyken ne kadar commit atarsak atalim aslinda sadece son attigimiz commit'in hash'ina isaret eden bir dosyadan ibaret. Bu dizinde bir dosya olusturarak yeni bir git branch'i olusturabildigimizi gelin test edelim.
+
+```bash
+$ git branch
+  main
+* yeni-branch
+
+$ echo "c973c9d315307caedfb39a99413067c4a2f3e1ff" > .git/refs/heads/yeni-branch-2
+
+$ git branch
+  main
+* yeni-branch
+  yeni-branch-2
+
+$ git checkout yeni-branch-2
+Switched to branch 'yeni-branch-2'
+```
+
+Yukaridaki `echo` komutu ile bir commit hash'ini `.git/refs/heads` dizininde yeni bir dosyaya yazdirdik. Bunun sonucunda da git'in yeni branch'imizi tanidigini gormus olduk. Buradan anlasiliyor ki branch yapisi onceki attigimiz commit'lerin bir listesini herhangi bir yerde tutmuyor. Peki o zaman git bu commit'lerin ve branch'lerin takibini nasil yapiyor?

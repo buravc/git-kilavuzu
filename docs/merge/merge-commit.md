@@ -59,9 +59,10 @@ Buradan anlasilacagi uzere `419a640` commit'inden baslayarak dallanan 2 ayri deg
 `yeni-branch` ismindeki branch'i `main` branch'e birlestirerek aslinda o dalda yapilmis olan degisiklikleri, yani `main` branch'te bulunmayip `yeni-branch`'te bulunan commit'leri `main` branch'ine de almak istedigimizi varsayalim. Bu birbirinden farkli yonlere dallanmis iki branch'i bir araya getirmek icin `merge` komutunu kullanabiliriz.
 
 !!! tip "Text editoru"
-    Calistiracagimiz `merge` komutu bizden commit mesajini duzenlememizi isteyecek. Bu noktada git'in varsayilan olarak kullandigi `vi` modal editoru acilacaktir. Fakat bircogumuz buna asina olmadigi icin bu komutu calistirmadan once git'in kullanacagi text editorunu vscode olarak degistirmenizi tavsiye ederim. Bunu asagidaki komutu calistirarak saglayabilirsiniz.
+    Calistiracagimiz `merge` komutu bizden commit mesajini duzenlememizi isteyecek. Bu noktada git'in varsayilan olarak kullandigi `vi` modal editoru acilacaktir. Fakat bircogumuz buna asina olmadigi icin bu komutu calistirmadan once git'in kullanacagi text editorunu `vscode` veya `idea` olarak degistirmenizi tavsiye ederim. Bunu asagidaki komutlardan birini calistirarak saglayabilirsiniz.
     ```bash
-    git config --global core.editor "code --wait"
+    $ git config --global core.editor "code --wait" # vscode icin
+    $ git config --global core.editor "idea --wait" # JetBrains IntelliJ icin
     ```
 
 ```bash

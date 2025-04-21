@@ -9,6 +9,7 @@ nav:
     - "Repository Olusturmak": temeller/repository-olusturmak.md
     - "Branch Olusturmak": temeller/branch-olusturmak.md
     - "Commit History": temeller/commit-history.md
+    - "Branch Merge / Merge Commit": temeller/merge-commit.md
 
 markdown_extensions:
   - admonition

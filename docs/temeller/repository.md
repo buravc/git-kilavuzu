@@ -1,8 +1,8 @@
-# Repository Olusturmak
+# Repository
 
-Git ile calismaya baslamadan once ilk yapmamiz gereken sey ya zaten repository olan bir klasore gecmek, ya da yeni bir klasorde repository olusturmak.
+Git ile çalışmaya başlamadan önce ilk yapmamız gereken şey ya zaten repository olan bir klasöre geçmek, ya da yeni bir klasörde repository oluşturmak.
 
-Biz yeni bir klasor olusturup repository olusturarak baslayacagiz. Oncelikle `git-notlari-calisma` adinda bir klasor olusturup icine girerek bir git repository'si olusturacagiz.
+Biz yeni bir klasör oluşturup repository oluşturarak başlayacağız. Öncelikle `git-notlari-calisma` adında bir klasör oluşturup içine girerek bir git repository'si oluşturacağız.
 
 ```bash
 $ mkdir git-notlari-calisma && cd git-notlari-calisma
@@ -13,14 +13,14 @@ Initialized empty Git repository in ...../git-notlari-calisma/.git/
 ```
 
 !!! tip "Unix Bilgisi"
-    Shell ortaminda iki komutu `&&` operatoru ile zincirleme olarak calistirabilirsiniz. Boylece ilk komut basarisiz olursa ikinci komut hic calismayacaktir.
+    Shell ortamında iki komutu `&&` operatörü ile zincirleme olarak çalıştırabilirsiniz. Böylece ilk komut başarısız olursa ikinci komut hiç çalışmayacaktır.
 
-Peki `git init` komutu bize ne sagladi? Ilk bakista klasorun icinde degisen hicbir sey goremiyor olabilirsiniz. Ancak artik klasorun icinde `.git` isminde gizli bir klasor olusmus durumda. 
+Peki `git init` komutu bize ne sağladı? İlk bakışta klasörün içinde değişen hiçbir şey göremiyor olabilirsiniz. Ancak artık klasörün içinde `.git` isminde gizli bir klasör oluşmuş durumda. 
 
 !!! tip "Unix Bilgisi"
-    Bu klasorun gizli olmasinin sebebi isminin `.` karakteri ile basliyor olmasidir. Eger ki Unix bazli bir sistemdeyseniz bu varsayilan bir davranistir. Bu davranisi klasorun icinde `ls` komutu calistirip terminalde hicbir seyin listelenmedigini gorerek dogrulayabilirsiniz. Ancak `ls -a` seklinde calistirdiginizda bu klasorun varligini gorebilirsiniz.
+    Bu klasörün gizli olmasının sebebi isminin `.` karakteri ile başlıyor olmasıdır. Eğer ki Unix bazlı bir sistemdeyseniz bu varsayılan bir davranıştır. Bu davranışı klasörün içinde `ls` komutu çalıştırıp terminalde hiçbir şeyin listelenmediğini görerek doğrulayabilirsiniz. Ancak `ls -a` şeklinde çalıştırdığınızda bu klasörün varlığını görebilirsiniz.
 
-Bu `.git` klasorunun bulunmasi mevcut klasore bir git repository'si olma niteligi kazandiriyor. Peki bu klasorun icinde neler var?
+Bu `.git` klasörünün bulunması mevcut klasöre bir git repository’si olma niteliği kazandırıyor. Peki bu klasörün içinde neler var?
 
 ```
 $ tree .git
@@ -55,4 +55,4 @@ $ tree .git
 9 directories, 18 files
 ```
 
-Burada cok fazla dosya ve klasor listelenmis durumda. Hangi klasor ne ise yariyor? Bir git repository'si bu kadar bilgi mi iceriyor? Bunlara yavas yavas ilerleyen zamanlarda deginecegiz. Simdi en temel git yapilarindan biri olan bir *commit* atmayi deneyelim.
+Burada çok fazla dosya ve klasör listelenmiş durumda. Hangi klasör ne işe yarıyor? Bir git repository’si bu kadar bilgi mi içeriyor? Bunlara yavaş yavaş ilerleyen zamanlarda değineceğiz. Şimdi en temel git yapılarından biri olan bir *commit* atmayı deneyelim.

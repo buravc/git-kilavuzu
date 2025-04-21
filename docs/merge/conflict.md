@@ -147,6 +147,8 @@ $ git log --graph --all --oneline --parents
 * beddf6b Ilk commit
 ```
 
+2 adet parent commit'e bakan yeni bir **merge commit** ile iki commit dali birbirine basarili bir sekilde baglanmis ve `dal-A` branch'i bu yeni commit'e tasinmis durumda.
+
 !!! note "Merge Commit'inde degisiklik"
     Eger ki bu **conflict**'i cozerken `test.txt` uzerinde git'in **index**'inde bulunmayan farkli bir degisiklik yapmis olsaydik, ornegin yeni bir satira yeni bir yazi ekleseydik, merge commit'imizde bu degisiklik yer alacakti.
     ```bash

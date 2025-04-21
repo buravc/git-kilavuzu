@@ -12,11 +12,11 @@ Git bize iki veya daha fazla commit dalini, yani iki branch'i tek bir noktada to
 Bu `merge` operasyonunu onceki sayfalarda uzerinde calistigimiz repository'miz uzerinde gerceklestirelim. Fakat oncelikle repository'mizin mevcut halini korumak amaci ile `.git` klasorunu yedekleyelim. Ilerleyen zamanlarda bu noktaya geri donmemiz gerekecek.
 
 ```bash
-$ cp -r .git ../git-notlari-calisma.git.bak
+$ cp -r .git ../git-notlari-calisma.git.yedek
 ```
 
 !!! tip "Unix Bilgisi"
-    Yukaridaki calistirdigimiz `cp` komutu bir dosyayi kopyalamak icin kullanilir. Bizim kopyalamak istedigimiz `.git` bir klasor oldugu icin `-r` bayragini kullanmamiz gerekiyor. Bu bayrak dosya operasyonlarinda genelde **recursive** manasina gelmektedir. `cp -r <source> <target>` seklinde bu komutun kullanimini genellestirebiliriz. `<target>` olarak kullandigimiz `../git-notlari-calisma.git.bak` argumaninin basindaki `../` aslinda bize bir ust klasoru isaret etmemize olanak saglar. Yani `.git` klasorunu aslinda bir ust klasore `git-notlari-calisma.git.bak` ismi ile kopyalamis olduk.
+    Yukaridaki calistirdigimiz `cp` komutu bir dosyayi kopyalamak icin kullanilir. Bizim kopyalamak istedigimiz `.git` bir klasor oldugu icin `-r` bayragini kullanmamiz gerekiyor. Bu bayrak dosya operasyonlarinda genelde **recursive** manasina gelmektedir. `cp -r <source> <target>` seklinde bu komutun kullanimini genellestirebiliriz. `<target>` olarak kullandigimiz `../git-notlari-calisma.git.yedek` argumaninin basindaki `../` aslinda bize bir ust klasoru isaret etmemize olanak saglar. Yani `.git` klasorunu aslinda bir ust klasore `git-notlari-calisma.git.yedek` ismi ile kopyalamis olduk.
 
 Simdi `main` branch'imize gecip repository'mizde yeni bir dosya olusturup commit atalim. Hemen ardindan da commit'imizin yaptigi degisikligi gosterelim. Bu degisikligi gostermek icin `git show` komutunu yeni olusan commit'in hash'i ile birlikte kullanacagiz.
 

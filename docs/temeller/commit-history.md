@@ -28,4 +28,7 @@ Bu bilgilerin isiginda gectigimiz sayfada hazirladigimiz repository'i uzerinde y
 
 ![image info](./images/commit-history-1.gif)
 
-Buradan yola cikarak, bir Branch'in **commit history**'de basitce bir noktaya isaret eden bir referans oldugu sonucuna varabiliriz.
+Buradan yola cikarak, bir branch'in **commit history**'de basitce bir noktaya isaret eden bir referans oldugu sonucuna varabiliriz. Commit hash'leri kullanmak yerine branch'leri kullanmanin bize faydalarini su sekilde listeleyebiliriz:
+
+- Bu isaretler sayesinde istedigimiz bir commit dalina commit hash'leri yerine daha okunabilir ve hatirlanabilir isimler ile isaret edebiliyoruz.
+- Commit hash'leri sabit ve spesifik bir commit'e isaret edebiliyorken branch'lerin isaret ettigi, veya **"baktigi"** commit'ler degisebiliyor. Bu da bize bazi durumlarda, ornegin yaptigimiz degisiklikleri bir zincir olarak gruplamak ve isimlendirmek istedigimiz durumlarda, esneklik sagliyor.

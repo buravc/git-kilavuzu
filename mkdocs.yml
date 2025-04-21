@@ -3,8 +3,8 @@ theme:
   name: material
 
 nav:
-  - "Onsoz": index.md
-  - "Baslamadan Once": baslamadan-once.md
+  - "Önsoz": index.md
+  - "Başlamadan Önce": baslamadan-once.md
   - Temeller:
     - "Repository": temeller/repository.md
     - "Commit": temeller/commit.md

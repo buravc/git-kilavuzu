@@ -1,6 +1,6 @@
-# Branch Olusturmak
+# Branch
 
-Ilk commitlerimizi attik ve artik 2 committen olusan bir git repository'sine sahibiz.
+İlk commitlerimizi attık ve artık 2 committen oluşan bir git repository'sine sahibiz.
 
 ```bash
 $ git log --graph
@@ -17,10 +17,10 @@ $ git log --graph
       Ilk commit
 ```
 
-Simdi ise git'in bir baska temeli olan bir **branch** olusturalim. Branch'imizin adina `yeni-branch` diyelim. Hemen ardindan ise git'i bu branch'e gecirelim, yani **checkout** ettirelim. Son olarak da repository'de bulunan butun branch'leri listeleyelim.
+Şimdi ise git'in bir başka temeli olan bir **branch** oluşturalım. Branch'imizin adını `yeni-branch` diyelim. Hemen ardından ise git'i bu branch'e geçirelim, yani **checkout** ettirelim. Son olarak da repository'de bulunan bütün branch'leri listeleyelim.
 
 !!! note "Terminoloji"
-    **Branch** Turkcede bir butunun bir alt dali anlamina gelmektedir. Agac dali, egitim dali gibi baglamlardaki kullanimi ornek gosterilebilir. Git baglaminda ise **branch** dallanan, bir noktadan ayrilan commit'leri isaret etmek icin kullanilir.
+    **Branch** Türkçede bir bütünün bir alt dalı anlamına gelmektedir. Ağaç dalı, eğitim dalı gibi bağlamlardaki kullanımı örnek gösterilebilir. Git bağlamında ise **branch** dallanan, bir noktadan ayrılan commit'leri işaret etmek için kullanılır.
 
 ```bash
 $ git branch yeni-branch
@@ -33,19 +33,19 @@ $ git branch
 * yeni-branch
 ```
 
-!!! tip "Kisayol"
-    Burada tek bir eylem icin iki ayri komutunun bulunmasinin sebebi **checkout** komutunun farkli bir islevinin olmasidir. Tek komut ile yeni bir branch olusturup ona **checkout** etmek icin `git checkout -b yeni-branch` yapabilirsiniz.
+!!! tip "Kısayol"
+    Burada tek bir eylem için iki ayrı komutunun bulunmasının sebebi **checkout** komutunun farklı bir işlevinin olmasıdır. Tek komut ile yeni bir branch oluşturup ona **checkout** etmek için `git checkout -b yeni-branch` yapabilirsiniz.
 
-Peki bu yaptigimiz eylemler ne ise yaradi? Bir branch olusturduk ve ona gectik ancak bu bize ne sagladi ki? Repository'de neler degisti? Bu noktada aslinda bir branch'in somut olarak neye donustugunu anlamamiz gerekli.
+Peki bu yaptığımız eylemler ne işe yaradı? Bir branch oluşturduk ve ona geçtik ancak bu bize ne sağladı ki? Repository'de neler değişti? Bu noktada aslında bir branch'in somut olarak neye dönüştüğünü anlamamız gerekli.
 
-Bu sorunun cevabi icin bir onceki sayfada da bahsettigimiz `.git` klasorunun icine bakalim. Yeni bir branch olusturunca burada git ne yapiyor olabilir?
+Bu sorunun cevabı için bir önceki sayfada da bahsettiğimiz `.git` klasörünün içine bakalım. Yeni bir branch oluşturunca burada git ne yapıyor olabilir?
 
 ```bash
 $ ls .git/refs/heads
 main            yeni-branch
 ```
 
-Burada 2 adet dosya olusmus gorunuyor. Dosyalarin isimleri ise repository'mizdeki branch'lerin isimleri ile uyusuyor. Peki bu dosyalarin icinde ne bulunuyor?
+Burada 2 adet dosya oluşmuş görünüyor. Dosyaların isimleri ise repository'mizdeki branch'lerin isimleri ile uyuşuyor. Peki bu dosyaların içinde ne bulunuyor?
 
 ```bash
 $ cat .git/refs/heads/main
@@ -55,7 +55,7 @@ $ cat .git/refs/heads/yeni-branch
 419a640a88ca3d23399c51c5f398f2d3684a66bf
 ```
 
-Iclerinde bir hash bulunuyor ve bu hash bizim son commit'imizin hashi ile ayni. Yani branch'ler aslinda bir commit'e isaret eden bir dosyadan ibaretler. Bunu `git log` calistirarak da gorebiliriz.
+İçlerinde bir hash bulunuyor ve bu hash bizim son commit'imizin hash'i ile aynı. Yani branch'ler aslında bir commit'e işaret eden bir dosyadan ibaretler. Bunu `git log` çalıştırarak da görebiliriz.
 
 ```bash
 $ git log --graph
@@ -72,9 +72,9 @@ $ git log --graph
       Ilk commit
 ```
 
-Burada `419a640a88ca3d23399c51c5f398f2d3684a66bf` hash'li commit'imize `yeni-branch` ve `main` branch'lerinin isaret ettigini commit hash'inin yainda bulunan `(HEAD -> yeni-branch, main)` bolumu ile gorebiliyoruz.
+Burada `419a640a88ca3d23399c51c5f398f2d3684a66bf` hash'li commit'imize `yeni-branch` ve `main` branch'lerinin işaret ettiğini commit hash'inin yanında bulunan `(HEAD -> yeni-branch, main)` bölümü ile görebiliyoruz.
 
-Simdi yeni bir commit daha atalim ve sonrasinda `git log` ile repository'mize tekrar bakalim.
+Şimdi yeni bir commit daha atalım ve sonrasında `git log` ile repository'mize tekrar bakalım.
 
 ```bash
 $ echo "yeni-branch icin merhaba dunya" >> test.txt
@@ -103,7 +103,7 @@ $ git log --graph
       Ilk commit
 ```
 
-`main` branch'imiz hala bir onceki commit'e isaret ediyorken `yeni-branch` isimli branch'imiz yeni attigimiz `c973c9d315307caedfb39a99413067c4a2f3e1ff` hash'li commit'e isaret etmekte. Peki `.git` klasorunde ne degisiklik oldu?
+`main` branch'imiz hala bir önceki commit'e işaret ediyorken `yeni-branch` isimli branch'imiz yeni attığımız `c973c9d315307caedfb39a99413067c4a2f3e1ff` hash'li commit'e işaret etmekte. Peki `.git` klasöründe ne değişiklik oldu?
 
 ```bash
 $ cat .git/refs/heads/main
@@ -113,7 +113,7 @@ $ cat .git/refs/heads/yeni-branch
 c973c9d315307caedfb39a99413067c4a2f3e1ff
 ```
 
-Yukarisi bize gosteriyor ki sadece `yeni-branch` dosyasinin icindeki hash degismis durumda. Yani git terminolojisinde branch dedigimiz temel yapi aslinda sadece bir commit isaretcisi olarak calisiyor. Biz o branch'teyken ne kadar commit atarsak atalim aslinda sadece son attigimiz commit'in hash'ina isaret eden bir dosyadan ibaret. Bu dizinde bir dosya olusturarak yeni bir git branch'i olusturabildigimizi gelin test edelim.
+Yukarısi bize gösteriyor ki sadece `yeni-branch` dosyasının içindeki hash değişmiş durumda. Yani git terminolojisinde branch dediğimiz temel yapı aslında sadece bir commit işaretçisi olarak çalışıyor. Biz o branch'teyken ne kadar commit atarsak atalım aslında sadece son attığımız commit'in hash'ına işaret eden bir dosyadan ibaret. Bu dizinde bir dosya oluşturarak yeni bir git branch'i oluşturabildiğimizi gelin test edelim.
 
 ```bash
 $ git branch
@@ -131,4 +131,4 @@ $ git checkout yeni-branch-2
 Switched to branch 'yeni-branch-2'
 ```
 
-Yukaridaki `echo` komutu ile bir commit hash'ini `.git/refs/heads` dizininde yeni bir dosyaya yazdirdik. Bunun sonucunda da git'in yeni branch'imizi tanidigini gormus olduk. Buradan anlasiliyor ki branch yapisi onceki attigimiz commit'lerin bir listesini herhangi bir yerde tutmuyor. Peki o zaman git bu commit'lerin ve branch'lerin takibini nasil yapiyor?
+Yukarıdaki `echo` komutu ile bir commit hash'ini `.git/refs/heads` dizininde yeni bir dosyaya yazdırdık. Bunun sonucunda da git'in yeni branch'imizi tanıdığını görmüş olduk. Buradan anlaşılıyor ki branch yapısı önceki attığımız commit'lerin bir listesini herhangi bir yerde tutmuyor. Peki o zaman git bu commit'lerin ve branch'lerin takibini nasıl yapıyor?

@@ -17,7 +17,7 @@ git version 2.48.1
 !!! warning "Varsayilan Sistem"
     Bu dokumani Unix bir sistemde calisildigini varsayarak hazirliyorum. Yazida herhangi bir gorsel uygulama (JetBrains, SourceTree, Visual Studio) kullanmaktan kacinacagim. Sadece **shell** komutlari uzerinden anlatim yapacagim. **MacOS** veya **Linux** bir isletim sistemindeyseniz calistirilan komutlarda bir uyumsuzluk yasamayacaksiniz. **Windows**'ta calisiyorsaniz **WSL (Windows Subsystem for Linux)** kurarak bir Linux altsistemi icerisinde Terminal baslatarak calismanizi oneririm. Aksi taktirde Windows'un komut sistemi Unix sistemlerle onemli davranis farkliliklari sergiledigi icin uyum sorunlari yasamaniz kacinilmaz olacaktir.
 !!! tip "Unix Bilgisi"
-    Git konusunda hizlica bilgi almak isterseniz terminalinizde her zaman asagidaki komutlardan birini calistirabilirsiniz. `#` karakterinden sonraki kisim yorum olarak kabul edilir.
+    Git konusunda hizlica bilgi almak isterseniz terminalinizde her zaman asagidaki komutlardan birini calistirabilirsiniz. Bunu `git` haricinde de kullandiginiz bir cok arac icin uygulayabilirsiniz. `#` karakterinden sonraki kisim yorum olarak kabul edilir.
     ```bash
     $ man git # git'in kullanma klavuzunu acar
     $ git --help

@@ -103,7 +103,7 @@ Burada herhangi bir dosya degisikligi gozukmuyorken `Merge: a26b42a c973c9d` sat
 !!! note "Merge commit'i de degisiklik barindirabilir"
     Ileride **conflict** terimine degindigimizde merge commit'lerinin de degisiklik barindirabildigini gorecegiz.
 
-Buradan da anlasilacagi uzere bir branch'i digerine merge etmek aslinda commit'leri kopyalamiyor, birlestirmiyor, degistirmiyor. Bir branch'i digerine merge etmek aslinda commit graf'ina sadece bir halka daha ekliyor.
+Buradan da anlasilacagi uzere bir branch'i digerine merge etmek aslinda commit'leri kopyalamiyor, birlestirmiyor, degistirmiyor. Bir branch'i digerine merge etmek aslinda commit graf'ina sadece bir dugum daha ekliyor.
 
 !!! note "Terminoloji"
     `merge` komutu birden fazla branch'i ayni anda merge etmemize de olanak sagliyor. Bunun sonucunda olusan merge commit'inin 2'den fazla parent commit'i olabiliyor. Bu yontem ile yapilan merge islemlerine **octopus merge** deniliyor. Turkcelestirmek istersek ahtapot birlesimi diyebiliriz ama bu cok saglikli bir karsilik olmaz.

@@ -59,7 +59,7 @@ $ cat test.txt
 Hello world
 ```
 
-## Dosya Checkout Etmek
+### Dosya Checkout Etmek
 
 `checkout` komutunu kullanarak butun bir commit'i checkout edebiliyoruz. Ancak buna alternatif olarak bir commit'teki spesifik bir dosyayi da `checkout` edebiliriz.
 

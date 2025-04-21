@@ -9,9 +9,21 @@ nav:
     - "Repository Olusturmak": temeller/repository-olusturmak.md
     - "Branch Olusturmak": temeller/branch-olusturmak.md
     - "Commit History": temeller/commit-history.md
-    - "Branch Merge / Merge Commit": temeller/merge-commit.md
+  - Merge Operasyonu:
+    - "Branch Merge / Merge Commit": merge/merge-commit.md
+    - "Fast-Forward Merge": merge/fast-forward-merge.md
 
 markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/katex.js
+  - https://unpkg.com/katex@0/dist/katex.min.js
+  - https://unpkg.com/katex@0/dist/contrib/auto-render.min.js
+
+extra_css:
+  - https://unpkg.com/katex@0/dist/katex.min.css

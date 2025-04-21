@@ -6,10 +6,10 @@ nav:
   - "Onsoz": index.md
   - "Baslamadan Once": baslamadan-once.md
   - Temeller:
-    - "Repository Olusturmak": temeller/repository-olusturmak.md
-    - "Commit Atmak": temeller/commit.md
+    - "Repository": temeller/repository.md
+    - "Commit": temeller/commit.md
     - "Checkout": temeller/checkout.md
-    - "Branch Olusturmak": temeller/branch-olusturmak.md
+    - "Branch": temeller/branch.md
     - "Commit History": temeller/commit-history.md
   - Merge Operasyonu:
     - "Branch Merge / Merge Commit": merge/merge-commit.md

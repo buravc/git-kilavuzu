@@ -1,6 +1,8 @@
 # Commit History
 
-Git repository'deki yapilan degisiklikleri gruplamak ve saklamak icin **commit** denilen bir yapi kullanmaktadir. Bir **commit** attigimizda aslinda o zamanda yaptigimiz degisiklikleri tek bir grup icerisinde toplayarak repository'e kayit etmis oluruz. Git ogrenirken yapilan en yaygin hata bence bir **commit**'in tam olarak ne oldugunu anlamamak ve varsayimlarla devam etmek. Internetteki kaynaklarin bircogu da buna dogru bir sekilde deginememekte.
+Git ogrenirken yapilan en yaygin hata bence bir **commit**'in tam olarak ne oldugunu anlamamak ve varsayimlarla devam etmek. Internetteki kaynaklarin bircogu da buna dogru bir sekilde deginememekte.
+
+Git repository'deki yapilan degisiklikleri gruplamak ve saklamak icin **commit** denilen bir yapi kullanmaktadir. Bir **commit** attigimizda aslinda o zamanda yaptigimiz degisiklikler sonucunda repository'deki dosyalarin son halini bir araya toplayarak git'in veritabanina kayit etmis oluruz.
 
 Bir **commit**, hem bir sahibi olan, yani bir kullanici adi ve email ile bagdastirilan, hem de bir **parent commit**'i olan bir yapidir. Yani her **commit**'in **en az bir parent commit**'i olmak zorundadir. Bunu `git log` komutunda `--parents` bayragini kullanarak gorebiliriz. Buna ek olarak ciktiyi sadelestirmek icin `--oneline` bayragini da ekleyelim.
 

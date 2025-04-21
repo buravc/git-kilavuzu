@@ -93,7 +93,7 @@ $ git --no-pager log --graph --parents --oneline --all
 * beddf6b Ilk commit
 ```
 
-Buradan da asikar oldugu uzere `merge` komutu ile yeni bir commit olusturulmus durumda. Bu commit'in hash'i `b979b40` iken, 1 degil **2 adet parent commit**'e, yani `a26b42a` ve `c973c9d` commitlerine baktigini gorebiliyoruz. Soldaki graf ile bu birlesme terminal ortamindaki karakterler ile gorsellestirilmis.
+Buradan da asikar oldugu uzere `merge` komutu ile yeni bir commit olusturulmus durumda. `main` branch'i artik bu commit'e bakiyor. Bu commit'in hash'i `b979b40` iken, 1 degil **2 adet parent commit**'e, yani `a26b42a` ve `c973c9d` commitlerine baktigini gorebiliyoruz. Soldaki graf ile bu birlesme terminal ortamindaki karakterler ile gorsellestirilmis. Bu gorsellik bize daha karmasik repository'lerde yardimci olacak.
 
 Peki bu merge commit'inin icinde ne var? Bunu yukarida kullandigimiz `git show` komutu ile gosterelim.
 
@@ -108,6 +108,11 @@ Date:   Mon Apr 21 12:28:56 2025 +0200
 ```
 
 Burada herhangi bir dosya degisikligi gozukmuyorken `Merge: a26b42a c973c9d` satiri gozumuze carpiyor. Bu commit aslinda icinde herhangi bir degisiklik barindirmiyor ve sadece 2 adet ayri commit'e isaret ediyor. Yani aslinda sadece bir yertutucu gorevi goruyor. Bu ozellikteki commit'lere **merge commit** adi verilmektedir.
+
+!!! note "Merge commit'i de degisiklik barindirabilir"
+    Ileride **conflict** terimine degindigimizde merge commit'lerinin de degisiklik barindirabildigini gorecegiz.
+
+Buradan da anlasilacagi uzere bir branch'i digerine merge etmek aslinda commit'leri kopyalamiyor, birlestirmiyor, degistirmiyor. Bir branch'i digerine merge etmek aslinda commit graf'ina sadece bir halka daha ekliyor.
 
 !!! note "Terminoloji"
     `merge` komutu birden fazla branch'i ayni anda merge etmemize de olanak sagliyor. Bunun sonucunda olusan merge commit'inin 2'den fazla parent commit'i olabiliyor. Bu yontem ile yapilan merge islemlerine **octopus merge** deniliyor. Turkcelestirmek istersek ahtapot birlesimi diyebiliriz ama bu cok saglikli bir karsilik olmaz.

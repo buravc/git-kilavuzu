@@ -11,7 +11,7 @@ nav:
     - "Checkout": temeller/checkout.md
     - "Branch": temeller/branch.md
     - "Commit History": temeller/commit-history.md
-  - Merge Operasyonu:
+  - Merge:
     - "Branch Merge / Merge Commit": merge/merge-commit.md
     - "Fast-Forward Merge": merge/fast-forward-merge.md
     - "Conflict": merge/conflict.md

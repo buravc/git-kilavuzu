@@ -62,8 +62,6 @@ $ git log --graph --all --oneline
 
 `dal-A` ve `dal-B` branch'leri birbirinden ayrilmis durumda. `dal-A` branch'ine gecerek `dal-B` branch'ini merge edelim.
 
-!!! warning "Merge Branch'lari"
-    Burada `dal-B` branch'ini `dal-A` branch'ine merge ediyoruz. Eger ki merge basarilir olursa `dal-A` branch'inin baktigi commit guncellenirken `dal-B` branch'inde hicbir degisiklik meydana gelmeyecektir.
 
 ```bash
 $ git checkout dal-A

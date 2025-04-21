@@ -65,6 +65,9 @@ Buradan anlasilacagi uzere `419a640` commit'inden baslayarak dallanan 2 ayri deg
     $ git config --global core.editor "idea --wait" # JetBrains IntelliJ icin
     ```
 
+!!! warning "Merge Branch'lari"
+    Burada `yeni-branch` isimli branch'i `main` isimli branch'e merge ediyoruz. Eger ki merge basarili olursa `main` branch'inin baktigi commit guncellenirken `yeni-branch` isimli branch'de hicbir degisiklik meydana gelmeyecektir.
+
 ```bash
 $ git merge yeni-branch
 Merge made by the 'ort' strategy.
@@ -102,7 +105,7 @@ Date:   Mon Apr 21 12:28:56 2025 +0200
 Burada herhangi bir dosya degisikligi gozukmuyorken `Merge: a26b42a c973c9d` satiri gozumuze carpiyor. Bu commit aslinda icinde herhangi bir degisiklik barindirmiyor ve sadece 2 adet ayri commit'e isaret ediyor. Yani aslinda sadece bir yertutucu gorevi goruyor. Bu ozellikteki commit'lere **merge commit** adi verilmektedir.
 
 !!! note "Merge commit'i de degisiklik barindirabilir"
-    Ileride **conflict** terimine degindigimizde merge commit'lerinin de degisiklik barindirabildigini gorecegiz.
+    Ileride **conflict** terimine degindigimizde **merge commit**'lerinin de degisiklik barindirabildigini gorecegiz.
 
 Buradan da anlasilacagi uzere bir branch'i digerine merge etmek aslinda commit'leri kopyalamiyor, birlestirmiyor, degistirmiyor. Bir branch'i digerine merge etmek aslinda commit graf'ina sadece bir dugum daha ekliyor.
 

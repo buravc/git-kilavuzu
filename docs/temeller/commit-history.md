@@ -1,10 +1,10 @@
 # Commit History
 
-Git ogrenirken yapilan en yaygin hata bence bir **commit**'in tam olarak ne oldugunu anlamamak ve varsayimlarla devam etmek. Internetteki kaynaklarin bircogu da buna dogru bir sekilde deginememekte.
+Git öğrenirken yapılan en yaygın hata bence bir **commit**'in tam olarak ne olduğunu anlamamak ve varsayımlarla devam etmek. İnternetteki kaynakların birçoğu da buna doğru bir şekilde değinememektedir.
 
-Git repository'deki yapilan degisiklikleri gruplamak ve saklamak icin **commit** denilen bir yapi kullanmaktadir. Bir **commit** attigimizda aslinda o zamanda yaptigimiz degisiklikler sonucunda repository'deki dosyalarin son halini bir araya toplayarak git'in veritabanina kayit etmis oluruz.
+Git repository'deki yapılan değişiklikleri gruplamak ve saklamak için **commit** denilen bir yapı kullanmaktadır. Bir **commit** attığımızda aslında o zamanda yaptığımız değişiklikler sonucunda repository'deki **dosyaların son halini** bir araya toplayarak git'in veritabanına kayıt etmiş oluruz.
 
-Bir **commit**, hem bir sahibi olan, yani bir kullanici adi ve email ile bagdastirilan, hem de bir **parent commit**'i olan bir yapidir. Yani her **commit**'in **en az bir parent commit**'i olmak zorundadir. Bunu `git log` komutunda `--parents` bayragini kullanarak gorebiliriz. Buna ek olarak ciktiyi sadelestirmek icin `--oneline` bayragini da ekleyelim.
+Bir **commit**, hem bir sahibi olan, yani bir kullanıcı adı ve email ile bağdaştırılan, hem de bir **parent commit**'i olan bir yapıdır. Yani her **commit**'in **en az bir parent commit**'i olmak zorundadır. Bunu `git log` komutunda `--parents` bayrağını kullanarak görebiliriz. Buna ek olarak çıktıyı sadeleştirmek için `--oneline` bayrağını da ekleyelim.
 
 ```bash
 $ git log --graph --parents --oneline
@@ -13,24 +13,24 @@ $ git log --graph --parents --oneline
 * beddf6b Ilk commit
 ```
 
-- `--oneline` bayragi ile artik log'da her satir bir commit'e denk geliyor ve hash'larin sadece ilk 7 karakteri yaziliyor.
-- `--parents` bayragi ile her satirin basinda 2 adet farkli hash bulunuyor. Ilk hash commit'in kendi hash'i iken ikinci hash ise parent commit'in hash'i oluyor.
+- `--oneline` bayrağı ile artık log'da her satır bir commit'e denk geliyor ve hash'ların sadece ilk 7 karakteri yazılıyor.
+- `--parents` bayrağı ile her satırın başında 2 adet farklı hash bulunuyor. İlk hash commit'in kendi hash'i iken ikinci hash ise parent commit'in hash'i oluyor.
 
-Log'da da gorulebilecegi uzere aslinda commit'lerimiz arasinda linked list'e benzer, geriye donuk bir graf yapisi bulunmaktadir. Commit'ler kendilerinden once gelen commit'leri, yani *parent commit*'i isaret ederek bir agac olustururlar.
+Log'da da görülebileceği üzere aslında commit'lerimiz arasında linked list'e benzer, geriye dönük bir grafik yapısı bulunmaktadır. Commit'ler kendilerinden önce gelen commit'leri, yani *parent commit*'i işaret ederek bir ağaç oluştururlar.
 
 !!! note "Terminoloji"
-    **Parent** icin Turkce bir terim bulamadim. Burada bir onceki commit veya **ata commit** diye dusunebiliriz.
+    **Parent** için Türkçe bir terim bulamadım. Burada bir önceki commit veya **ata commit** diye düşünebiliriz.
 !!! note "En az bir parent"
-    Gelecekte bazi commit'lerin birden cok parent'i olabildigini gorecegiz. Burada bir istisna olarak bir repository'de atilan ilk commit'i ornek gosterebiliriz. Ilk oldugu icin o commit'in bir parent'i bulunmamaktadir.
+    Gelecekte bazı commit'lerin birden çok parent'ı olabildiğini göreceğiz. Burada bir istisna olarak bir repository'de atılan ilk commit'i örnek gösterebiliriz. İlk olduğu için o commit'in bir parent'ı bulunmamaktadır.
 
-Bu bilgilerin isiginda gectigimiz sayfada hazirladigimiz repository'i uzerinde yaptigimiz degisiklikler sonucunda sekillenen butun **commit history**'i su sekilde gorsellestirebiliriz.
+Bu bilgilerin ışığında geçtiğimiz sayfada hazırladığımız repository'i üzerinde yaptığımız değişiklikler sonucunda şekillenen bütün **commit history**'i şu şekilde görselleştirebiliriz.
 
 !!! note "Terminoloji"
-    **Commit history** bir git repository'sindeki, genelde bir branch'e ait, commit grafi veya commit gecmisi anlaminda kullanilir.
+    **Commit history** bir git repository'sindeki, genelde bir branch'e ait, commit grafiği veya commit geçmişi anlamında kullanılır.
 
 ![image info](./images/commit-history-1.gif)
 
-Buradan yola cikarak, bir branch'in **commit history**'de basitce bir noktaya isaret eden bir referans oldugu sonucuna varabiliriz. Commit hash'leri kullanmak yerine branch'leri kullanmanin bize faydalarini su sekilde listeleyebiliriz:
+Buradan yola çıkarak, bir branch'in **commit history**'de basitçe bir noktaya işaret eden bir referans olduğu sonucuna varabiliriz. Commit hash'leri kullanmak yerine branch'leri kullanmanın bize faydalarını şu şekilde listeleyebiliriz:
 
-- Bu isaretler sayesinde istedigimiz bir commit dalina commit hash'leri yerine daha okunabilir ve hatirlanabilir isimler ile isaret edebiliyoruz.
-- Commit hash'leri sabit ve spesifik bir commit'e isaret edebiliyorken branch'lerin isaret ettigi, veya **"baktigi"** commit'ler degisebiliyor. Bu da bize bazi durumlarda, ornegin yaptigimiz degisiklikleri bir zincir olarak gruplamak ve isimlendirmek istedigimiz durumlarda, esneklik sagliyor.
+- Bu işaretler sayesinde istediğimiz bir commit dalına commit hash'leri yerine daha okunabilir ve hatırlanabilir isimler ile işaret edebiliyoruz.
+- Commit hash'leri sabit ve spesifik bir commit'e işaret edebiliyorken branch'lerin işaret ettiği, veya **"baktığı"** commit'ler değişebiliyor. Bu da bize bazı durumlarda, örneğin yaptığımız değişiklikleri bir zincir olarak gruplamak ve isimlendirmek istediğimiz durumlarda, esneklik sağlıyor.

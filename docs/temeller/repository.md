@@ -2,14 +2,14 @@
 
 Git ile çalışmaya başlamadan önce ilk yapmamız gereken şey ya zaten repository olan bir klasöre geçmek, ya da yeni bir klasörde repository oluşturmak.
 
-Biz yeni bir klasör oluşturup repository oluşturarak başlayacağız. Öncelikle `git-notlari-calisma` adında bir klasör oluşturup içine girerek bir git repository'si oluşturacağız.
+Biz yeni bir klasör oluşturup repository oluşturarak başlayacağız. Öncelikle `git-kilavuzu-calisma` adında bir klasör oluşturup içine girerek bir git repository'si oluşturacağız.
 
 ```bash
-$ mkdir git-notlari-calisma && cd git-notlari-calisma
+$ mkdir git-kilavuzu-calisma && cd git-kilavuzu-calisma
 
 $ git init
 
-Initialized empty Git repository in ...../git-notlari-calisma/.git/
+Initialized empty Git repository in ...../git-kilavuzu-calisma/.git/
 ```
 
 !!! tip "Unix Bilgisi"

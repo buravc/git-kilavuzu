@@ -59,14 +59,4 @@ $ cat test.txt
 Hello world
 ```
 
-### Dosya Checkout Etmek
-
-`checkout` komutunu kullanarak butun bir commit'i checkout edebiliyoruz. Ancak buna alternatif olarak bir commit'teki spesifik bir dosyayi da `checkout` edebiliriz.
-
-```bash
-$ git checkout main test.txt
-Updated 1 path from eff951c
-$ cat test.txt
-Hello world
-Merhaba Dunya
-```
+`git checkout main` komutu repository'mizi eski haline alarak ile kaldigimiz yerde devam edelim.

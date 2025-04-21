@@ -16,13 +16,16 @@ $ git log --graph --parents --oneline
 
 Log'da da gorulebilecegi uzere aslinda commit'lerimiz arasinda linked list'e benzer, geriye donuk bir graf yapisi bulunmaktadir. Commit'ler kendilerinden once gelen commit'leri, yani *parent commit*'i isaret ederek bir agac olustururlar.
 
-!!! note "Parent Commit"
-    `Parent` icin Turkce bir terim bulamadim. Burada bir onceki commit veya **ata commit** diye dusunebiliriz.
+!!! note "Terminoloji"
+    **Parent** icin Turkce bir terim bulamadim. Burada bir onceki commit veya **ata commit** diye dusunebiliriz.
 !!! note "En az bir parent"
     Gelecekte bazi commit'lerin birden cok parent'i olabildigini gorecegiz. Burada bir istisna olarak bir repository'de atilan ilk commit'i ornek gosterebiliriz. Ilk oldugu icin o commit'in bir parent'i bulunmamaktadir.
 
-Bu bilgilerin isiginda gectigimiz sayfada hazirladigimiz repository'i uzerinde yaptigimiz degisiklikler sonucunda sekillenen **commit history**'i su sekilde gorsellestirebiliriz.
+Bu bilgilerin isiginda gectigimiz sayfada hazirladigimiz repository'i uzerinde yaptigimiz degisiklikler sonucunda sekillenen butun **commit history**'i su sekilde gorsellestirebiliriz.
+
+!!! note "Terminoloji"
+    **Commit history** bir git repository'sindeki, genelde bir branch'e ait, commit grafi veya commit gecmisi anlaminda kullanilir.
 
 ![image info](./images/commit-history-1.gif)
 
-Buradan yola cikarak, bir Branch'in **commit history**'de bir noktaya basitce isaret eden bir yapi oldugu sonucuna varabiliriz.
+Buradan yola cikarak, bir Branch'in **commit history**'de basitce bir noktaya isaret eden bir referans oldugu sonucuna varabiliriz.

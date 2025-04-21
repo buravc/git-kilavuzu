@@ -19,6 +19,9 @@ $ git log --graph
 
 Simdi ise git'in bir baska temeli olan bir **branch** olusturalim. Branch'imizin adina `yeni-branch` diyelim. Hemen ardindan ise git'i bu branch'e gecirelim, yani **checkout** ettirelim. Son olarak da repository'de bulunan butun branch'leri listeleyelim.
 
+!!! note "Terminoloji"
+    **Branch** Turkcede bir butunun bir alt dali anlamina gelmektedir. Agac dali, egitim dali gibi baglamlardaki kullanimi ornek gosterilebilir. Git baglaminda ise **branch** dallanan, bir noktadan ayrilan commit'leri isaret etmek icin kullanilir.
+
 ```bash
 $ git branch yeni-branch
 

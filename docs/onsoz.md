@@ -1,4 +1,4 @@
-# Giriş
+# Onsoz
 
 Son yıllarda Git'in bir ana akım VCS (Version Control System) haline geldiğini söylemek yanlış olmaz. Gerek hobi projelerde gerek profesyonel ekiplerde Git bir genel kabul olarak oturmuş durumda. Birçok projenin geliştirilme sürecindeki değişiklikleri yönetmek için gereksinim duyulan temel eylemleri Git başarıyla sağlayan bir araçtır. Git'in yaygınlığına örnek olarak birçoğumuz günlük geliştirme süreçlerimizde bir noktada temel Git komutları olan *commit* atma ve *push* atma eylemlerini gerçekleştiriyoruz.
 
@@ -9,8 +9,3 @@ Bu sorunu "bilgi yetersizliği" olarak özetleyerek yazıyı noktalayabiliriz, k
 Birçoğumuz kullandığımız yazılım araçlarının da sadece düzenli olarak kullandığımız kısımlarını öğreniyoruz. Bu çoğu zaman zamandan tasarruf sağlayıp dikkatimizin dağılmasının önüne geçiyor. Git de bu kullandığımız araçlardan birisi. Ancak Git'in çok önemli bir farkı var. Git geliştirme süreçlerimizin tam merkezinde yer alan bir araç. Aynı codebase üzerinde birden çok kisinin bir arada birbirini engellemeden çalışabilmesine olanak sağlıyor. Codebase büyüdükçe yapılan değişikliklerin kayıt altına alınmasını ve takip edilmesini oldukça kolaylaştırıyor. Geliştirici arkadaşların yaptıkları geliştirmeden çok projenin yönetimine zaman ayırmasını engelliyor, ve bu sayede geliştirme süreçlerimizin ivmelenmesini sağlıyor. Sağladığı kolaylıkları göz önünde bulundurarak Git'in sadece bir *commit* atma aracı olarak görülmesinden çok daha fazla ilgiyi hak ettiği kanaatindeyim. Sonuçta kullandığımız buzdolabının kullanım kılavuzunu okumaktan da zarar gelmez.
 
 Bu dökümanda referans olarak alınabilecek bir kaynak oluşturmayı amaçlıyorum. Git'in mental modeline bilgimin yettiği kadar değinmeye çalışacağım. Böylelikle Git'i her şeyin iyi gitmediği durumlarda nasıl faydalı bir şekilde kullanabileceğimizi daha iyi göreceğiz.
-
-!!! warning "Yazinin Amaci"
-    Basit seviyede git bilginizin oldugunu ve git ile calismis oldugunuz varsayarak yaziya devam edecegim. Temellere elimden geldigince deginmeye calisacak olsam da bu yazinin ana amaci git'in yanlis bilinen dogrularina deginmektir.
-!!! warning "Varsayilan Sistem"
-    Bu dokumani Unix bir sistemde calisildigini varsayarak hazirliyorum. Yazida herhangi bir gorsel uygulama (JetBrains, SourceTree, Visual Studio) kullanmaktan kacinacagim. Sadece **shell** komutlari uzerinden anlatim yapacagim. **MacOS** veya **Linux** bir isletim sistemindeyseniz calistirilan komutlarda bir uyumsuzluk yasamayacaksiniz. **Windows**'ta calisiyorsaniz **WSL (Windows Subsystem for Linux)** kurarak bir Linux altsistemi icerisinde Terminal baslatarak calismanizi oneririm. Aksi taktirde Windows'un komut sistemi Unix sistemlerle onemli davranis farkliliklari sergiledigi icin uyum sorunlari yasamaniz kacinilmaz olacaktir.

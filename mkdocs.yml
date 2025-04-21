@@ -4,7 +4,8 @@ theme:
   name: material
 
 nav:
-  - index.md
+  - "Onsoz": onsoz.md
+  - "Baslamadan Once": baslamadan-once.md
   - Temeller:
     - "Repository Olusturmak": temeller/repository-olusturmak.md
     - "Branch Olusturmak": temeller/branch-olusturmak.md

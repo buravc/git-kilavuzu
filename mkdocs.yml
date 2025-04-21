@@ -1,10 +1,9 @@
 site_name: Git Notları
-site_url: https://github.com/buravc
 theme:
   name: material
 
 nav:
-  - "Onsoz": onsoz.md
+  - "Onsoz": index.md
   - "Baslamadan Once": baslamadan-once.md
   - Temeller:
     - "Repository Olusturmak": temeller/repository-olusturmak.md

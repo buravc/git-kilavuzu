@@ -64,7 +64,7 @@ class GitCommitDiagram(Scene):
         
         gitInitCommitText = self.create_shell_command_prompt(f"git commit -m \"{commitMessages[0]}\"")
         gitFixBugCommitText = self.create_shell_command_prompt(f"git commit -m \"{commitMessages[1]}\"")
-        gitAddNewFeatureCommitText = self.create_shell_command_prompt(f"git commit -m \"{commitMessages[2]}\"")
+        gitAddNewFeatureCommitText = self.create_shell_command_prompt(f"git checkout -b yeni-branch\n$ git commit -m \"{commitMessages[2]}\"")
 
         mainBranchPointer = Ref("main")
         

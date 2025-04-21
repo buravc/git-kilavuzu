@@ -14,6 +14,7 @@ nav:
   - Merge Operasyonu:
     - "Branch Merge / Merge Commit": merge/merge-commit.md
     - "Fast-Forward Merge": merge/fast-forward-merge.md
+    - "Conflict": merge/conflict.md
 
 markdown_extensions:
   - admonition

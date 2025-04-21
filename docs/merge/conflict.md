@@ -96,7 +96,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 Bu noktada yukarida git'in de bize acikca belirttigi uzere iki secenegimiz bulunmaktadir.
 
 - Merge islemini iptal ederek `dal-A` branch'ine geri donmektir. Bunu `git merge --abort` ile yapabilirsiniz.
-- Olusan ***conflict***'i elle cozebilirsiniz.
+- Olusan **conflict**'i elle cozebilirsiniz.
 
 Bu conflict'i elle cozmek icin oncelikle **conflict** olan `test.txt` dosyamizin icerigine goz atalim.
 
@@ -148,3 +148,27 @@ $ git log --graph --all --oneline --parents
 * 419a640 beddf6b Dosyaya Merhaba Dunya ekledim
 * beddf6b Ilk commit
 ```
+
+!!! note "Merge Commit'inde degisiklik"
+    Eger ki bu **conflict**'i cozerken `test.txt` uzerinde git'in **index**'inde bulunmayan farkli bir degisiklik yapmis olsaydik, ornegin yeni bir satira yeni bir yazi ekleseydik, merge commit'imizde bu degisiklik yer alacakti.
+    ```bash
+    $ git show 3bfac7d
+    commit 3bfac7da6102da926b2ad4f319f22e3c617c26c8 (HEAD -> dal-A)
+    Merge: a1ef269 f3a666a
+    Author: <username> <email>
+    Date:   Mon Apr 21 18:52:14 2025 +0200
+
+    Merge branch 'dal-B' into dal-A
+
+    diff --cc test.txt
+    index f995c5f,2c7ce7b..39d67bc
+    --- a/test.txt
+    +++ b/test.txt
+    @@@ -1,4 -1,4 +1,5 @@@
+    - dal-A Hello world
+    + dal-B icin Hello world satiri yaziyorum
+    ++--> Conflict cozerken bu yeni satiri ekledim <--
+      Merhaba Dunya
+      yeni-branch icin merhaba dunya
+      dal B icin degisiklik
+    ```

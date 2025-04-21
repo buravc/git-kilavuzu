@@ -8,6 +8,7 @@ nav:
   - "Baslamadan Once": baslamadan-once.md
   - Temeller:
     - "Repository Olusturmak": temeller/repository-olusturmak.md
+    - "Checkout": temeller/checkout.md
     - "Branch Olusturmak": temeller/branch-olusturmak.md
     - "Commit History": temeller/commit-history.md
   - Merge Operasyonu:

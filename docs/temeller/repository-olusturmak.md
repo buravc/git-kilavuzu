@@ -100,6 +100,13 @@ Changes to be committed:
 
 Ekledigimiz dosyayin `new file` olarak listelendigini gorebiliyoruz. Artik commit atmaya haziriz. Commit mesajimiza `Ilk commit` yazarak ilk commitimizi atabiliriz.
 
+!!! note "Commit Sahipligi"
+    Bir git repository'sinde atilan commit'lerin bir sahibi olmak zorundadir. Biz henuz git'e kendi kullanici adi ve email adresimizi tanitmadik. Asagidaki komutlar ile git'in ayarlarina bunu eklemeyi unutmayalim.
+    ```bash
+    $ git config --global user.name "<username>"
+    $ git config --global user.email "<email>"
+    ```
+
 ```bash
 $ git commit -m "Ilk commit"
 [main (root-commit) beddf6b] Ilk commit

@@ -1,6 +1,6 @@
 # Commit History
 
-Git öğrenirken yapılan en yaygın hata bence bir **commit**'in tam olarak ne olduğunu anlamamak ve varsayımlarla devam etmek. İnternetteki kaynakların birçoğu da buna doğru bir şekilde değinememektedir.
+Bence git öğrenirken yapılan en yaygın hata bir **commit**'in tam olarak ne olduğunu anlamamak ve varsayımlarla devam etmek. İnternetteki Türkçe kaynakların birçoğunun da buna doğru bir şekilde değinemediğini düşünüyorum.
 
 Git repository'deki yapılan değişiklikleri gruplamak ve saklamak için **commit** denilen bir yapı kullanmaktadır. Bir **commit** attığımızda aslında o zamanda yaptığımız değişiklikler sonucunda repository'deki **dosyaların son halini** bir araya toplayarak git'in veritabanına kayıt etmiş oluruz.
 

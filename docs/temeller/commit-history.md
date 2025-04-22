@@ -16,7 +16,7 @@ $ git log --graph --parents --oneline
 - `--oneline` bayrağı ile artık log'da her satır bir commit'e denk geliyor ve hash'ların sadece ilk 7 karakteri yazılıyor.
 - `--parents` bayrağı ile her satırın başında 2 adet farklı hash bulunuyor. İlk hash commit'in kendi hash'i iken ikinci hash ise parent commit'in hash'i oluyor.
 
-Log'da da görülebileceği üzere aslında commit'lerimiz arasında linked list'e benzer, geriye dönük bir grafik yapısı bulunmaktadır. Commit'ler kendilerinden önce gelen commit'leri, yani *parent commit*'i işaret ederek bir ağaç oluştururlar.
+Log'da da görülebileceği üzere aslında commit'lerimiz arasında linked list'e benzer, geriye dönük bir graf yapısı bulunmaktadır. Commit'ler kendilerinden önce gelen commit'leri, yani *parent commit*'i işaret ederek bir ağaç oluştururlar.
 
 !!! note "Terminoloji"
     **Parent** için Türkçe bir terim bulamadım. Burada bir önceki commit veya **ata commit** diye düşünebiliriz.

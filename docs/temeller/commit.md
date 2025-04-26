@@ -11,7 +11,7 @@ $ echo "Hello world" > test.txt
 
 Şimdi ise `git` yaptığımız değişikliği görebiliyor mu bunu `git status` ile kontrol edelim.
 
-```bash
+```bash hl_lines="6-8"
 $ git status
 On branch main
 

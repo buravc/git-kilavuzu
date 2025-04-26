@@ -27,7 +27,7 @@ Bir kopyadan diğerine, veya diğer bir deyiş ile bir commit’ten diğerine ge
 !!! tip "Kısa Hash’i Çakışan Commit’ler"
     Bir repository’de ilk 7 karakteri aynı olan iki commit’in denk gelme ihtimali $16^7 = 268,\!435,\!456$’dır. Dolayısıyla bu ihtimal oldukça düşük. Bunun yaşandığı durumda çalıştırdığınız git komutu hata atacaktır.
 
-```bash
+```bash hl_lines="19"
 $ git checkout beddf6b
 Note: switching to 'beddf6b'.
 

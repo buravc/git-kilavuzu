@@ -113,7 +113,7 @@ $ cat .git/refs/heads/yeni-branch
 c973c9d315307caedfb39a99413067c4a2f3e1ff
 ```
 
-Yukarısi bize gösteriyor ki sadece `yeni-branch` dosyasının içindeki hash değişmiş durumda. Yani git terminolojisinde branch dediğimiz temel yapı aslında sadece bir commit işaretçisi olarak çalışıyor. Biz o branch'teyken ne kadar commit atarsak atalım aslında sadece son attığımız commit'in hash'ına işaret eden bir dosyadan ibaret. Bu dizinde bir dosya oluşturarak yeni bir git branch'i oluşturabildiğimizi gelin test edelim.
+Yukarısı bize gösteriyor ki sadece `yeni-branch` dosyasının içindeki hash değişmiş durumda. Yani git terminolojisinde branch dediğimiz temel yapı aslında sadece bir commit işaretçisi olarak çalışıyor. Biz o branch'teyken ne kadar commit atarsak atalım aslında sadece son attığımız commit'in hash'ına işaret eden bir dosyadan ibaret. Bu dizinde bir dosya oluşturarak yeni bir git branch'i oluşturabildiğimizi gelin test edelim.
 
 ```bash
 $ git branch

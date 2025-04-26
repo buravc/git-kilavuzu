@@ -62,7 +62,7 @@ $ git log --graph --all --oneline
 
 `dal-A` ve `dal-B` branch'leri birbirinden ayrılmış durumda. `dal-A` branch'ine geçerek `dal-B` branch'ini merge edelim.
 
-```bash
+```bash hl_lines="6 7"
 $ git checkout dal-A
 Switched to branch 'dal-A'
 
@@ -72,11 +72,14 @@ CONFLICT (content): Merge conflict in test.txt
 Automatic merge failed; fix conflicts and then commit the result.
 ```
 
-Gördüğünüz gibi bir hata ile karşılaştık. Burada sözlüğümüze yeni bir terimi ekleyebiliriz. **Conflict** bir git işlemi sırasında bir dosya üzerinde meydana gelen, ve birbirini kapsamayan iki farklı commit'teki değişikliğin birbiriyle çakışması durumudur.
+Gördüğünüz gibi bir hata ile karşılaştık. Burada sözlüğümüze yeni bir terimi ekleyebiliriz.
+
+!!! note "Terminoloji"
+    **Conflict** bir git işlemi sırasında bir dosya üzerinde meydana gelen, ve birbirini kapsamayan, yani history'leri farklı olan iki farklı commit'te meydana gelen değişikliğin birbiriyle çakışması durumudur.
 
 Bu noktada repository'miz artık özel bir duruma geçmiştir. Git bu merge esnasında oluşan **conflict**'in manuel olarak çözülmesini beklemektedir. Repository'mizin son durumuna bakarak durum hakkında bir fikir sahibi olalım.
 
-```bash
+```bash hl_lines="4 5"
 $ git status
 On branch dal-A
 You have unmerged paths.
@@ -92,8 +95,8 @@ no changes added to commit (use "git add" and/or "git commit -a")
 
 Bu noktada yukarıda git'in de bize açıkça belirttiği üzere iki seçeneğimiz bulunmaktadır:
 
-- Merge işlemini iptal ederek `dal-A` branch'ine geri dönmektir. Bunu `git merge --abort` ile yapabilirsiniz.
 - Oluşan **conflict**'i elle çözebilirsiniz.
+- Merge işlemini iptal ederek `dal-A` branch'ine geri dönmektir. Bunu `git merge --abort` ile yapabilirsiniz.
 
 Bu conflict'i elle çözmek için öncelikle **conflict** olan `test.txt` dosyamızın içeriğine göz atalım.
 
@@ -129,7 +132,7 @@ $ git merge --continue
 
 Merge işlemini başarılı bir şekilde tamamladıktan sonra `git log` şu şekilde görünecektir.
 
-```bash
+```bash hl_lines="2"
 $ git log --graph --all --oneline --parents
 *   6c72e42 a1ef269 f3a666a (HEAD -> dal-A) Merge branch 'dal-B' into dal-A
 |\  
@@ -150,7 +153,7 @@ $ git log --graph --all --oneline --parents
 
 !!! note "Merge Commit'inde değişiklik"
     Eğer ki bu **conflict**'i çözerken `test.txt` üzerinde git'in **index**'inde bulunmayan farklı bir değişiklik yapmış olsaydık, örneğin yeni bir satıra yeni bir yazı ekleseydik, merge commit'imizde bu değişiklik yer alacaktı.
-    ```bash
+    ```bash hl_lines="3 16"
     $ git show 3bfac7d
     commit 3bfac7da6102da926b2ad4f319f22e3c617c26c8 (HEAD -> dal-A)
     Merge: a1ef269 f3a666a

@@ -1,10 +1,13 @@
 # Commit History
 
-Bence git öğrenirken yapılan en yaygın hata bir **commit**'in tam olarak ne olduğunu anlamamak ve varsayımlarla devam etmek. İnternetteki Türkçe kaynakların birçoğunun da buna doğru bir şekilde değinemediğini düşünüyorum.
+Bence git öğrenirken yapılan en yaygın hata bir **commit**'in tam olarak ne olduğunu anlamamak ve git'i varsayımlarda bulunarak kullanmaya devam etmek. İnternetteki Türkçe kaynakların birçoğunun da buna doğru bir şekilde değinemediğini düşünüyorum.
 
 Git repository'deki yapılan değişiklikleri gruplamak ve saklamak için **commit** denilen bir yapı kullanmaktadır. Bir **commit** attığımızda aslında o zamanda yaptığımız değişiklikler sonucunda repository'deki **dosyaların son halini** bir araya toplayarak git'in veritabanına kayıt etmiş oluruz.
 
-Bir **commit**, hem bir sahibi olan, yani bir kullanıcı adı ve email ile bağdaştırılan, hem de bir **parent commit**'i olan bir yapıdır. Yani her **commit**'in **en az bir parent commit**'i olmak zorundadır. Bunu `git log` komutunda `--parents` bayrağını kullanarak görebiliriz. Buna ek olarak çıktıyı sadeleştirmek için `--oneline` bayrağını da ekleyelim.
+Bir **commit**, hem bir sahibi olan, yani bir kullanıcı adı ve email ile bağdaştırılan, hem de bir **parent commit**'i olan bir yapıdır. Her **commit**'in **en az bir parent commit**'i olmak zorundadır. Bunu `git log` komutunda `--parents` bayrağını kullanarak görebiliriz.
+
+!!! tip "`--oneline` bayrağı"
+    Burada çıktıyı sadeleştirmek için `--oneline` bayrağını da ekleyelim. Böylece log'da her commit artık sadece 1 satır, yani **one line** yer kaplayacak.
 
 ```bash
 $ git log --graph --parents --oneline

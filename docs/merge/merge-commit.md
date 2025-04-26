@@ -40,9 +40,9 @@ index 0000000..3be11c6
 +Lorem ipsum
 ```
 
-Şimdi repository'mizin log'una bakalım. Bu sefer `--all` bayrağını da komutumuza ekleyelim. Bu bayrak ile sadece mevcut branch'in değil bütün repository'nin log'unu görmek istiyoruz.
+Şimdi repository'mizin log'una bakalım. Bu sefer `--all` bayrağını da komutumuza ekleyelim. Bu bayrak ile sadece mevcut branch'in değil bütün repository'nin log'unu görebiliriz.
 
-```bash
+```bash hl_lines="5"
 $ git log --graph --parents --oneline --all
 * a26b42a 419a640 (HEAD -> main) test-2.txt dosyasini ekledim
 | * c973c9d 419a640 (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
@@ -59,7 +59,7 @@ Buradan anlaşılacağı üzere `419a640` commit'inden başlayarak dallanan 2 ay
 `yeni-branch` ismindeki branch'i `main` branch'e birleştirerek aslında o dalda yapılmış olan değişiklikleri, yani `main` branch'te bulunmayıp `yeni-branch`'te bulunan commit'leri `main` branch'ine de almak istediğimizi varsayalım. Bu birbirinden farklı yönlere dallanmış iki branch'i bir araya getirmek için `merge` komutunu kullanabiliriz.
 
 !!! tip "Text editoru"
-    Çalıştıracağımız `merge` komutu bizden commit mesajını düzenlememizi isteyecek. Bu noktada git'in varsayılan olarak kullandığı `vi` modal editoru açılacaktır. Fakat birçoğumuz buna aşina olmadığı için bu komutu çalıştırmadan önce git'in kullanacağı text editorunu `vscode` veya `idea` olarak değiştirmenizi tavsiye ederim. Bunu aşağıdaki komutlardan birini çalıştırarak sağlayabilirsiniz.
+    Çalıştıracağımız `merge` komutu bizden commit mesajını düzenlememizi isteyecek. Bu noktada git'in varsayılan olarak kullandığı `vi` isimli modal text editor açılacaktır. Fakat birçoğumuz buna aşina olmadığı için, bu komutu çalıştırmadan önce sizin git'in kullanacağı text editorunu `vscode` veya `idea` olarak değiştirmenizi tavsiye ederim. Bunu aşağıdaki komutlardan birini çalıştırarak sağlayabilirsiniz.
     ```bash
     $ git config --global core.editor "code --wait" # vscode icin
     $ git config --global core.editor "idea --wait" # JetBrains IntelliJ icin
@@ -92,7 +92,7 @@ Buradan da aşikar olduğu üzere `merge` komutu ile yeni bir commit oluşturulm
 
 Peki bu merge commit'inin içinde ne var? Bunu yukarıda kullandığımız `git show` komutu ile gösterelim.
 
-```bash
+```bash hl_lines="3"
 $ git show b979b40
 commit b979b404898a2508b2812b3ca6b4b70d7e6f07f7 (HEAD -> main)
 Merge: a26b42a c973c9d

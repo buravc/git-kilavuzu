@@ -30,12 +30,25 @@ nav:
     - "Fast-Forward Merge": merge/fast-forward-merge.md
     - "Conflict": merge/conflict.md
 
+watch:
+  - variables.yml
+
+plugins:
+  - search
+  - macros:
+      on_undefined: "strict"
+      include_yaml:
+        - variables.yml
+
 markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.snippets:
+      base_path: "snippets"
+      check_paths: true
 
 extra_javascript:
   - javascripts/katex.js

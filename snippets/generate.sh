@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 set -e
+set -o pipefail
 
 readonly ROOT_DIR="$PWD"
 readonly REPO_DIR="git-kilavuzu-calisma"
@@ -37,107 +38,65 @@ echo-command-and-result() {
 }
 
 # commit section prefix
-SNIPPET_DIR="$ROOT_DIR/snippets";
-rm "$SNIPPET_DIR/"*.md || true;
-CURRENT_SNIPPET_PATH="${SNIPPET_DIR}/commit.md"
+SNIPPETS_OUTPUT_DIR="$ROOT_DIR/snippets";
+rm "$SNIPPETS_OUTPUT_DIR/"*.md || true;
+PAGE_SNIPPET_DECLARATIONS="$ROOT_DIR/snippets.yml"
 
-# commit snippets
-# region snippet hello world
-SNIPPET_NAME="hello-world"
-create-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
+process-page() {
+    local PAGE;
+    PAGE="$(cat)"
+    local CURRENT_PAGE_NAME="$1"
+    local CURRENT_PAGE_OUTPUT_PATH="${SNIPPETS_OUTPUT_DIR}/$CURRENT_PAGE_NAME.md"
+    local len_snippets;
+    len_snippets="$(echo "$PAGE" | yq "length")"
+    for ((snippet_index = 0; snippet_index < len_snippets; snippet_index++)); do
+        echo "$PAGE" | yq -Y ".[${snippet_index}]" | process-snippet "$CURRENT_PAGE_OUTPUT_PATH"
+    done
+}
 
-echo-command-and-result echo \"Hello world\" \> test.txt | append-snippet "$CURRENT_SNIPPET_PATH"
+process-snippet() {
+    local SNIPPET SNIPPET_NAME OUTPUT_PATH HIGHLIGHT;
+    SNIPPET="$(cat)"
+    OUTPUT_PATH="$1"
+    SNIPPET_NAME="$(echo "$SNIPPET" | yq -r ".snippet")"
+    HIGHLIGHT="$(echo "$SNIPPET" | (yq -r ".highlight // empty" 2>/dev/null || true))"
+    create-snippet "$OUTPUT_PATH" "$SNIPPET_NAME" "${HIGHLIGHT:+hl_lines=\"$HIGHLIGHT\"}"
 
-finish-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-# endregion
+    len_cmds="$(echo "$SNIPPET" | yq -r ".commands | length")"
+    for ((cmd_index = 0; cmd_index < len_cmds; cmd_index++)); do
+        local COMMAND COMMAND_TYPE VALUE;
+        COMMAND="$(echo "$SNIPPET" | yq -Y ".commands[$cmd_index]")"
+        COMMAND_TYPE="$(echo "$COMMAND" | yq -r "keys[0]")"
+        VALUE="$(echo "$COMMAND" | yq -r ".$COMMAND_TYPE")"
+        case "$COMMAND_TYPE" in
+            echo_run_output)
+            echo-command-and-result $VALUE | append-snippet "$OUTPUT_PATH";
+            ;;
+            echo)
+            echo "" | append-snippet "$OUTPUT_PATH"
+            ;;
+            run)
+            # set -x;
+            eval $VALUE;
+            # set +x;
+            ;;
+            *)
+            echo "failed to determine command";
+            ;;
+        esac
+    done
 
-# region git status
-SNIPPET_NAME="git-status"
-create-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME" "hl_lines=\"6-8\""
+    finish-snippet "$OUTPUT_PATH" "$SNIPPET_NAME"
+}
 
-echo-command-and-result git status | append-snippet "$CURRENT_SNIPPET_PATH"
+main() {
+    local len_pages;
+    len_pages=$(yq 'keys | length' "$PAGE_SNIPPET_DECLARATIONS")
+    for ((page_index = 0; page_index < len_pages; page_index++)); do
+        local CURRENT_PAGE_NAME;
+        CURRENT_PAGE_NAME="$(yq -r "keys[$page_index]" "$PAGE_SNIPPET_DECLARATIONS")"
+        yq -Y ".$CURRENT_PAGE_NAME" "$PAGE_SNIPPET_DECLARATIONS" | process-page "$CURRENT_PAGE_NAME"
+    done
+}
 
-finish-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-# endregion
-
-# region git add git status
-SNIPPET_NAME="git-add-git-status-1"
-create-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-
-echo-command-and-result git add test.txt | append-snippet "$CURRENT_SNIPPET_PATH"
-echo "" | append-snippet "$CURRENT_SNIPPET_PATH"
-echo-command-and-result git status | append-snippet "$CURRENT_SNIPPET_PATH"
-
-finish-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-# endregion
-
-# region git commit
-SNIPPET_NAME="git-commit-1"
-create-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-
-echo-command-and-result git commit -m \"Ilk commit\" | append-snippet "$CURRENT_SNIPPET_PATH"
-# Calculate Commit hash and update variable
-yq -Y -i ".commit.first_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
-
-finish-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-# endregion
-
-# region git log
-SNIPPET_NAME="git-log-1"
-create-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-
-echo-command-and-result git log | append-snippet "$CURRENT_SNIPPET_PATH"
-
-finish-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-# endregion
-
-# region echo merhaba dunya, git status
-SNIPPET_NAME="echo-merhaba-git-status"
-create-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-
-echo-command-and-result echo \"Merhaba Dunya\" \>\> test.txt | append-snippet "$CURRENT_SNIPPET_PATH"
-echo "" | append-snippet "$CURRENT_SNIPPET_PATH"
-echo-command-and-result git status | append-snippet "$CURRENT_SNIPPET_PATH"
-
-finish-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-# endregion
-
-# region git add; git status
-SNIPPET_NAME="git-add-git-status-2"
-create-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-
-echo-command-and-result git add test.txt | append-snippet "$CURRENT_SNIPPET_PATH"
-echo "" | append-snippet "$CURRENT_SNIPPET_PATH"
-echo-command-and-result git status | append-snippet "$CURRENT_SNIPPET_PATH"
-
-finish-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-# endregion
-
-# region git commit
-SNIPPET_NAME="git-commit-2"
-create-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-
-echo-command-and-result git commit -m \"Dosyaya Merhaba Dunya ekledim\" | append-snippet "$CURRENT_SNIPPET_PATH"
-# Calculate Commit hash and update variable
-yq -Y -i ".commit.second_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
-
-finish-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-# endregion
-
-# region git log --graph
-SNIPPET_NAME="git-log-graph"
-create-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-
-echo-command-and-result git log --graph | append-snippet "$CURRENT_SNIPPET_PATH"
-
-finish-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-# endregion
-
-# region git log --graph --patch
-SNIPPET_NAME="git-log-graph-patch"
-create-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-
-echo-command-and-result git log --graph --patch | append-snippet "$CURRENT_SNIPPET_PATH"
-
-finish-snippet "$CURRENT_SNIPPET_PATH" "$SNIPPET_NAME"
-# endregion
+main

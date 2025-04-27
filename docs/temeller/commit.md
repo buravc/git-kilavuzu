@@ -2,9 +2,7 @@
 
 Commit atabilmemiz için öncelikle repository içerisinde bir değişiklik yapmamız gerekli. Burada `test.txt` isminde bir dosya oluşturarak içerisine `Hello world` yazdırabiliriz.
 
-```bash
-$ echo "Hello world" > test.txt
-```
+-8<- "commit/initial-echo.md"
 
 !!! tip "Unix Bilgisi"
     `echo` komutu yazdığımız metni tekrar etmeye yarayan bir komuttur. Yukarıda ise echo'nun çıktısının `>` ile `test.txt` isminde bir dosyaya yönlendirilmesini sağladık. Bu dosya eğer ki yoksa otomatik olarak oluşturulmaktadır. Bu dosyanın içeriğini doğrulamak için `cat test.txt` komutunu çalıştırabilirsiniz.

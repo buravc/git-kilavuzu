@@ -43,11 +43,19 @@ PREFIX="$ROOT_DIR/snippets/commit";
 rm -rf "$PREFIX" || true;
 mkdir -p "$PREFIX"
 
+# Snippet commit-00
+CURRENT_SNIPPET_PATH="${PREFIX}/initial-echo.md"
+create-snippet "$CURRENT_SNIPPET_PATH"
+
+echo-command-and-result echo \"Hello world\" \> test.txt | append-snippet "$CURRENT_SNIPPET_PATH"
+
+finish-snippet "$CURRENT_SNIPPET_PATH"
+
+
 # Snippet commit-01
 CURRENT_SNIPPET_PATH="${PREFIX}/initial-git-status.md"
 create-snippet "$CURRENT_SNIPPET_PATH" "hl_lines=\"6-8\""
 
-echo "Hello world" > test.txt
 echo-command-and-result git status | append-snippet "$CURRENT_SNIPPET_PATH"
 
 finish-snippet "$CURRENT_SNIPPET_PATH"

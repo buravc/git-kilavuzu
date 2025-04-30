@@ -35,7 +35,7 @@ Changes to be committed:
 # --8<-- [start:git-commit-1]
 ```bash 
 $ git commit -m "Ilk commit"
-[main (root-commit) d81fbdd] Ilk commit
+[main (root-commit) 8951e94] Ilk commit
  1 file changed, 1 insertion(+)
  create mode 100644 test.txt
 ```
@@ -43,9 +43,9 @@ $ git commit -m "Ilk commit"
 # --8<-- [start:git-log-1]
 ```bash 
 $ git log
-commit d81fbdddda2cbc95fa7b180a6c2d6aaed7f9a234 (HEAD -> main)
+commit 8951e947cb69b53dcee2b11ad4f0495afc3634c3 (HEAD -> main)
 Author: <username> <email>
-Date:   Sun Apr 27 20:05:09 2025 +0200
+Date:   Wed Apr 30 22:21:28 2025 +0200
 
     Ilk commit
 ```
@@ -79,22 +79,22 @@ Changes to be committed:
 # --8<-- [start:git-commit-2]
 ```bash 
 $ git commit -m "Dosyaya Merhaba Dunya ekledim"
-[main 65ac0a6] Dosyaya Merhaba Dunya ekledim
+[main 7813aec] Dosyaya Merhaba Dunya ekledim
  1 file changed, 1 insertion(+)
 ```
 # --8<-- [end:git-commit-2]
 # --8<-- [start:git-log-graph]
 ```bash 
 $ git log --graph
-* commit 65ac0a6113e0da523495d7651dc5155e1d6f3ff6 (HEAD -> main)
+* commit 7813aec794b46a914695861412a04fae91720334 (HEAD -> main)
 | Author: <username> <email>
-| Date:   Sun Apr 27 20:05:11 2025 +0200
+| Date:   Wed Apr 30 22:21:30 2025 +0200
 | 
 |     Dosyaya Merhaba Dunya ekledim
 | 
-* commit d81fbdddda2cbc95fa7b180a6c2d6aaed7f9a234
+* commit 8951e947cb69b53dcee2b11ad4f0495afc3634c3
   Author: <username> <email>
-  Date:   Sun Apr 27 20:05:09 2025 +0200
+  Date:   Wed Apr 30 22:21:28 2025 +0200
   
       Ilk commit
 ```
@@ -102,9 +102,9 @@ $ git log --graph
 # --8<-- [start:git-log-graph-patch]
 ```bash 
 $ git log --graph --patch
-* commit 65ac0a6113e0da523495d7651dc5155e1d6f3ff6 (HEAD -> main)
+* commit 7813aec794b46a914695861412a04fae91720334 (HEAD -> main)
 | Author: <username> <email>
-| Date:   Sun Apr 27 20:05:11 2025 +0200
+| Date:   Wed Apr 30 22:21:30 2025 +0200
 | 
 |     Dosyaya Merhaba Dunya ekledim
 | 
@@ -116,9 +116,9 @@ $ git log --graph --patch
 |  Hello world
 | +Merhaba Dunya
 | 
-* commit d81fbdddda2cbc95fa7b180a6c2d6aaed7f9a234
+* commit 8951e947cb69b53dcee2b11ad4f0495afc3634c3
   Author: <username> <email>
-  Date:   Sun Apr 27 20:05:09 2025 +0200
+  Date:   Wed Apr 30 22:21:28 2025 +0200
   
       Ilk commit
   

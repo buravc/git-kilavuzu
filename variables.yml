@@ -1,3 +1,6 @@
 commit:
-  first_commit_hash: d81fbdddda2cbc95fa7b180a6c2d6aaed7f9a234
-  second_commit_hash: 65ac0a6113e0da523495d7651dc5155e1d6f3ff6
+  first_commit_hash: 8951e947cb69b53dcee2b11ad4f0495afc3634c3
+  second_commit_hash: 7813aec794b46a914695861412a04fae91720334
+checkout:
+  long_commit_hash: 8951e947cb69b53dcee2b11ad4f0495afc3634c3
+  short_commit_hash: 8951e94

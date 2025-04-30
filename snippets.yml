@@ -1,40 +1,54 @@
-commit:
-  - snippet: hello-world
-    commands:
-      - echo_run_output: echo "Hello world" > test.txt
-  - snippet: git-status
-    highlight: 6-8
-    commands:
-      - echo_run_output: git status
-  - snippet: git-add-git-status-1
-    commands:
-      - echo_run_output: git add test.txt
-      - echo: ""
-      - echo_run_output: git status
-  - snippet: git-commit-1
-    commands:
-      - echo_run_output: git commit -m "Ilk commit"
-      - run: yq -Y -i ".commit.first_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
-  - snippet: git-log-1
-    commands:
-      - echo_run_output: git log
-  - snippet: echo-merhaba-git-status
-    commands:
-      - echo_run_output: echo "Merhaba Dunya" >> test.txt
-      - echo: ""
-      - echo_run_output: git status
-  - snippet: git-add-git-status-2
-    commands:
-      - echo_run_output: git add test.txt
-      - echo: ""
-      - echo_run_output: git status
-  - snippet: git-commit-2
-    commands:
-      - echo_run_output: git commit -m "Dosyaya Merhaba Dunya ekledim"
-      - run: yq -Y -i ".commit.second_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
-  - snippet: git-log-graph
-    commands:
-      - echo_run_output: git log --graph
-  - snippet: git-log-graph-patch
-    commands:
-      - echo_run_output: git log --graph --patch
+- commit:
+    - snippet: hello-world
+      commands:
+        - echo_run_output: echo "Hello world" > test.txt
+    - snippet: git-status
+      highlight: 6-8
+      commands:
+        - echo_run_output: git status
+    - snippet: git-add-git-status-1
+      commands:
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git status
+    - snippet: git-commit-1
+      commands:
+        - echo_run_output: git commit -m "Ilk commit"
+        - run: yq -Y -i ".commit.first_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
+    - snippet: git-log-1
+      commands:
+        - echo_run_output: git log
+    - snippet: echo-merhaba-git-status
+      commands:
+        - echo_run_output: echo "Merhaba Dunya" >> test.txt
+        - echo: ""
+        - echo_run_output: git status
+    - snippet: git-add-git-status-2
+      commands:
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git status
+    - snippet: git-commit-2
+      commands:
+        - echo_run_output: git commit -m "Dosyaya Merhaba Dunya ekledim"
+        - run: yq -Y -i ".commit.second_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
+    - snippet: git-log-graph
+      commands:
+        - echo_run_output: git log --graph
+    - snippet: git-log-graph-patch
+      commands:
+        - echo_run_output: git log --graph --patch
+- checkout:
+    - snippet: git-log-graph
+      commands:
+        - echo_run_output: git log --graph
+    - snippet: git-checkout
+      highlight: 19
+      commands:
+        - run: CHECKOUT_CMD="$(echo "git checkout <hash>" | sed -e "s|<hash>|$(git rev-parse --short HEAD~)|")"
+        - echo_run_output: $CHECKOUT_CMD
+        - run: yq -Y -i ".checkout.long_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
+        - run: yq -Y -i ".checkout.short_commit_hash = \"$(git rev-parse --short HEAD)\"" "$VARIABLES_FILE"
+    - snippet: cat-test-txt
+      commands:
+        - echo_run_output: cat test.txt

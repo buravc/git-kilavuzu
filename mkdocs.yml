@@ -33,6 +33,7 @@ nav:
 watch:
   - variables.yml
   - snippets.yml
+  - snippets/
 
 plugins:
   - search

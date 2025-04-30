@@ -32,7 +32,12 @@ finish-snippet() {
 echo-command-and-result() {
     # set -x
     local cmd="$*"
-    echo "$ $cmd"
+    if [[ "${cmd:0:1}" == "\$" ]]; then
+        local sub_cmd="${cmd:1}"
+        echo "\$ ${!sub_cmd}"
+    else
+        echo "\$ $cmd"
+    fi
     eval "$cmd" 2>&1
     # set +x
 }
@@ -91,11 +96,11 @@ process-snippet() {
 
 main() {
     local len_pages;
-    len_pages=$(yq 'keys | length' "$PAGE_SNIPPET_DECLARATIONS")
+    len_pages=$(yq 'length' "$PAGE_SNIPPET_DECLARATIONS")
     for ((page_index = 0; page_index < len_pages; page_index++)); do
         local CURRENT_PAGE_NAME;
-        CURRENT_PAGE_NAME="$(yq -r "keys[$page_index]" "$PAGE_SNIPPET_DECLARATIONS")"
-        yq -Y ".$CURRENT_PAGE_NAME" "$PAGE_SNIPPET_DECLARATIONS" | process-page "$CURRENT_PAGE_NAME"
+        CURRENT_PAGE_NAME="$(yq -r ".[${page_index}] | keys[0]" "$PAGE_SNIPPET_DECLARATIONS")"
+        yq -Y ".[${page_index}].$CURRENT_PAGE_NAME" "$PAGE_SNIPPET_DECLARATIONS" | process-page "$CURRENT_PAGE_NAME"
     done
 }
 

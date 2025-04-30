@@ -46,7 +46,7 @@
       highlight: 19
       commands:
         - run: CHECKOUT_CMD="$(echo "git checkout <hash>" | sed -e "s|<hash>|$(git rev-parse --short HEAD~)|")"
-        - echo_run_output: $CHECKOUT_CMD
+        - expand_echo_run_output: CHECKOUT_CMD
         - run: yq -Y -i ".checkout.long_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
         - run: yq -Y -i ".checkout.short_commit_hash = \"$(git rev-parse --short HEAD)\"" "$VARIABLES_FILE"
     - snippet: cat-test-txt

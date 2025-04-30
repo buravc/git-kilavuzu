@@ -29,7 +29,7 @@ finish-snippet() {
     echo "# --8<-- [end:$2]" >> "$1"
 }
 
-echo-command-and-result() {
+echo-run-output() {
     # set -x
     local cmd="$*"
     if [[ "${cmd:0:1}" == "\$" ]]; then
@@ -39,6 +39,14 @@ echo-command-and-result() {
         echo "\$ $cmd"
     fi
     eval "$cmd" 2>&1
+    # set +x
+}
+
+expand-echo-run-output() {
+    # set -x
+    local cmd="$*"
+    echo "\$ ${!cmd}"
+    eval "\$$cmd" 2>&1
     # set +x
 }
 
@@ -75,7 +83,10 @@ process-snippet() {
         VALUE="$(echo "$COMMAND" | yq -r ".$COMMAND_TYPE")"
         case "$COMMAND_TYPE" in
             echo_run_output)
-            echo-command-and-result $VALUE | append-snippet "$OUTPUT_PATH";
+            echo-run-output $VALUE | append-snippet "$OUTPUT_PATH";
+            ;;
+            expand_echo_run_output)
+            expand-echo-run-output $VALUE | append-snippet "$OUTPUT_PATH";
             ;;
             echo)
             echo "" | append-snippet "$OUTPUT_PATH"

@@ -102,3 +102,7 @@
         - echo_run_output: git branch
         - echo: ""
         - echo_run_output: git checkout yeni-branch-2
+- commit_history:
+    - snippet: git-log-graph-oneline
+      commands:
+        - echo_run_output: git log --graph --parents --oneline

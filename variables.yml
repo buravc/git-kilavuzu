@@ -1,9 +1,15 @@
 commit:
-  first_commit_hash: a8784a788a723c8cb16610769d826376f9f46d0f
-  second_commit_hash: 34813837660f442bb757c9450b42bf7ce562f871
+  first_commit_hash: 3ef71ec8a02f828955a3ea2751b8eddce5d36e83
+  second_commit_hash: cc91c99152b6bfd4d0483201185bf4cf8215097d
 checkout:
-  long_commit_hash: a8784a788a723c8cb16610769d826376f9f46d0f
-  short_commit_hash: a8784a7
+  long_commit_hash: 3ef71ec8a02f828955a3ea2751b8eddce5d36e83
+  short_commit_hash: 3ef71ec
 branch:
-  commit_hash_1: 34813837660f442bb757c9450b42bf7ce562f871
-  commit_hash_2: b7ff1e04881de7d9b736c549271aa33e9e8168d4
+  commit_hash_1: cc91c99152b6bfd4d0483201185bf4cf8215097d
+  commit_hash_2: 1a45c9378a4ee522af4b49f62d989427c3971b61
+merge_commit:
+  common_ancestor_commit_hash: cc91c99
+  merge_commit_hash: 8df38ff
+  merge_commit_parent_1_hash: f901136
+  merge_commit_parent_2_hash: '1a45c93'
+  merge_indicator_line: 'Merge: f901136 1a45c93'

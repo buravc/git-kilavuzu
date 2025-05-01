@@ -106,3 +106,36 @@
     - snippet: git-log-graph-oneline
       commands:
         - echo_run_output: git log --graph --parents --oneline
+- merge_commit:
+    - snippet: git-commit-main
+      commands:
+        - echo_run_output: git checkout main
+        - echo: ""
+        - echo_run_output: echo "Lorem ipsum" > test-2.txt
+        - echo: ""
+        - echo_run_output: git add test-2.txt
+        - echo: ""
+        - echo_run_output: git commit -m "test-2.txt dosyasini ekledim"
+        - echo: ""
+        - run: MERGE_COMMIT_GIT_SHOW_1="git show $(git rev-parse --short HEAD)"
+        - expand_echo_run_output: MERGE_COMMIT_GIT_SHOW_1
+    - snippet: git-log-1
+      highlight: "5"
+      commands:
+        - echo_run_output: git log --graph --parents --oneline --all
+        - run: yq -Y -i ".merge_commit.common_ancestor_commit_hash = \"$(git rev-parse --short HEAD^)\"" "$VARIABLES_FILE"
+    - snippet: git-merge-yeni-branch
+      commands:
+        - echo_run_output: git merge yeni-branch
+    - snippet: git-log-2
+      commands:
+        - echo_run_output: git log --graph --parents --oneline --all
+        - run: yq -Y -i ".merge_commit.merge_commit_hash = \"$(git rev-parse --short HEAD)\"" "$VARIABLES_FILE"
+        - run: yq -Y -i ".merge_commit.merge_commit_parent_1_hash = \"$(git rev-parse --short HEAD^1)\"" "$VARIABLES_FILE"
+        - run: yq -Y -i ".merge_commit.merge_commit_parent_2_hash = \"$(git rev-parse --short HEAD^2)\"" "$VARIABLES_FILE"
+    - snippet: git-show
+      highlight: "3"
+      commands:
+        - run: MERGE_COMMIT_GIT_SHOW_2="git show $(git rev-parse --short main)"
+        - expand_echo_run_output: MERGE_COMMIT_GIT_SHOW_2
+        - run: yq -Y -i ".merge_commit.merge_indicator_line = \"$(git show HEAD | awk 'NR == 2')\"" "$VARIABLES_FILE"

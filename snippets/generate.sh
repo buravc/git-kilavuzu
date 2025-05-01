@@ -37,6 +37,14 @@ echo-run-output() {
     # set +x
 }
 
+echo-run-output-error() {
+    # set -x
+    local cmd="$*"
+    echo "\$ $cmd"
+    eval "$cmd" 2>&1 || true
+    # set +x
+}
+
 expand-echo-run-output() {
     # set -x
     local cmd="$*"
@@ -80,11 +88,14 @@ process-snippet() {
             echo_run_output)
             echo-run-output $VALUE | append-snippet "$OUTPUT_PATH";
             ;;
+            echo_run_output_error)
+            echo-run-output-error $VALUE | append-snippet "$OUTPUT_PATH";
+            ;;
             expand_echo_run_output)
             expand-echo-run-output $VALUE | append-snippet "$OUTPUT_PATH";
             ;;
             echo)
-            echo "" | append-snippet "$OUTPUT_PATH"
+            echo "${VALUE}" | append-snippet "$OUTPUT_PATH"
             ;;
             run)
             # set -x;

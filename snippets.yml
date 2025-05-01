@@ -162,3 +162,56 @@
     - snippet: git-log
       commands:
         - echo_run_output: git log --graph --all --oneline
+- conflict:
+    - snippet: git-first-commit
+      commands:
+        - echo_run_output: git checkout -b dal-A
+        - echo: ""
+        - echo: "# burada test.txt dosyasini acip ilk satiri degistirelim. Sonrasinda ise siradaki komuttan devam edelim."
+        - echo: ""
+        - run: sed -i '' -e "1s|.*|dal-A icin Hello world satiri yaziyorum|" test.txt
+        - echo_run_output: cat test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "test.txt dal-A icin degistirdim"
+        - echo: ""
+        - echo_run_output: "git checkout dal-B # dal-B branch'imiz zaten hazir oldugu icin `-b` bayragini kullanmayarak yeni bir branch olusturmaktan kacindik."
+        - echo: ""
+        - echo: "# burada test.txt dosyasini acip ilk satiri yukaridakinden farkli bir sekilde degistirelim. Sonrasinda ise siradaki komuttan devam edelim."
+        - echo: ""
+        - run: sed -i '' -e "1s|.*|dal-B icin Hello world satiri yaziyorum|" test.txt
+        - echo_run_output: cat test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "test.txt dal-B icin degistirdim"
+    - snippet: git-log-1
+      commands:
+        - echo_run_output: git log --graph --all --oneline
+    - snippet: git-merge
+      highlight: "6-7"
+      commands:
+        - echo_run_output: git checkout dal-A
+        - echo: ""
+        - echo_run_output_error: git merge dal-B
+    - snippet: git-status
+      highlight: "4-5"
+      commands:
+        - echo_run_output: git status
+    - snippet: cat-conflicted-file
+      commands:
+        - echo_run_output: cat test.txt
+        - run: sed -i '' -e '1,3d;5d' test.txt
+    - snippet: git-merge-continue
+      commands:
+        - echo_run_output: cat test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - run: git config core.editor "sed -i '' -e ''"
+        - echo_run_output: "git merge --continue # acilan editor ile merge commit'imizin mesajini duzenleyerek kaydedip kapatalim."
+    - snippet: git-log-2
+      highlight: "2"
+      commands:
+        - echo_run_output: git log --graph --all --oneline --parents

@@ -17,11 +17,13 @@ items:
             properties:
               echo_run_output:
                 type: string
+              echo_run_output_error:
+                type: string
+              expand_echo_run_output:
+                type: string
               echo:
                 type: string
               run:
-                type: string
-              expand_echo_run_output:
                 type: string
             additionalProperties: false
       required:

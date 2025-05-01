@@ -32,12 +32,7 @@ finish-snippet() {
 echo-run-output() {
     # set -x
     local cmd="$*"
-    if [[ "${cmd:0:1}" == "\$" ]]; then
-        local sub_cmd="${cmd:1}"
-        echo "\$ ${!sub_cmd}"
-    else
-        echo "\$ $cmd"
-    fi
+    echo "\$ $cmd"
     eval "$cmd" 2>&1
     # set +x
 }
@@ -46,7 +41,7 @@ expand-echo-run-output() {
     # set -x
     local cmd="$*"
     echo "\$ ${!cmd}"
-    eval "\$$cmd" 2>&1
+    eval "${!cmd}" 2>&1
     # set +x
 }
 

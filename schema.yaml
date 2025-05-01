@@ -1,0 +1,29 @@
+type: array
+items:
+  type: object
+  additionalProperties:
+    type: array
+    items:
+      type: object
+      properties:
+        snippet:
+          type: string
+        highlight:
+          type: string
+        commands:
+          type: array
+          items:
+            type: object
+            properties:
+              echo_run_output:
+                type: string
+              echo:
+                type: string
+              run:
+                type: string
+              expand_echo_run_output:
+                type: string
+            additionalProperties: false
+      required:
+        - snippet
+        - commands

@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=./schema.yaml
 - commit:
     - snippet: hello-world
       commands:
@@ -43,7 +44,7 @@
       commands:
         - echo_run_output: git log --graph
     - snippet: git-checkout
-      highlight: 19
+      highlight: "19"
       commands:
         - run: CHECKOUT_CMD="$(echo "git checkout <hash>" | sed -e "s|<hash>|$(git rev-parse --short HEAD~)|")"
         - expand_echo_run_output: CHECKOUT_CMD
@@ -52,3 +53,52 @@
     - snippet: cat-test-txt
       commands:
         - echo_run_output: cat test.txt
+- branch:
+    - snippet: git-log-graph-1
+      commands:
+        - run: git checkout main
+        - echo_run_output: git log --graph
+    - snippet: git-branch-1
+      commands:
+        - echo_run_output: git branch yeni-branch
+        - echo: ""
+        - echo_run_output: git checkout yeni-branch
+        - echo: ""
+        - echo_run_output: git branch
+    - snippet: ls-refs-heads
+      commands:
+        - echo_run_output: ls .git/refs/heads
+    - snippet: cat-heads-1
+      commands:
+        - echo_run_output: cat .git/refs/heads/main
+        - echo: ""
+        - echo_run_output: cat .git/refs/heads/yeni-branch
+    - snippet: git-log-graph-2
+      commands:
+        - echo_run_output: git log --graph
+        - run: yq -Y -i ".branch.commit_hash_1 = \"$(git rev-parse yeni-branch)\"" "$VARIABLES_FILE"
+    - snippet: commit
+      commands:
+        - echo_run_output: echo "yeni-branch icin merhaba-dunya" >> test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "yeni-branch icin ilk commitimi atiyorum"
+        - echo: ""
+        - echo_run_output: git log --graph
+        - run: yq -Y -i ".branch.commit_hash_2 = \"$(git rev-parse yeni-branch)\"" "$VARIABLES_FILE"
+    - snippet: cat-heads-2
+      commands:
+        - echo_run_output: cat .git/refs/heads/main
+        - echo: ""
+        - echo_run_output: cat .git/refs/heads/yeni-branch
+    - snippet: manual-branch-creation
+      commands:
+        - echo_run_output: git branch
+        - echo: ""
+        - run: YENI_BRANCH_COMMIT="echo \"$(git rev-parse yeni-branch)\" > .git/refs/heads/yeni-branch-2"
+        - expand_echo_run_output: YENI_BRANCH_COMMIT
+        - echo: ""
+        - echo_run_output: git branch
+        - echo: ""
+        - echo_run_output: git checkout yeni-branch-2

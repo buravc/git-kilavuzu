@@ -1,15 +1,15 @@
 # --8<-- [start:git-log-graph-1]
 ```bash 
 $ git log --graph
-* commit cc91c99152b6bfd4d0483201185bf4cf8215097d (HEAD -> main)
+* commit c3919433b36c5abf8c76586946e356aff0f1d348 (HEAD -> main)
 | Author: <username> <email>
-| Date:   Thu May 1 17:11:34 2025 +0200
+| Date:   Thu May 1 17:51:37 2025 +0200
 | 
 |     Dosyaya Merhaba Dunya ekledim
 | 
-* commit 3ef71ec8a02f828955a3ea2751b8eddce5d36e83
+* commit 469f4cba474c35d2b42754f549052ab18a73aeb0
   Author: <username> <email>
-  Date:   Thu May 1 17:11:32 2025 +0200
+  Date:   Thu May 1 17:51:35 2025 +0200
   
       Ilk commit
 ```
@@ -36,24 +36,24 @@ yeni-branch
 # --8<-- [start:cat-heads-1]
 ```bash 
 $ cat .git/refs/heads/main
-cc91c99152b6bfd4d0483201185bf4cf8215097d
+c3919433b36c5abf8c76586946e356aff0f1d348
 
 $ cat .git/refs/heads/yeni-branch
-cc91c99152b6bfd4d0483201185bf4cf8215097d
+c3919433b36c5abf8c76586946e356aff0f1d348
 ```
 # --8<-- [end:cat-heads-1]
 # --8<-- [start:git-log-graph-2]
 ```bash 
 $ git log --graph
-* commit cc91c99152b6bfd4d0483201185bf4cf8215097d (HEAD -> yeni-branch, main)
+* commit c3919433b36c5abf8c76586946e356aff0f1d348 (HEAD -> yeni-branch, main)
 | Author: <username> <email>
-| Date:   Thu May 1 17:11:34 2025 +0200
+| Date:   Thu May 1 17:51:37 2025 +0200
 | 
 |     Dosyaya Merhaba Dunya ekledim
 | 
-* commit 3ef71ec8a02f828955a3ea2751b8eddce5d36e83
+* commit 469f4cba474c35d2b42754f549052ab18a73aeb0
   Author: <username> <email>
-  Date:   Thu May 1 17:11:32 2025 +0200
+  Date:   Thu May 1 17:51:35 2025 +0200
   
       Ilk commit
 ```
@@ -65,25 +65,25 @@ $ echo "yeni-branch icin merhaba-dunya" >> test.txt
 $ git add test.txt
 
 $ git commit -m "yeni-branch icin ilk commitimi atiyorum"
-[yeni-branch 1a45c93] yeni-branch icin ilk commitimi atiyorum
+[yeni-branch 694de91] yeni-branch icin ilk commitimi atiyorum
  1 file changed, 1 insertion(+)
 
 $ git log --graph
-* commit 1a45c9378a4ee522af4b49f62d989427c3971b61 (HEAD -> yeni-branch)
+* commit 694de911a0c6ba38ba9d5d40119bc238256f5ee0 (HEAD -> yeni-branch)
 | Author: <username> <email>
-| Date:   Thu May 1 17:11:41 2025 +0200
+| Date:   Thu May 1 17:51:44 2025 +0200
 | 
 |     yeni-branch icin ilk commitimi atiyorum
 | 
-* commit cc91c99152b6bfd4d0483201185bf4cf8215097d (main)
+* commit c3919433b36c5abf8c76586946e356aff0f1d348 (main)
 | Author: <username> <email>
-| Date:   Thu May 1 17:11:34 2025 +0200
+| Date:   Thu May 1 17:51:37 2025 +0200
 | 
 |     Dosyaya Merhaba Dunya ekledim
 | 
-* commit 3ef71ec8a02f828955a3ea2751b8eddce5d36e83
+* commit 469f4cba474c35d2b42754f549052ab18a73aeb0
   Author: <username> <email>
-  Date:   Thu May 1 17:11:32 2025 +0200
+  Date:   Thu May 1 17:51:35 2025 +0200
   
       Ilk commit
 ```
@@ -91,10 +91,10 @@ $ git log --graph
 # --8<-- [start:cat-heads-2]
 ```bash 
 $ cat .git/refs/heads/main
-cc91c99152b6bfd4d0483201185bf4cf8215097d
+c3919433b36c5abf8c76586946e356aff0f1d348
 
 $ cat .git/refs/heads/yeni-branch
-1a45c9378a4ee522af4b49f62d989427c3971b61
+694de911a0c6ba38ba9d5d40119bc238256f5ee0
 ```
 # --8<-- [end:cat-heads-2]
 # --8<-- [start:manual-branch-creation]
@@ -103,7 +103,7 @@ $ git branch
   main
 * yeni-branch
 
-$ echo "1a45c9378a4ee522af4b49f62d989427c3971b61" > .git/refs/heads/yeni-branch-2
+$ echo "694de911a0c6ba38ba9d5d40119bc238256f5ee0" > .git/refs/heads/yeni-branch-2
 
 $ git branch
   main

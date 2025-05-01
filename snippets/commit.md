@@ -35,7 +35,7 @@ Changes to be committed:
 # --8<-- [start:git-commit-1]
 ```bash 
 $ git commit -m "Ilk commit"
-[main (root-commit) 3ef71ec] Ilk commit
+[main (root-commit) 469f4cb] Ilk commit
  1 file changed, 1 insertion(+)
  create mode 100644 test.txt
 ```
@@ -43,9 +43,9 @@ $ git commit -m "Ilk commit"
 # --8<-- [start:git-log-1]
 ```bash 
 $ git log
-commit 3ef71ec8a02f828955a3ea2751b8eddce5d36e83 (HEAD -> main)
+commit 469f4cba474c35d2b42754f549052ab18a73aeb0 (HEAD -> main)
 Author: <username> <email>
-Date:   Thu May 1 17:11:32 2025 +0200
+Date:   Thu May 1 17:51:35 2025 +0200
 
     Ilk commit
 ```
@@ -79,22 +79,22 @@ Changes to be committed:
 # --8<-- [start:git-commit-2]
 ```bash 
 $ git commit -m "Dosyaya Merhaba Dunya ekledim"
-[main cc91c99] Dosyaya Merhaba Dunya ekledim
+[main c391943] Dosyaya Merhaba Dunya ekledim
  1 file changed, 1 insertion(+)
 ```
 # --8<-- [end:git-commit-2]
 # --8<-- [start:git-log-graph]
 ```bash 
 $ git log --graph
-* commit cc91c99152b6bfd4d0483201185bf4cf8215097d (HEAD -> main)
+* commit c3919433b36c5abf8c76586946e356aff0f1d348 (HEAD -> main)
 | Author: <username> <email>
-| Date:   Thu May 1 17:11:34 2025 +0200
+| Date:   Thu May 1 17:51:37 2025 +0200
 | 
 |     Dosyaya Merhaba Dunya ekledim
 | 
-* commit 3ef71ec8a02f828955a3ea2751b8eddce5d36e83
+* commit 469f4cba474c35d2b42754f549052ab18a73aeb0
   Author: <username> <email>
-  Date:   Thu May 1 17:11:32 2025 +0200
+  Date:   Thu May 1 17:51:35 2025 +0200
   
       Ilk commit
 ```
@@ -102,9 +102,9 @@ $ git log --graph
 # --8<-- [start:git-log-graph-patch]
 ```bash 
 $ git log --graph --patch
-* commit cc91c99152b6bfd4d0483201185bf4cf8215097d (HEAD -> main)
+* commit c3919433b36c5abf8c76586946e356aff0f1d348 (HEAD -> main)
 | Author: <username> <email>
-| Date:   Thu May 1 17:11:34 2025 +0200
+| Date:   Thu May 1 17:51:37 2025 +0200
 | 
 |     Dosyaya Merhaba Dunya ekledim
 | 
@@ -116,9 +116,9 @@ $ git log --graph --patch
 |  Hello world
 | +Merhaba Dunya
 | 
-* commit 3ef71ec8a02f828955a3ea2751b8eddce5d36e83
+* commit 469f4cba474c35d2b42754f549052ab18a73aeb0
   Author: <username> <email>
-  Date:   Thu May 1 17:11:32 2025 +0200
+  Date:   Thu May 1 17:51:35 2025 +0200
   
       Ilk commit
   

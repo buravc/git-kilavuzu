@@ -139,3 +139,26 @@
         - run: MERGE_COMMIT_GIT_SHOW_2="git show $(git rev-parse --short main)"
         - expand_echo_run_output: MERGE_COMMIT_GIT_SHOW_2
         - run: yq -Y -i ".merge_commit.merge_indicator_line = \"$(git show HEAD | awk 'NR == 2')\"" "$VARIABLES_FILE"
+- fast_forward_merge:
+    - snippet: git-commit
+      commands:
+        - echo_run_output: git checkout -b "dal-B"
+        - echo: ""
+        - echo_run_output: echo "dal B icin degisiklik" >> test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "dal-B icin degisiklik yaptim"
+        - echo: ""
+        - echo_run_output: git log --graph --all --oneline
+    - snippet: git-merge
+      highlight: "6"
+      commands:
+        - run: yq -Y -i ".fast_forward_merge.main_hash_before_ff = \"$(git rev-parse --short main)\"" "$VARIABLES_FILE"
+        - echo_run_output: git checkout main
+        - echo: ""
+        - echo_run_output: git merge dal-B
+        - run: yq -Y -i ".fast_forward_merge.main_hash_after_ff = \"$(git rev-parse --short main)\"" "$VARIABLES_FILE"
+    - snippet: git-log
+      commands:
+        - echo_run_output: git log --graph --all --oneline

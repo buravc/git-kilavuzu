@@ -158,8 +158,8 @@ main() {
             fi
         fi
         yq -Y ".[${page_index}].$CURRENT_PAGE_NAME" "$PAGE_SNIPPET_DECLARATIONS" | process-page "$CURRENT_PAGE_NAME"
+        git bundle create "../bundles/git-kilavuzu-calisma-$CURRENT_PAGE_NAME.bundle" --all
     done
-    git bundle create ../git-kilavuzu-calisma.bundle --all
 }
 
 main

@@ -5,7 +5,7 @@ set -o pipefail
 
 readonly ROOT_DIR="$PWD"
 readonly REPO_DIR="git-kilavuzu-calisma"
-readonly VARIABLES_FILE="$ROOT_DIR/variables.yml"
+readonly VARIABLES_FILE="$ROOT_DIR/variables.yaml"
 
 rm -rf "$REPO_DIR" || true;
 
@@ -56,7 +56,7 @@ expand-echo-run-output() {
 # commit section prefix
 SNIPPETS_OUTPUT_DIR="$ROOT_DIR/snippets";
 rm "$SNIPPETS_OUTPUT_DIR/"*.md || true;
-PAGE_SNIPPET_DECLARATIONS="$ROOT_DIR/snippets.yml"
+PAGE_SNIPPET_DECLARATIONS="$ROOT_DIR/snippets.yaml"
 
 process-page() {
     local PAGE;

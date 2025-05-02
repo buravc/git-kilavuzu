@@ -1,23 +1,23 @@
 # --8<-- [start:git-log-graph]
 ```bash 
 $ git log --graph
-* commit be76ce795a4595ed2446185e01e9a7d3134c880d (HEAD -> main)
+* commit 5691da539dddcf7440f330a2f2d1e064859a164f (HEAD -> main)
 | Author: <username> <email>
-| Date:   Thu May 1 19:30:09 2025 +0200
+| Date:   Fri May 2 21:27:40 2025 +0200
 | 
 |     Dosyaya Merhaba Dunya ekledim
 | 
-* commit 0831d6c0aa90b8c52a667750b922b411d36681f8
+* commit a0d61de80d7b70e85c57d9d3959b3642dd68cd5c
   Author: <username> <email>
-  Date:   Thu May 1 19:30:07 2025 +0200
+  Date:   Fri May 2 21:27:38 2025 +0200
   
       Ilk commit
 ```
 # --8<-- [end:git-log-graph]
 # --8<-- [start:git-checkout]
 ```bash hl_lines="19"
-$ git checkout 0831d6c
-Note: switching to '0831d6c'.
+$ git checkout a0d61de
+Note: switching to 'a0d61de'.
 
 You are in 'detached HEAD' state. You can look around, make experimental
 changes and commit them, and you can discard any commits you make in this
@@ -34,7 +34,7 @@ Or undo this operation with:
 
 Turn off this advice by setting config variable advice.detachedHead to false
 
-HEAD is now at 0831d6c Ilk commit
+HEAD is now at a0d61de Ilk commit
 ```
 # --8<-- [end:git-checkout]
 # --8<-- [start:cat-test-txt]

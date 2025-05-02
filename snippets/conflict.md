@@ -14,7 +14,7 @@ dal B icin degisiklik
 $ git add test.txt
 
 $ git commit -m "test.txt dal-A icin degistirdim"
-[dal-A 9ee4e2a] test.txt dal-A icin degistirdim
+[dal-A 380af38] test.txt dal-A icin degistirdim
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 $ git checkout dal-B # dal-B branch'imiz zaten hazir oldugu icin `-b` bayragini kullanmayarak yeni bir branch olusturmaktan kacindik.
@@ -31,24 +31,24 @@ dal B icin degisiklik
 $ git add test.txt
 
 $ git commit -m "test.txt dal-B icin degistirdim"
-[dal-B 9397a77] test.txt dal-B icin degistirdim
+[dal-B c077697] test.txt dal-B icin degistirdim
  1 file changed, 1 insertion(+), 1 deletion(-)
 ```
 # --8<-- [end:git-first-commit]
 # --8<-- [start:git-log-1]
 ```bash 
 $ git log --graph --all --oneline
-* 9397a77 (HEAD -> dal-B) test.txt dal-B icin degistirdim
-| * 9ee4e2a (dal-A) test.txt dal-A icin degistirdim
+* c077697 (HEAD -> dal-B) test.txt dal-B icin degistirdim
+| * 380af38 (dal-A) test.txt dal-A icin degistirdim
 |/  
-* 2ea23bb (main) dal-B icin degisiklik yaptim
-*   a3cf991 Merge branch 'yeni-branch'
+* 1b30337 (main) dal-B icin degisiklik yaptim
+*   76b2782 Merge branch 'yeni-branch'
 |\  
-| * 3be1429 (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
-* | bdb78d0 test-2.txt dosyasini ekledim
+| * 3c9874b (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
+* | 5b86313 test-2.txt dosyasini ekledim
 |/  
-* be76ce7 Dosyaya Merhaba Dunya ekledim
-* 0831d6c Ilk commit
+* 5691da5 Dosyaya Merhaba Dunya ekledim
+* a0d61de Ilk commit
 ```
 # --8<-- [end:git-log-1]
 # --8<-- [start:git-merge]
@@ -101,24 +101,24 @@ dal B icin degisiklik
 $ git add test.txt
 
 $ git merge --continue # acilan editor ile merge commit'imizin mesajini duzenleyerek kaydedip kapatalim.
-[dal-A 09304ae] Merge branch 'dal-B' into dal-A
+[dal-A c428542] Merge branch 'dal-B' into dal-A
 ```
 # --8<-- [end:git-merge-continue]
 # --8<-- [start:git-log-2]
 ```bash hl_lines="2"
 $ git log --graph --all --oneline --parents
-*   09304ae 9ee4e2a 9397a77 (HEAD -> dal-A) Merge branch 'dal-B' into dal-A
+*   c428542 380af38 c077697 (HEAD -> dal-A) Merge branch 'dal-B' into dal-A
 |\  
-| * 9397a77 2ea23bb (dal-B) test.txt dal-B icin degistirdim
-* | 9ee4e2a 2ea23bb test.txt dal-A icin degistirdim
+| * c077697 1b30337 (dal-B) test.txt dal-B icin degistirdim
+* | 380af38 1b30337 test.txt dal-A icin degistirdim
 |/  
-* 2ea23bb a3cf991 (main) dal-B icin degisiklik yaptim
-*   a3cf991 bdb78d0 3be1429 Merge branch 'yeni-branch'
+* 1b30337 76b2782 (main) dal-B icin degisiklik yaptim
+*   76b2782 5b86313 3c9874b Merge branch 'yeni-branch'
 |\  
-| * 3be1429 be76ce7 (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
-* | bdb78d0 be76ce7 test-2.txt dosyasini ekledim
+| * 3c9874b 5691da5 (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
+* | 5b86313 5691da5 test-2.txt dosyasini ekledim
 |/  
-* be76ce7 0831d6c Dosyaya Merhaba Dunya ekledim
-* 0831d6c Ilk commit
+* 5691da5 a0d61de Dosyaya Merhaba Dunya ekledim
+* a0d61de Ilk commit
 ```
 # --8<-- [end:git-log-2]

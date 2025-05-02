@@ -8,14 +8,14 @@ $ echo "Lorem ipsum" > test-2.txt
 $ git add test-2.txt
 
 $ git commit -m "test-2.txt dosyasini ekledim"
-[main bdb78d0] test-2.txt dosyasini ekledim
+[main 5b86313] test-2.txt dosyasini ekledim
  1 file changed, 1 insertion(+)
  create mode 100644 test-2.txt
 
-$ git show bdb78d0
-commit bdb78d05b9bd4094170b438fa904d62a49585bf6 (HEAD -> main)
+$ git show 5b86313
+commit 5b863135d9ca043baaca57bf553c6fbbb881950f (HEAD -> main)
 Author: <username> <email>
-Date:   Thu May 1 19:30:19 2025 +0200
+Date:   Fri May 2 21:27:51 2025 +0200
 
     test-2.txt dosyasini ekledim
 
@@ -31,11 +31,11 @@ index 0000000..3be11c6
 # --8<-- [start:git-log-1]
 ```bash hl_lines="5"
 $ git log --graph --parents --oneline --all
-* bdb78d0 be76ce7 (HEAD -> main) test-2.txt dosyasini ekledim
-| * 3be1429 be76ce7 (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
+* 5b86313 5691da5 (HEAD -> main) test-2.txt dosyasini ekledim
+| * 3c9874b 5691da5 (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
 |/  
-* be76ce7 0831d6c Dosyaya Merhaba Dunya ekledim
-* 0831d6c Ilk commit
+* 5691da5 a0d61de Dosyaya Merhaba Dunya ekledim
+* a0d61de Ilk commit
 ```
 # --8<-- [end:git-log-1]
 # --8<-- [start:git-merge-yeni-branch]
@@ -49,22 +49,22 @@ Merge made by the 'ort' strategy.
 # --8<-- [start:git-log-2]
 ```bash 
 $ git log --graph --parents --oneline --all
-*   a3cf991 bdb78d0 3be1429 (HEAD -> main) Merge branch 'yeni-branch'
+*   76b2782 5b86313 3c9874b (HEAD -> main) Merge branch 'yeni-branch'
 |\  
-| * 3be1429 be76ce7 (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
-* | bdb78d0 be76ce7 test-2.txt dosyasini ekledim
+| * 3c9874b 5691da5 (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
+* | 5b86313 5691da5 test-2.txt dosyasini ekledim
 |/  
-* be76ce7 0831d6c Dosyaya Merhaba Dunya ekledim
-* 0831d6c Ilk commit
+* 5691da5 a0d61de Dosyaya Merhaba Dunya ekledim
+* a0d61de Ilk commit
 ```
 # --8<-- [end:git-log-2]
 # --8<-- [start:git-show]
 ```bash hl_lines="3"
-$ git show a3cf991
-commit a3cf991913353d2a06ddc15db7de2eafd96d4441 (HEAD -> main)
-Merge: bdb78d0 3be1429
+$ git show 76b2782
+commit 76b2782390749f0e9b702fd63e8a10d1af5aa6b8 (HEAD -> main)
+Merge: 5b86313 3c9874b
 Author: <username> <email>
-Date:   Thu May 1 19:30:20 2025 +0200
+Date:   Fri May 2 21:27:52 2025 +0200
 
     Merge branch 'yeni-branch'
 

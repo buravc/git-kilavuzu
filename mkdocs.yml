@@ -29,6 +29,19 @@ nav:
     - "Branch Merge / Merge Commit": merge/merge-commit.md
     - "Fast-Forward Merge": merge/fast-forward-merge.md
     - "Conflict": merge/conflict.md
+    - "Squash Merge": merge/squash-merge.md
+
+watch:
+  - variables.yaml
+  - snippets.yaml
+  - snippets/
+
+plugins:
+  - search
+  - macros:
+      on_undefined: "strict"
+      include_yaml:
+        - variables.yaml
 
 markdown_extensions:
   - admonition
@@ -36,6 +49,9 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.arithmatex:
       generic: true
+  - pymdownx.snippets:
+      base_path: "snippets"
+      check_paths: true
 
 extra_javascript:
   - javascripts/katex.js

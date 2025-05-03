@@ -9,12 +9,7 @@ Bir **commit**, hem bir sahibi olan, yani bir kullanıcı adı ve email ile bağ
 !!! tip "`--oneline` bayrağı"
     Burada çıktıyı sadeleştirmek için `--oneline` bayrağını da ekleyelim. Böylece log'da her commit artık sadece 1 satır, yani **one line** yer kaplayacak.
 
-```bash
-$ git log --graph --parents --oneline
-* c973c9d 419a640 (HEAD -> yeni-branch) yeni-branch icin ilk commitimi atiyorum
-* 419a640 beddf6b (main) Dosyaya Merhaba Dunya ekledim
-* beddf6b Ilk commit
-```
+-8<- "commit_history.md:git-log-graph-oneline"
 
 - `--oneline` bayrağı ile artık log'da her satır bir commit'e denk geliyor ve hash'ların sadece ilk 7 karakteri yazılıyor.
 - `--parents` bayrağı ile her satırın başında 2 adet farklı hash bulunuyor. İlk hash commit'in kendi hash'i iken ikinci hash ise parent commit'in hash'i oluyor.

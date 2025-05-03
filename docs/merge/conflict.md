@@ -4,73 +4,15 @@ Biri diğerini kapsayan iki branch için merge işleminde **fast-forward merge**
 
 `A` ve `B` isminde iki branch'imiz olduğunu varsayalım. `A` branch'indeyken `test.txt` dosyasının **ilk** satırını değiştirip bir commit attık. Artık `A` branch'imizde bu değişiklik bulunmakta. `B` branch'indeyken de aynı işlemi tekrarladım ve **ilk** satırı değiştirerek commit attık. Artık birbirinden ayrı ve aynı dosya üzerinde farklı değişiklikleri olan 2 branch'imiz var. Peki bu durumda `B` branch'ini `A` branch'ine merge etmek istersek, git `test.txt` dosyasındaki iki farklı branch'teki değişikliği nasıl birleştirecek?
 
-```bash
-$ git checkout -b dal-A
-Switched to a new branch 'dal-A'
-
-# burada test.txt dosyasini acip ilk satiri degistirelim. Sonrasinda ise siradaki komuttan devam edelim.
-
-$ cat test.txt
-dal-A Hello world
-Merhaba Dunya
-yeni-branch icin merhaba dunya
-dal B icin degisiklik
-
-$ git add test.txt
-
-$ git commit -m "test-txt dal-A icin degistirdim"
-[dal-A a1ef269] test-txt dal-A icin degistirdim
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-$ git checkout main
-Switched to branch 'main'
-
-$ git checkout dal-B # dal-B branch'imiz zaten hazir oldugu icin `-b` bayragini kullanmayarak yeni bir branch olusturmaktan kacindik.
-Switched to branch 'dal-B'
-
-# burada test.txt dosyasini acip ilk satiri yukaridakinden farkli bir sekilde degistirelim. Sonrasinda ise siradaki komuttan devam edelim.
-
-$ cat test.txt
-dal-B icin Hello world satiri yaziyorum
-Merhaba Dunya
-yeni-branch icin merhaba dunya
-dal B icin degisiklik
-
-$ git add test.txt
-
-$ git commit -m "test-txt dal-B icin degistirdim"
-[dal-B f3a666a] test-txt dal-B icin degistirdim
- 1 file changed, 1 insertion(+), 1 deletion(-)
-```
+-8<- "conflict.md:git-first-commit"
 
 Şimdi ise merge işleminden önce repository'mizin son haline bakalım.
 
-```bash
-$ git log --graph --all --oneline
-* f3a666a (HEAD -> dal-B) test-txt dal-B icin degistirdim
-| * a1ef269 (dal-A) test-txt dal-A icin degistirdim
-|/  
-* bf6c603 (main) dal-B icin degisiklik yaptim
-*   b979b40 Merge branch 'yeni-branch'
-|\  
-| * c973c9d (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
-* | a26b42a test-2.txt dosyasini ekledim
-|/  
-* 419a640 Dosyaya Merhaba Dunya ekledim
-* beddf6b Ilk commit
-```
+-8<- "conflict.md:git-log-1"
 
 `dal-A` ve `dal-B` branch'leri birbirinden ayrılmış durumda. `dal-A` branch'ine geçerek `dal-B` branch'ini merge edelim.
 
-```bash hl_lines="6 7"
-$ git checkout dal-A
-Switched to branch 'dal-A'
-
-$ git merge dal-B
-Auto-merging test.txt
-CONFLICT (content): Merge conflict in test.txt
-Automatic merge failed; fix conflicts and then commit the result.
-```
+-8<- "conflict.md:git-merge"
 
 Gördüğünüz gibi bir hata ile karşılaştık. Burada sözlüğümüze yeni bir terimi ekleyebiliriz.
 
@@ -79,19 +21,7 @@ Gördüğünüz gibi bir hata ile karşılaştık. Burada sözlüğümüze yeni 
 
 Bu noktada repository'miz artık özel bir duruma geçmiştir. Git bu merge esnasında oluşan **conflict**'in manuel olarak çözülmesini beklemektedir. Repository'mizin son durumuna bakarak durum hakkında bir fikir sahibi olalım.
 
-```bash hl_lines="4 5"
-$ git status
-On branch dal-A
-You have unmerged paths.
-  (fix conflicts and run "git commit")
-  (use "git merge --abort" to abort the merge)
-
-Unmerged paths:
-  (use "git add <file>..." to mark resolution)
-        both modified:   test.txt
-
-no changes added to commit (use "git add" and/or "git commit -a")
-```
+-8<- "conflict.md:git-status"
 
 Bu noktada yukarıda git'in de bize açıkça belirttiği üzere iki seçeneğimiz bulunmaktadır:
 
@@ -100,54 +30,17 @@ Bu noktada yukarıda git'in de bize açıkça belirttiği üzere iki seçeneğim
 
 Bu conflict'i elle çözmek için öncelikle **conflict** olan `test.txt` dosyamızın içeriğine göz atalım.
 
-```bash
-$ cat test.txt
-<<<<<<< HEAD
-dal-A Hello world
-=======
-dal-B icin Hello world satiri yaziyorum
->>>>>>> dal-B
-Merhaba Dunya
-yeni-branch icin merhaba dunya
-dal B icin degisiklik
-```
+-8<- "conflict.md:cat-conflicted-file"
 
 Görüldüğü üzere iki branch'te yapılan farklı değişiklikler dosyanın içerisinde mevcut ancak aralarına özel işaretleyiciler konularak ayrılmış. Burada bu **conflict**'i elle çözmek için bu dosyayı bir text editor yardımıyla açarak son halinin nasıl olmasını istediğimize karar vermek.
 
 Bu örneğimiz açısından bir editor yardımı ile `dal-B` branch'inden gelen satırı tutup kalanını silerek devam edebiliriz. Daha sonrasında ise merge işlemine devam edelim.
 
-```bash
-$ cat test.txt
-dal-B icin Hello world satiri yaziyorum
-Merhaba Dunya
-yeni-branch icin merhaba dunya
-dal B icin degisiklik
-
-$ git add test.txt
-
-$ git merge --continue
-# acilan editor ile merge commit'imizin mesajini duzenleyerek kaydedip kapatalim.
-[dal-A 6c72e42] Merge branch 'dal-B' into dal-A
-```
+-8<- "conflict.md:git-merge-continue"
 
 Merge işlemini başarılı bir şekilde tamamladıktan sonra `git log` şu şekilde görünecektir.
 
-```bash hl_lines="2"
-$ git log --graph --all --oneline --parents
-*   6c72e42 a1ef269 f3a666a (HEAD -> dal-A) Merge branch 'dal-B' into dal-A
-|\  
-| * f3a666a bf6c603 (dal-B) test-txt dal-B icin degistirdim
-* | a1ef269 bf6c603 test-txt dal-A icin degistirdim
-|/  
-* bf6c603 b979b40 (main) dal-B icin degisiklik yaptim
-*   b979b40 a26b42a c973c9d Merge branch 'yeni-branch'
-|\  
-| * c973c9d 419a640 (yeni-branch-2, yeni-branch) yeni-branch icin ilk commitimi atiyorum
-* | a26b42a 419a640 test-2.txt dosyasini ekledim
-|/  
-* 419a640 beddf6b Dosyaya Merhaba Dunya ekledim
-* beddf6b Ilk commit
-```
+-8<- "conflict.md:git-log-2"
 
 2 adet parent commit'e bakan yeni bir **merge commit** ile iki commit dalı birbirine başarılı bir şekilde bağlanmış ve `dal-A` branch'i bu yeni commit'e taşınmış durumda.
 

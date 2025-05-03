@@ -1,0 +1,253 @@
+# yaml-language-server: $schema=./schema.yaml
+- commit:
+    - snippet: hello-world
+      commands:
+        - echo_run_output: echo "Hello world" > test.txt
+    - snippet: git-status
+      highlight: 6-8
+      commands:
+        - echo_run_output: git status
+    - snippet: git-add-git-status-1
+      commands:
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git status
+    - snippet: git-commit-1
+      commands:
+        - echo_run_output: git commit -m "Ilk commit"
+        - run: yq -Y -i ".commit.first_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
+    - snippet: git-log-1
+      commands:
+        - echo_run_output: git log
+    - snippet: echo-merhaba-git-status
+      commands:
+        - echo_run_output: echo "Merhaba Dunya" >> test.txt
+        - echo: ""
+        - echo_run_output: git status
+    - snippet: git-add-git-status-2
+      commands:
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git status
+    - snippet: git-commit-2
+      commands:
+        - echo_run_output: git commit -m "Dosyaya Merhaba Dunya ekledim"
+        - run: yq -Y -i ".commit.second_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
+    - snippet: git-log-graph
+      commands:
+        - echo_run_output: git log --graph
+    - snippet: git-log-graph-patch
+      commands:
+        - echo_run_output: git log --graph --patch
+- checkout:
+    - snippet: git-log-graph
+      commands:
+        - echo_run_output: git log --graph
+    - snippet: git-checkout
+      highlight: "19"
+      commands:
+        - run: CHECKOUT_CMD="$(echo "git checkout <hash>" | sed -e "s|<hash>|$(git rev-parse --short HEAD~)|")"
+        - expand_echo_run_output: CHECKOUT_CMD
+        - run: yq -Y -i ".checkout.long_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
+        - run: yq -Y -i ".checkout.short_commit_hash = \"$(git rev-parse --short HEAD)\"" "$VARIABLES_FILE"
+    - snippet: cat-test-txt
+      commands:
+        - echo_run_output: cat test.txt
+- branch:
+    - snippet: git-log-graph-1
+      commands:
+        - run: git checkout main
+        - echo_run_output: git log --graph
+    - snippet: git-branch-1
+      commands:
+        - echo_run_output: git branch yeni-branch
+        - echo: ""
+        - echo_run_output: git checkout yeni-branch
+        - echo: ""
+        - echo_run_output: git branch
+    - snippet: ls-refs-heads
+      commands:
+        - echo_run_output: ls .git/refs/heads
+    - snippet: cat-heads-1
+      commands:
+        - echo_run_output: cat .git/refs/heads/main
+        - echo: ""
+        - echo_run_output: cat .git/refs/heads/yeni-branch
+    - snippet: git-log-graph-2
+      commands:
+        - echo_run_output: git log --graph
+        - run: yq -Y -i ".branch.commit_hash_1 = \"$(git rev-parse yeni-branch)\"" "$VARIABLES_FILE"
+    - snippet: commit
+      commands:
+        - echo_run_output: echo "yeni-branch icin merhaba-dunya" >> test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "yeni-branch icin ilk commitimi atiyorum"
+        - echo: ""
+        - echo_run_output: git log --graph
+        - run: yq -Y -i ".branch.commit_hash_2 = \"$(git rev-parse yeni-branch)\"" "$VARIABLES_FILE"
+    - snippet: cat-heads-2
+      commands:
+        - echo_run_output: cat .git/refs/heads/main
+        - echo: ""
+        - echo_run_output: cat .git/refs/heads/yeni-branch
+    - snippet: manual-branch-creation
+      commands:
+        - echo_run_output: git branch
+        - echo: ""
+        - run: YENI_BRANCH_COMMIT="echo \"$(git rev-parse yeni-branch)\" > .git/refs/heads/yeni-branch-2"
+        - expand_echo_run_output: YENI_BRANCH_COMMIT
+        - echo: ""
+        - echo_run_output: git branch
+        - echo: ""
+        - echo_run_output: git checkout yeni-branch-2
+- commit_history:
+    - snippet: git-log-graph-oneline
+      commands:
+        - echo_run_output: git log --graph --parents --oneline
+- merge_commit:
+    - snippet: git-commit-main
+      commands:
+        - echo_run_output: git checkout main
+        - echo: ""
+        - echo_run_output: echo "Lorem ipsum" > test-2.txt
+        - echo: ""
+        - echo_run_output: git add test-2.txt
+        - echo: ""
+        - echo_run_output: git commit -m "test-2.txt dosyasini ekledim"
+        - echo: ""
+        - run: MERGE_COMMIT_GIT_SHOW_1="git show $(git rev-parse --short HEAD)"
+        - expand_echo_run_output: MERGE_COMMIT_GIT_SHOW_1
+    - snippet: git-log-1
+      highlight: "5"
+      commands:
+        - echo_run_output: git log --graph --parents --oneline --all
+        - run: yq -Y -i ".merge_commit.common_ancestor_commit_hash = \"$(git rev-parse --short HEAD^)\"" "$VARIABLES_FILE"
+    - snippet: git-merge-yeni-branch
+      commands:
+        - echo_run_output: git merge yeni-branch
+    - snippet: git-log-2
+      commands:
+        - echo_run_output: git log --graph --parents --oneline --all
+        - run: yq -Y -i ".merge_commit.merge_commit_hash = \"$(git rev-parse --short HEAD)\"" "$VARIABLES_FILE"
+        - run: yq -Y -i ".merge_commit.merge_commit_parent_1_hash = \"$(git rev-parse --short HEAD^1)\"" "$VARIABLES_FILE"
+        - run: yq -Y -i ".merge_commit.merge_commit_parent_2_hash = \"$(git rev-parse --short HEAD^2)\"" "$VARIABLES_FILE"
+    - snippet: git-show
+      highlight: "3"
+      commands:
+        - run: MERGE_COMMIT_GIT_SHOW_2="git show $(git rev-parse --short main)"
+        - expand_echo_run_output: MERGE_COMMIT_GIT_SHOW_2
+        - run: yq -Y -i ".merge_commit.merge_indicator_line = \"$(git show HEAD | awk 'NR == 2')\"" "$VARIABLES_FILE"
+- fast_forward_merge:
+    - snippet: git-commit
+      commands:
+        - echo_run_output: git checkout -b "dal-B"
+        - echo: ""
+        - echo_run_output: echo "dal B icin degisiklik" >> test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "dal-B icin degisiklik yaptim"
+        - echo: ""
+        - echo_run_output: git log --graph --all --oneline
+    - snippet: git-merge
+      highlight: "6"
+      commands:
+        - run: yq -Y -i ".fast_forward_merge.main_hash_before_ff = \"$(git rev-parse --short main)\"" "$VARIABLES_FILE"
+        - echo_run_output: git checkout main
+        - echo: ""
+        - echo_run_output: git merge dal-B
+        - run: yq -Y -i ".fast_forward_merge.main_hash_after_ff = \"$(git rev-parse --short main)\"" "$VARIABLES_FILE"
+    - snippet: git-log
+      commands:
+        - echo_run_output: git log --graph --all --oneline
+- conflict:
+    - snippet: git-first-commit
+      commands:
+        - echo_run_output: git checkout -b dal-A
+        - echo: ""
+        - echo: "# burada test.txt dosyasini acip ilk satiri degistirelim. Sonrasinda ise siradaki komuttan devam edelim."
+        - echo: ""
+        - run: sed -i '' -e "1s|.*|dal-A icin Hello world satiri yaziyorum|" test.txt
+        - echo_run_output: cat test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "test.txt dal-A icin degistirdim"
+        - echo: ""
+        - echo_run_output: "git checkout dal-B # dal-B branch'imiz zaten hazir oldugu icin `-b` bayragini kullanmayarak yeni bir branch olusturmaktan kacindik."
+        - echo: ""
+        - echo: "# burada test.txt dosyasini acip ilk satiri yukaridakinden farkli bir sekilde degistirelim. Sonrasinda ise siradaki komuttan devam edelim."
+        - echo: ""
+        - run: sed -i '' -e "1s|.*|dal-B icin Hello world satiri yaziyorum|" test.txt
+        - echo_run_output: cat test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "test.txt dal-B icin degistirdim"
+    - snippet: git-log-1
+      commands:
+        - echo_run_output: git log --graph --all --oneline
+    - snippet: git-merge
+      highlight: "6-7"
+      commands:
+        - echo_run_output: git checkout dal-A
+        - echo: ""
+        - echo_run_output_error: git merge dal-B
+    - snippet: git-status
+      highlight: "4-5"
+      commands:
+        - echo_run_output: git status
+    - snippet: cat-conflicted-file
+      commands:
+        - echo_run_output: cat test.txt
+        - run: sed -i '' -e '1,3d;5d' test.txt
+    - snippet: git-merge-continue
+      commands:
+        - echo_run_output: cat test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - run: git config core.editor "sed -i '' -e ''"
+        - echo_run_output: "git merge --continue # acilan editor ile merge commit'imizin mesajini duzenleyerek kaydedip kapatalim."
+    - snippet: git-log-2
+      highlight: "2"
+      commands:
+        - echo_run_output: git log --graph --all --oneline --parents
+- squash_merge:
+    - snippet: git-log-1
+      commands:
+        - echo_run_output: git log --graph --all --oneline
+    - snippet: prepare-dal-b
+      commands:
+        - echo_run_output: git checkout dal-B
+        - echo: ""
+        - echo_run_output: echo "Degisiklik-1" >> test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "degisiklik-1"
+        - echo: ""
+        - echo_run_output: echo "Degisiklik-2" >> test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "degisiklik-2"
+        - echo: ""
+        - echo_run_output: cat test.txt
+    - snippet: squash-merge
+      commands:
+        - echo_run_output: git checkout dal-A
+        - echo: ""
+        - echo_run_output: git merge --squash dal-B
+        - echo: ""
+        - echo_run_output: git status
+    - snippet: git-commit-log
+      commands:
+        - echo_run_output: git commit -m "squash merge dal-B"
+        - echo: ""
+        - echo_run_output: git log --graph --all --oneline
+    - snippet: cat-test-txt
+      commands:
+        - echo_run_output: cat test.txt

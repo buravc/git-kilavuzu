@@ -9,7 +9,7 @@ https://buravc.github.io/git-kilavuzu
 
 ```
 # Kurulum
-$ pip3 install mkdocs mkdocs-material pymdown-extensions
+$ pip3 install mkdocs-material pymdown-extensions mkdocs-macros-plugin
 
 # Calistirmak
 $ mkdocs serve

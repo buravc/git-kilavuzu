@@ -34,6 +34,12 @@ if [[ -f "$BUNDLE_FILE" ]]; then
     echo "bundle file provided, restoring bundle"
     rm -rf "$REPO_DIR" || true;
     git clone "$BUNDLE_FILE" "$REPO_DIR" && cd "$REPO_DIR"
+    current_branch_name="$(git rev-parse --abbrev-ref HEAD)"
+    for branch in $(git branch -r | grep 'origin/' | grep -v 'origin/HEAD' | grep -v "origin/$current_branch_name"); do
+        git checkout --track "${branch#origin/}" || git checkout -b "${branch#origin/}" "$branch"
+    done
+    git remote remove origin
+    git checkout "$current_branch_name"
 elif [[ -z "$START_STEP" ]]; then
     echo "no bundle is provided, creating new repo..."
     rm -rf "$REPO_DIR" || true;

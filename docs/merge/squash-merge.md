@@ -1,24 +1,24 @@
-Gectigimiz bolumler sonucunda 2 merge commit'li bir history'miz olustu.
+Geçtiğimiz bölümler sonucunda 2 merge commit'li bir history'miz oluştu.
 
 -8<- "squash_merge.md:git-log-1"
 
-Fakat bu cok boyutlu veya cok parent'li yapi bazen repository'i yonetmemizi zorlastirabiliyor. Ornegin bazen repository'mizde `main` branch'inin tek boyutlu kalmasini isteyebiliriz. Boylece gelecekte `main` branch'in takip edilmesini ve yonetilmesinin kolaylasmasini saglamak istiyoruz. Fakat farkli bir branch acarak deneysel calismalar yapmaya ihtiyacimiz da olabiliyor.
+Fakat bu çok boyutlu veya çok parent'lı yapı bazen repository'i yönetmemizi zorlaştırabiliyor. Örneğin bazen repository'mizde `main` branch'inin tek boyutlu kalmasını isteyebiliriz. Böylece gelecekte `main` branch'in takip edilmesini ve yönetilmesinin kolaylaşmasını sağlamak istiyoruz. Fakat farklı bir branch açarak deneysel çalışmalar yapmaya ihtiyacımız da olabiliyor.
 
-Kendimize `A` isminde yeni bir branch olusturdugumuzu ve bunun uzerinde deneysel calismalar yapip cok sayida commit attigimizi varsayalim. Bu branch'te attigimiz commitlerin hepsi anlamli commit'ler olmayabilir ve o commit'lerin cogunun sadece o branch'te kalmasini istiyoruz. `main` branch'e `A` branch'ini merge etmek istiyoruz ama `A` branch'inde meydana gelen butun gelistirme surecinden ziyade sadece `A` branch'inin sonucunu almak istiyoruz. Boylece `main` branch'inin de dal yapisinin tek boyutta kalmasini saglamak istiyoruz.
+Kendimize `A` isminde yeni bir branch oluşturduğumuzu ve bunun üzerinde deneysel çalışmalar yapıp çok sayıda commit attığımızı varsayalım. Bu branch'te attığımız commit'lerin hepsi anlamlı commit'ler olmayabilir ve o commit'lerin çoğunun sadece o branch'te kalmasını istiyoruz. `main` branch'e `A` branch'ini merge etmek istiyoruz ama `A` branch'inde meydana gelen bütün geliştirme sürecinden ziyade sadece `A` branch'inin sonucunu almak istiyoruz. Böylece `main` branch'inin de dal yapısının tek boyutta kalmasını sağlamak istiyoruz.
 
-Bu senaryoda gerceklestirmek istedigimiz eylemi **squash merge** olarak adlandirabiliriz. Aslinda yapmak istedigimiz sey `A` branch'indeki butun commitleri **sikistirip** yeni bir commit olarak `main` branch'e eklemek olarak sadelestirilebilir. Bunu gerceklestirmek icin merge esnasinda `--squash` bayragini kullanmamiz yeterli olacaktir.
+Bu senaryoda gerçekleştirmek istediğimiz eylemi **squash merge** olarak adlandırabiliriz. Aslında yapmak istediğimiz şey `A` branch'indeki bütün commit'leri **sıkıştırıp** yeni bir commit olarak `main` branch'e eklemek olarak sadeleştirilebilir. Bunu gerçekleştirmek için merge esnasında `--squash` bayrağını kullanmamız yeterli olacaktır.
 
-Ornek olarak `dal-A` ve `dal-B` branch'lerini ele alalim. `dal-B` branch'ine gecip 2 tane commit atalim. Bu commit'lerden sonra `dal-B` branch'ini `dal-A` branch'ine merge etmek isteyecegiz.
+Örnek olarak `dal-A` ve `dal-B` branch'lerini ele alalım. `dal-B` branch'ine geçip 2 tane commit atalım. Bu commit'lerden sonra `dal-B` branch'ini `dal-A` branch'ine merge etmek isteyeceğiz.
 
 -8<- "squash_merge.md:prepare-dal-b"
 
-`dal-B` uzerinde 2 commit atarak `test.txt` dosyasina 2 degisiklik yaptik. Simdi ise `dal-A` branch'ine gecerek **squash merge** yapmayi deneyelim.
+`dal-B` üzerinde 2 commit atarak `test.txt` dosyasına 2 değişiklik yaptık. Şimdi ise `dal-A` branch'ine geçerek **squash merge** yapmayı deneyelim.
 
 -8<- "squash_merge.md:squash-merge"
 
-`git status` komutunun ciktisindan da anlasilacagi uzere calistirdigimiz `merge` otomatik olarak bir commit atmadi. Onun yerine `dal-B` branch'indeki degisiklikleri index'e ekledi. Bu durumda commit'i kendimiz elle tamamlamamiz gerekiyor.
+`git status` komutunun çıktısından da anlaşılacağı üzere çalıştırdığımız `merge` otomatik olarak bir commit atmadı. Onun yerine `dal-B` branch'indeki değişiklikleri index'e ekledi. Bu durumda commit'i kendimiz elle tamamlamamız gerekiyor.
 
 -8<- "squash_merge.md:git-commit-log"
 -8<- "squash_merge.md:cat-test-txt"
 
-Commit'i gerceklestirdikten sonra log'dan da gorebilecegimiz uzere aslinda bir merge commit'i olusmadi. Onun yerine sadece kendisinden onceki commit'e bakan yeni bir commit olustu ve bu yeni commit ile birlikte `dal-B` branch'inde `test.txt` dosyasina yaptigimiz degisiklikler artik `dal-A` branch'inde mevcut hale geldi.
+Commit'i gerçekleştirdikten sonra log'dan da görebileceğimiz üzere aslında bir merge commit'i oluşmadı. Onun yerine sadece kendisinden önceki commit'e bakan yeni bir commit oluştu ve bu yeni commit ile birlikte `dal-B` branch'inde `test.txt` dosyasına yaptığımız değişiklikler artık `dal-A` branch'inde mevcut hale geldi.

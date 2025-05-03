@@ -215,3 +215,39 @@
       highlight: "2"
       commands:
         - echo_run_output: git log --graph --all --oneline --parents
+- squash_merge:
+    - snippet: git-log-1
+      commands:
+        - echo_run_output: git log --graph --all --oneline
+    - snippet: prepare-dal-b
+      commands:
+        - echo_run_output: git checkout dal-B
+        - echo: ""
+        - echo_run_output: echo "Degisiklik-1" >> test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "degisiklik-1"
+        - echo: ""
+        - echo_run_output: echo "Degisiklik-2" >> test.txt
+        - echo: ""
+        - echo_run_output: git add test.txt
+        - echo: ""
+        - echo_run_output: git commit -m "degisiklik-2"
+        - echo: ""
+        - echo_run_output: cat test.txt
+    - snippet: squash-merge
+      commands:
+        - echo_run_output: git checkout dal-A
+        - echo: ""
+        - echo_run_output: git merge --squash dal-B
+        - echo: ""
+        - echo_run_output: git status
+    - snippet: git-commit-log
+      commands:
+        - echo_run_output: git commit -m "squash merge dal-B"
+        - echo: ""
+        - echo_run_output: git log --graph --all --oneline
+    - snippet: cat-test-txt
+      commands:
+        - echo_run_output: cat test.txt

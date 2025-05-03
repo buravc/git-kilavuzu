@@ -29,6 +29,7 @@ nav:
     - "Branch Merge / Merge Commit": merge/merge-commit.md
     - "Fast-Forward Merge": merge/fast-forward-merge.md
     - "Conflict": merge/conflict.md
+    - "Squash Merge": merge/squash-merge.md
 
 watch:
   - variables.yaml

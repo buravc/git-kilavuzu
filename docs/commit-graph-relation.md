@@ -3,7 +3,7 @@
 !!! note "Mental Model"
     Bu konuda git'i mental olarak modelleme biçimimizi tekrar gözden geçirmemizde fayda olacaktır. Bir branch bir commit'e işaret eden bir işaretçidir. Diğer bir deyişle **bir branch aynı anda birden çok commit'e değil, yalnızca tek bir commit'e işaret eder.**
 
-    Bir commit ise bir commit grafinin bir parçasıdır ve kendisinden önceki commit'e veya commit'lere *parent* ilişkisiyle bağlıdır.
+    Bir commit ise bir commit grafının bir parçasıdır ve kendisinden önceki commit'e veya commit'lere *parent* ilişkisiyle bağlıdır.
 
 Bir branch'in diğerini kapsıyor olması durumu aslında birkaç olay sonucunda gerçekleşebilir. `A` ve `B` isminde iki branch'imiz olsun. `B` branch'i `A` branch'ini kapsıyor ( $\text{branch}_B \supseteq \text{branch}_A$ ) önermesi aşağıdaki durumlarda gerçekleşebilir:
 
@@ -15,7 +15,7 @@ Fakat burada bu sorguyu branch'ler ile değil de commit'ler ile ele almak daha d
 
 Branch terimini ortadan kaldırıp yerine commit terimini kullanmaya başladığımız zaman, **kapsamak** olarak isimlendirdiğimiz durum aslında basitçe bir commit'in diğer commit'in **atası** olmasını ima etmektedir.
 
-**X** ve **Y** hash'li iki commit'imiz olsun. **X commit**'inin parent commit grafini gezerek **Y commit**'ine ulaşabiliyorsak **Y commit**'i **X commit**'inin atasıdır diyebiliriz.
+**X** ve **Y** hash'li iki commit'imiz olsun. **X commit**'inin parent commit grafını gezerek **Y commit**'ine ulaşabiliyorsak **Y commit**'i **X commit**'inin atasıdır diyebiliriz.
 
 Şimdi üzerinde çalıştığımız repository'mize dönüp bu sorguyu farklı commit ikilileri için deneyelim.
 
@@ -45,7 +45,7 @@ Repository'mizin mevcuttaki halinde bu sorgunun cevabı her zaman evet olacaktı
 
     `|` (**pipe**) operatörü ile bir önceki komutun çıktısını bir sonraki komuta girdi olarak besleyebiliyor, diğer bir deyişle **pipe**'leyebiliyoruz. `| grep "{{ commit_graph_relation.root_commit }}"` yaparak `git log` komutunun çıktısını `grep` programına girdi olarak besledik ve `grep` de bize sadece ve sadece `"{{ commit_graph_relation.root_commit }}"` kısmını içeren satırları çıkardı.
 
-Yukarıdaki komut ile mevcut history grafimizi yazdırdık ve `grep` ile bu grafi filtreleyerek repository'deki ilk commit mevcut history'mizde var mı yok mu sorgusuna cevabımızı "evet" olarak bulduk.
+Yukarıdaki komut ile mevcut history grafımızı yazdırdık ve `grep` ile bu grafı filtreleyerek repository'deki ilk commit mevcut history'mizde var mı yok mu sorgusuna cevabımızı "evet" olarak bulduk.
 
 #### İkinci sorgumuz: `yeni-branch` branch'inin baktığı commit, şu anki commit'imizin atası mı?
 

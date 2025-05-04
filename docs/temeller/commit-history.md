@@ -24,7 +24,7 @@ Log'da da görülebileceği üzere aslında commit'lerimiz arasında linked list
 Bu bilgilerin ışığında geçtiğimiz sayfada hazırladığımız repository'i üzerinde yaptığımız değişiklikler sonucunda şekillenen bütün **commit history**'i şu şekilde görselleştirebiliriz.
 
 !!! note "Terminoloji"
-    **Commit history** bir git repository'sindeki, genelde bir branch'e ait, commit grafiği veya commit geçmişi anlamında kullanılır.
+    **Commit history** bir git repository'sindeki, genelde bir branch'e ait, commit grafı veya commit geçmişi anlamında kullanılır.
 
 ![image info](./images/commit-history-1.gif)
 

@@ -21,6 +21,8 @@ items:
                 type: string
               expand_echo_run_output:
                 type: string
+              expand_echo_run_output_error:
+                type: string
               echo:
                 type: string
               run:

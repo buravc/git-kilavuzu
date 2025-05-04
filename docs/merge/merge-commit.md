@@ -40,7 +40,7 @@ Bunu çalıştırdıktan sonra karşınıza açılan text editoru kaydedip çık
 
 -8<- "merge_commit.md:git-log-2"
 
-Buradan da aşikar olduğu üzere `merge` komutu ile yeni bir commit oluşturulmuş durumda. `main` branch'i artık bu commit'e bakıyor. Bu commit'in hash'i `{{ merge_commit.merge_commit_hash }}` iken, 1 değil **2 adet parent commit**'e, yani `{{ merge_commit.merge_commit_parent_1_hash }}` ve `{{ merge_commit.merge_commit_parent_2_hash }}` commit'lerine baktığını görebiliyoruz. Soldaki grafik ile bu birleşme terminal ortamındaki karakterler ile görselleştirilmiş. Bu görsellik bize daha karmaşık repository'lerde yardımcı olacak.
+Buradan da aşikar olduğu üzere `merge` komutu ile yeni bir commit oluşturulmuş durumda. `main` branch'i artık bu commit'e bakıyor. Bu commit'in hash'i `{{ merge_commit.merge_commit_hash }}` iken, 1 değil **2 adet parent commit**'e, yani `{{ merge_commit.merge_commit_parent_1_hash }}` ve `{{ merge_commit.merge_commit_parent_2_hash }}` commit'lerine baktığını görebiliyoruz. Soldaki graf ile bu birleşme terminal ortamındaki karakterler ile görselleştirilmiş. Bu görsellik bize daha karmaşık repository'lerde yardımcı olacak.
 
 Peki bu merge commit'inin içinde ne var? Bunu yukarıda kullandığımız `git show` komutu ile gösterelim.
 

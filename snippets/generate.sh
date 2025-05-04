@@ -90,6 +90,14 @@ expand-echo-run-output() {
     # set +x
 }
 
+expand-echo-run-output-error() {
+    # set -x
+    local cmd="$*"
+    echo "\$ ${!cmd}"
+    eval "${!cmd}" 2>&1 || true
+    # set +x
+}
+
 process-page() {
     local PAGE;
     PAGE="$(cat)"
@@ -126,6 +134,9 @@ process-snippet() {
             ;;
             expand_echo_run_output)
             expand-echo-run-output $VALUE | append-snippet "$OUTPUT_PATH";
+            ;;
+            expand_echo_run_output_error)
+            expand-echo-run-output-error $VALUE | append-snippet "$OUTPUT_PATH";
             ;;
             echo)
             echo "${VALUE}" | append-snippet "$OUTPUT_PATH"

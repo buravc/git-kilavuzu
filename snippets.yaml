@@ -251,3 +251,55 @@
     - snippet: cat-test-txt
       commands:
         - echo_run_output: cat test.txt
+- commit_graph_relation:
+    - snippet: git-log
+      commands:
+        - echo_run_output: git log --graph --all --oneline
+    - snippet: orphan-branch
+      commands:
+        - echo_run_output: git checkout --orphan yeni-bir-branch
+        - echo: ""
+        - echo: "# eski commit'ten kalan dizin yapisini temizleyelim"
+        - echo_run_output: git rm -rf .
+        - echo: ""
+        - echo_run_output: echo "Yeni Bir Baslangic Yapiyorum" > yeni-bir-baslangic.txt
+        - echo: ""
+        - echo_run_output: git add yeni-bir-baslangic.txt
+        - echo: ""
+        - echo_run_output: git commit -m "yeni bir baslangic"
+        - echo: ""
+        - echo_run_output: git log --all --max-parents=0
+        - run: git checkout dal-A
+    - snippet: sorgu-1
+      commands:
+        - run: SORGU_1="git log --oneline | grep \"$(git rev-list --abbrev-commit --max-parents=0 HEAD)\""
+        - expand_echo_run_output: SORGU_1
+        - run: yq -Y -i ".commit_graph_relation.root_commit = \"$(git rev-list --abbrev-commit --max-parents=0 HEAD)\"" "$VARIABLES_FILE"
+    - snippet: sorgu-2
+      commands:
+        - run: SORGU_2="git log --oneline | grep \"$(git rev-parse --short yeni-branch)\""
+        - expand_echo_run_output: SORGU_2
+    - snippet: sorgu-3
+      commands:
+        - run: SORGU_3="git log --oneline | grep \"$(git rev-parse --short dal-B)\""
+        - expand_echo_run_output_error: SORGU_3
+        - echo: ""
+    - snippet: alternatif-komut-rev-list
+      commands:
+        - run: SORGU_2_REV_LIST="git rev-list dal-A | grep \"$(git rev-parse yeni-branch)\""
+        - expand_echo_run_output: SORGU_2_REV_LIST
+    - snippet: alternatif-komut-merge-base-1
+      commands:
+        - echo: "# `yeni-branch` isimli branch'in isaret ettigi commit"
+        - echo: "# `dal-A` branch'inin isaret ettigi commit'in atasi mi?"
+        - echo: "# $? ile bir onceki komutun cikis kodunu alip bunu da `echo` ile yazdirabiliriz."
+        - echo_run_output: git merge-base --is-ancestor yeni-branch dal-A && echo $?
+    - snippet: alternatif-komut-merge-base-2
+      commands:
+        - echo: "# `dal-B` isimli branch'in isaret ettigi commit"
+        - echo: "# `dal-A` branch'inin isaret ettigi commit'in atasi mi?"
+        - echo: "# Burada bir onceki komutun aksine `||` operatorunu kullanmamiz gerekiyor"
+        - echo: "# aksi taktirde `&&` kullansaydik sol taraftaki komut"
+        - echo: "# 0'dan farkli bir kod ile cikis yapacagi icin sagdaki komut hic calismayacakti."
+        - echo_run_output: git merge-base --is-ancestor dal-B dal-A || echo $?
+

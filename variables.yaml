@@ -19,3 +19,5 @@ ff_merge:
 fast_forward_merge:
   main_hash_before_ff: 'b5b6c09'
   main_hash_after_ff: 'cef4e44'
+commit_graph_relation:
+  root_commit: 95e7356

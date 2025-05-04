@@ -30,6 +30,7 @@ nav:
     - "Fast-Forward Merge": merge/fast-forward-merge.md
     - "Conflict": merge/conflict.md
     - "Squash Merge": merge/squash-merge.md
+  - "Commit Grafı / Soyağacı İlişkisi": commit-graph-relation.md
 
 watch:
   - variables.yaml

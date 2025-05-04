@@ -51,7 +51,7 @@ Yukarıdaki komut ile mevcut history grafımızı yazdırdık ve `grep` ile bu g
 
 -8<- "commit_graph_relation.md:sorgu-2"
 
-`yeni-branch` isimli branch'i bir merge commit ile soyacığımıza bağlamıştık ve bunun sonucunda artık onun da mevcut commit'imizin bir atası olduğunu görebiliyoruz.
+`yeni-branch` isimli branch'i bir merge commit ile commit history'mize, diğer bir deyişle **soyağacımıza** bağlamıştık ve bunun sonucunda artık onun da mevcut commit'imizin bir atası olduğunu görebiliyoruz.
 
 #### Son sorgumuz: `dal-B` branch'inin baktığı commit, şu anki commit'imizin atası mı?
 
@@ -61,10 +61,10 @@ Hatırlarsanız `dal-B` branch'ine 2 yeni commit atıp onu daha sonra **squash m
 
 Yukarıdaki komutun hiçbir çıktısı vermemesiyle aşikar olduğu üzere `dal-B` branch'i şu anda `dal-A` branch'inin baktığı commit'in bir atası olarak görünmüyor. `dal-B` branch'ini merge etmiş olmamıza rağmen, yaptığımız merge işlemi **squash merge** olduğu için aslında `dal-B` branch'ini `dal-A` branch'ine bağlayan herhangi bir commit oluşmamış oluyor. Squash merge ile birlikte aslında `dal-A` branch'ine yalnızca bağımsız yeni bir commit atmış oluyoruz.
 
-Buradan yola çıkarak ne zaman **squash merge** yapmak istediğimize dikkat etmekte fayda olduğunu söyleyebiliriz. Branch'ler veya commitler arası soy ağacı ilişkisini korumak istiyorsak squash merge yapmaktan kaçınmalıyız.
+Buradan yola çıkarak ne zaman **squash merge** yapmak istediğimize dikkat etmekte fayda olduğunu söyleyebiliriz. Branch'ler veya commitler arası soyağacı ilişkisini korumak istiyorsak squash merge yapmaktan kaçınmalıyız.
 
 !!! tip "Alternatif komutlar"
-    Bu şekilde log'u kullanarak commit **soy ağacını** sorgulamak yanlış bir yaklaşım olmasa da, git'in bu amaç için kullanabileceğimiz farklı komutları da mevcut.
+    Bu şekilde log'u kullanarak commit **soyağacını** sorgulamak yanlış bir yaklaşım olmasa da, git'in bu amaç için kullanabileceğimiz farklı komutları da mevcut.
 
     - `rev-list` belirtilen commit'in ulaşabildiği bütün commit hash'lerini listeler. `log` komutu insan tarafından okunabilen bir komut iken `rev-list` script amacıyla kullanılan bir komuttur.
 

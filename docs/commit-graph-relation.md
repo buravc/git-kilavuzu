@@ -21,7 +21,8 @@ Branch terimini ortadan kaldırıp yerine commit terimini kullanmaya başladığ
 
 -8<- "commit_graph_relation.md:git-log"
 
-#### İlk sorgumuz: Repository'deki ilk commit, mevcut commit'imizin atası mı?
+#### Sorgular
+##### Repository'deki ilk commit, mevcut commit'imizin atası mı?
 
 Repository'mizin mevcuttaki halinde bu sorgunun cevabı her zaman evet olacaktır. Ancak bunu bir komut ile doğrulayalım.
 
@@ -47,13 +48,13 @@ Repository'mizin mevcuttaki halinde bu sorgunun cevabı her zaman evet olacaktı
 
 Yukarıdaki komut ile mevcut history grafımızı yazdırdık ve `grep` ile bu grafı filtreleyerek repository'deki ilk commit mevcut history'mizde var mı yok mu sorgusuna cevabımızı "evet" olarak bulduk.
 
-#### İkinci sorgumuz: `yeni-branch` branch'inin baktığı commit, şu anki commit'imizin atası mı?
+##### `yeni-branch` isimli branch'in baktığı commit, şu anki commit'imizin atası mı?
 
 -8<- "commit_graph_relation.md:sorgu-2"
 
 `yeni-branch` isimli branch'i bir merge commit ile commit history'mize, diğer bir deyişle **soyağacımıza** bağlamıştık ve bunun sonucunda artık onun da mevcut commit'imizin bir atası olduğunu görebiliyoruz.
 
-#### Son sorgumuz: `dal-B` branch'inin baktığı commit, şu anki commit'imizin atası mı?
+##### `dal-B` branch'inin baktığı commit, şu anki commit'imizin atası mı?
 
 Hatırlarsanız `dal-B` branch'ine 2 yeni commit atıp onu daha sonra **squash merge** ile `dal-A` branch'imize merge etmiştik.
 

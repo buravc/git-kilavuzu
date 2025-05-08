@@ -1,0 +1,67 @@
+### My Goals
+
+- [ ] branch
+- [ ] merge
+    - [ ] merge commit
+    - [ ] fast-forward merge
+    - [ ] conflict
+    - [ ] squash merge
+        - [ ] have an animated graph
+- [ ] commit graph
+- [ ] commands (**UNCATEGORIZED**)
+    - [ ] `git restore`
+    - [ ] `git reset`
+    - [ ] `git revert`
+    - [ ] `git blame`
+    - [ ] `git describe`
+    - [ ] `git show`
+    - [ ] `git cherry-pick`
+- [ ] index, working tree, stage etc.
+    - [ ] tracked vs untracked files
+    - [ ] file renaming
+- [ ] checkout files individually
+- [ ] amending a commit / immutable commit
+- [ ] `git rebase`
+    - [ ] animated graph
+    - [ ] interactive rebasing
+    - [ ] implicit difference between merging and rebasing
+- [ ] how diff works
+- [ ] `git apply`
+- [ ] `.git` folder contents
+- [ ] objects
+    - [ ] trees
+    - [ ] blobs
+    - [ ] commit structure
+    - [ ] how hashes of different objects are calculated
+- [ ] refs
+    - [ ] `HEAD` ref
+    - [ ] branches
+    - [ ] tags
+    - [ ] revisions
+- [ ] `git rm`
+- [ ] `git mv`
+- [ ] stash
+- [ ] `.gitignore`
+- [ ] `git config`
+- [ ] git remote
+    - [ ] origin
+    - [ ] push
+        - [ ] tracking branch
+    - [ ] fetch
+    - [ ] pull
+        - [ ] merge
+        - [ ] rebase
+- [ ] commit signing
+    - [ ] verify signature
+- [ ] submodules
+- [ ] reflog
+- [ ] dangling commit
+- [ ] garbage collection
+- [ ] git fsck
+- [ ] clone
+    - [ ] mirror
+    - [ ] depth
+- [ ] hooks
+- [ ] OPTIONAL
+    - [ ] `git bisect`
+    - [ ] bundles

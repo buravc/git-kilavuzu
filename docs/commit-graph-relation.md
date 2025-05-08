@@ -1,4 +1,4 @@
-Önceki bölümlerde fast forward merge'ye değinirken bahsettiğimiz önemli bir durum vardı. Bir branch diğer branch'i kapsıyor mu? Bu sorgunun bizim için önemi fast forward merge bölümünde öne çıkmıştı. Fakat bu sorgunun ima ettiklerinin ayrı bir bölümde değinilmeyi gerektirdiğini düşünüyorum.
+Önceki bölümlerde fast-forward merge'ye değinirken bahsettiğimiz önemli bir durum vardı. Bir branch diğer branch'i kapsıyor mu? Bu sorgunun bizim için önemi fast-forward merge bölümünde öne çıkmıştı. Fakat bu sorgunun ima ettiklerinin ayrı bir bölümde değinilmeyi gerektirdiğini düşünüyorum.
 
 !!! note "Mental Model"
     Bu konuda git'i mental olarak modelleme biçimimizi tekrar gözden geçirmemizde fayda olacaktır. Bir branch bir commit'e işaret eden bir işaretçidir. Diğer bir deyişle **bir branch aynı anda birden çok commit'e değil, yalnızca tek bir commit'e işaret eder.**

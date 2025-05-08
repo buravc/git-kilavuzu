@@ -63,5 +63,8 @@
     - [ ] depth
 - [ ] hooks
 - [ ] OPTIONAL
+    - [ ] algorithms
+        - [ ] compression
+        - [ ] merging / conflict solving
     - [ ] `git bisect`
     - [ ] bundles

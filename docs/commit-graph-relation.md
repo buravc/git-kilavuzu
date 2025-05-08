@@ -31,7 +31,7 @@ Repository'mizin mevcuttaki halinde bu sorgunun cevabı her zaman evet olacaktı
 ??? note "Birden çok **root commit**"  
     Bir git repository'sinde birden çok **root commit** bulunması mümkündür. Bunu gerçekleştirmenin yollarından birisi **orphan** bir branch oluşturmaktır. Bunu checkout yaparken `--orphan` bayrağı ile yeni bir branch oluşturarak gerçekleştirebiliriz.
 
-    Daha sonra log'u `--all --max-parents=0` bayrakları sadece **root commit**'leri gösterecek şekilde ayarlayarak birden çok **root commit**'imizin olduğunu doğrulayabiliriz.
+    Daha sonra log'u `--all --max-parents=0` bayrakları ile sadece **root commit**'leri gösterecek şekilde ayarlayarak birden çok **root commit**'imizin olduğunu doğrulayabiliriz.
     -8<- "commit_graph_relation.md:orphan-branch"
     Şimdi ise `git checkout dal-A` ile önceki branch'imize geri dönelim.
 
@@ -72,6 +72,6 @@ Buradan yola çıkarak ne zaman **squash merge** yapmak istediğimize dikkat etm
             Git komutlarından bahsederken insan tarafından okunabilmesi amaçlanan komutlara **porcelain** sıfatı kullanılır. `git log` bir **porselen** komut iken `rev-list` bir **porselen** komut değildir.
         -8<- "commit_graph_relation.md:alternatif-komut-rev-list"
 
-    - `merge-base` komutu `--is-ancestor` bayrağı ile kullanıldığı zaman bir commit diğerinin atasidir önermesi doğru ise `0` kodu ile, yanlış ise `0`'dan farklı bir kod ile çıkış yapar.
+    - `merge-base` komutu `--is-ancestor` bayrağı ile kullanıldığı zaman bir commit diğerinin atasıdir önermesi doğru ise `0` kodu ile, yanlış ise `0`'dan farklı bir kod ile çıkış yapar.
     -8<- "commit_graph_relation.md:alternatif-komut-merge-base-1"
     -8<- "commit_graph_relation.md:alternatif-komut-merge-base-2"

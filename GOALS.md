@@ -1,6 +1,9 @@
 ### My Goals
 
 - [ ] branch
+- [ ] `bir commit'in anatomisi` name?
+    - [ ] pretty print, `cat-file` a commit
+    - [ ] commit, tree, blob relation with a graph or diagram
 - [ ] merge
     - [ ] merge commit
     - [ ] fast-forward merge
@@ -18,7 +21,7 @@
     - [ ] `git cherry-pick`
 - [ ] index, working tree, stage etc.
     - [ ] tracked vs untracked files
-    - [ ] file renaming
+    - [ ] file renaming (delete + create = mv logic)
 - [ ] checkout files individually
 - [ ] amending a commit / immutable commit
 - [ ] `git rebase`
@@ -41,7 +44,13 @@
 - [ ] `git rm`
 - [ ] `git mv`
 - [ ] stash
+    - [ ] LIFO
+    - [ ] pop
+    - [ ] push
+    - [ ] apply
 - [ ] `.gitignore`
+    - [ ] add file forcefully, even if ignored
+    - [ ] having a dedicated ignore folder globally
 - [ ] `git config`
 - [ ] git remote
     - [ ] origin
@@ -68,3 +77,4 @@
         - [ ] merging / conflict solving
     - [ ] `git bisect`
     - [ ] bundles
+    - [ ] cleanup credential leak

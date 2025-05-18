@@ -1,0 +1,1044 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../commit-graph-relation/">
+      
+      
+        <link rel="next" href="../tree/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Bir Commit'in Anatomisi - Git Kılavuzu</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Git Kılavuzu" class="md-header__button md-logo" aria-label="Git Kılavuzu" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Git Kılavuzu
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bir Commit'in Anatomisi
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/buravc/git-kilavuzu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    buravc/git-kilavuzu
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Git Kılavuzu" class="md-nav__button md-logo" aria-label="Git Kılavuzu" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Git Kılavuzu
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/buravc/git-kilavuzu" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    buravc/git-kilavuzu
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Önsoz
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../baslamadan-once/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Başlamadan Önce
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Temeller
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Temeller
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../temeller/repository/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Repository
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../temeller/commit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Commit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../temeller/checkout/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Checkout
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../temeller/branch/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Branch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../temeller/commit-history/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Commit History
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Merge
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Merge
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../merge/merge-commit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Branch Merge / Merge Commit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../merge/fast-forward-merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Fast-Forward Merge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../merge/conflict/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Conflict
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../merge/squash-merge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Squash Merge
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../commit-graph-relation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Commit Grafı / Soyağacı İlişkisi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Objeler
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Objeler
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bir Commit'in Anatomisi
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tree/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tree
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../blob/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blob
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+  <h1>Bir Commit'in Anatomisi</h1>
+
+<p>Commit'ler bir git repository'sinin yapıtaşıdır. Bir repository'nin kilometre taşı olarak isimlendirebiliriz. Repository'mizin geçmişte hangi aşamalardan geçtiğini gösterir. Repository geçmişinde kayıt altına alınan bu değişiklikleri bir kişiye atfeder. Repository'miz üzerinde farklı durumlara geçip farklı çalışmalar yapmamıza olanak tanır. Henüz ana akıma almaya hazır olmadığımız değişiklikleri ayrı tutmamıza olanak tanır. Ve tüm bu özellikleri git kullanıcıdan soyutlanmış bir şekilde sağlar. Commit'ler kalıcı halde saklanmalarına rağmen repository'mizin dosyaları arasında yer tutmazlar. Bize görünmez bir şekilde varlıklarını sürdürürler. Peki kilometre taşlarımız olan bu commit'ler nerede?</p>
+<p>Yazımızın girişinde bir repository dizininde bulunan <code>.git</code> dizinin içeriğine bakmıştık ve bu dizinin içinde bulunduğu dizine git repository'si olma niteliği kazandırdığını dile getirmiştik. Üzerinde çalıştığımız repository'mize yazımız boyunca farklı değişikliklerde bulunduk. Bu işlemlerin sonucunda repository'mizin <code>.git</code> klasörüne tekrar bakarak, yazının başındaki haline kıyasla ne gibi değişikliklerin olduğunu gözlemleyelim.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>tree<span class="w"> </span>.git
+.git
+├──<span class="w"> </span>config
+├──<span class="w"> </span>description
+├──<span class="w"> </span>HEAD
+├──<span class="w"> </span>hooks
+│<span class="w">   </span>├──<span class="w"> </span>applypatch-msg.sample
+│<span class="w">   </span>├──<span class="w"> </span>commit-msg.sample
+│<span class="w">   </span>├──<span class="w"> </span>fsmonitor-watchman.sample
+│<span class="w">   </span>├──<span class="w"> </span>post-update.sample
+│<span class="w">   </span>├──<span class="w"> </span>pre-applypatch.sample
+│<span class="w">   </span>├──<span class="w"> </span>pre-commit.sample
+│<span class="w">   </span>├──<span class="w"> </span>pre-merge-commit.sample
+│<span class="w">   </span>├──<span class="w"> </span>pre-push.sample
+│<span class="w">   </span>├──<span class="w"> </span>pre-rebase.sample
+│<span class="w">   </span>├──<span class="w"> </span>pre-receive.sample
+│<span class="w">   </span>├──<span class="w"> </span>prepare-commit-msg.sample
+│<span class="w">   </span>├──<span class="w"> </span>push-to-checkout.sample
+│<span class="w">   </span>├──<span class="w"> </span>sendemail-validate.sample
+│<span class="w">   </span>└──<span class="w"> </span>update.sample
+├──<span class="w"> </span>index
+├──<span class="w"> </span>info
+│<span class="w">   </span>└──<span class="w"> </span>exclude
+├──<span class="w"> </span>logs
+│<span class="w">   </span>├──<span class="w"> </span>HEAD
+│<span class="w">   </span>└──<span class="w"> </span>refs
+│<span class="w">       </span>├──<span class="w"> </span>heads
+│<span class="w">       </span>│<span class="w">   </span>├──<span class="w"> </span>dal-A
+│<span class="w">       </span>│<span class="w">   </span>├──<span class="w"> </span>dal-B
+│<span class="w">       </span>│<span class="w">   </span>├──<span class="w"> </span>main
+│<span class="w">       </span>│<span class="w">   </span>├──<span class="w"> </span>yeni-bir-branch
+│<span class="w">       </span>│<span class="w">   </span>├──<span class="w"> </span>yeni-branch
+│<span class="w">       </span>│<span class="w">   </span>└──<span class="w"> </span>yeni-branch-2
+│<span class="w">       </span>└──<span class="w"> </span>remotes
+├──<span class="w"> </span>objects
+│<span class="w">   </span>├──<span class="w"> </span>0d
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>3ca3b82801797f1e43b13e13ff848745f2508e
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">13</span>
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>549709c8a35740ffd8e8807d8d3316f9954ef6
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>bb9e0ba6d7bd9e4087f7cdb110080c10a8249d
+│<span class="w">   </span>├──<span class="w"> </span>2c
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>6d14409ca7bd4bedf69b1fa2b7df7e673c3c8b
+│<span class="w">   </span>├──<span class="w"> </span>2f
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>7e211bb943c48fa21d1cd73a0a0ba8ca871f39
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">31</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>f3baeb6bda14f8f02d304999e16df9de956377
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">36</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>7ea1ad26695c83c96a6632563f1118344897c0
+│<span class="w">   </span>├──<span class="w"> </span>3b
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>e11c69355948412925fa5e073d76d58ff3afd2
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">40</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>1ce7dbd55d28ea49c1c2f1c1439eb7d2b92427
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">51</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>ea971882184ee5986f440bb9e0ed2baea702ae
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">52</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>ac9288adff03447ba51676ca78a830d8b69ccb
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">54</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>8d693ac499dffbba69340bfb0b25593473883a
+│<span class="w">   </span>├──<span class="w"> </span>5f
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>a69300068f328394fc9765d3a3843d0d6d321a
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">71</span>
+│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>120a132264f1823a4bf4a42298d1586548716b
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>5c93c23f99d7602214513ee965ee0fe0514aff
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">77</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>7f68a6ba056e0bdfd674c3f8646ea2f9b04520
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">78</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>9492681e6b0d56b1fe142431bae464d630f2d3
+│<span class="w">   </span>├──<span class="w"> </span>7e
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>b6f87f0dae69f6a068004caea18eb0b3868e51
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">80</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>2992c4220de19a90767f3000a79a31b98d0df7
+│<span class="w">   </span>├──<span class="w"> </span>8c
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>d6f22b567ea17f6ac6f69e20e26d5824a47e7f
+│<span class="w">   </span>├──<span class="w"> </span>8d
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>d87969d42bdfaf073149647688bf2c5c0db840
+│<span class="w">   </span>├──<span class="w"> </span>8f
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>d49c9aea2c510c690e234cbd31938b188f4f81
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">95</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>e7356f75c2d844d9d1d7ba42fd5b40a5fd5ecf
+│<span class="w">   </span>├──<span class="w"> </span><span class="m">99</span>
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>da6674f09ff4194a01b3380fb5591537a9384c
+│<span class="w">   </span>├──<span class="w"> </span>9a
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>63d6499f568868f73613412f881a770f33342d
+│<span class="w">   </span>├──<span class="w"> </span>b5
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>b6c0910ab195204dec707b3370b8e70b47eabc
+│<span class="w">   </span>├──<span class="w"> </span>ce
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>f4e449c3fcab258db56a2954cc144ae3271584
+│<span class="w">   </span>├──<span class="w"> </span>da
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>9d8ba3ad2add71c335a269ada194455a06831e
+│<span class="w">   </span>├──<span class="w"> </span>dc
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>2243f197f26719f94687238bb0f9310da223d2
+│<span class="w">   </span>├──<span class="w"> </span>de
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>0bdc0759033f9b112a4d874c8aaff95959f198
+│<span class="w">   </span>├──<span class="w"> </span>eb
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>02546d739a068296f32e1340f4754bbbd3e922
+│<span class="w">   </span>├──<span class="w"> </span>ee
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>cd54119ac8e595f09320298ff46bab502d5861
+│<span class="w">   </span>├──<span class="w"> </span>ef
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>f951c5a4da7490ac1022508fc98ee4533897db
+│<span class="w">   </span>├──<span class="w"> </span>fe
+│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>b734c0ff9cfb31293961003c8bcf6fadd86514
+│<span class="w">   </span>└──<span class="w"> </span>info
+├──<span class="w"> </span>packed-refs
+└──<span class="w"> </span>refs
+<span class="w">    </span>├──<span class="w"> </span>heads
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>dal-A
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>dal-B
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>main
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>yeni-bir-branch
+<span class="w">    </span>│<span class="w">   </span>├──<span class="w"> </span>yeni-branch
+<span class="w">    </span>│<span class="w">   </span>└──<span class="w"> </span>yeni-branch-2
+<span class="w">    </span>├──<span class="w"> </span>remotes
+<span class="w">    </span>└──<span class="w"> </span>tags
+
+<span class="m">45</span><span class="w"> </span>directories,<span class="w"> </span><span class="m">67</span><span class="w"> </span>files
+</code></pre></div>
+<p>Artık <code>.git</code> dizinimizin içinde branch'lerimizi görebiliyoruz. Buna ek olarak <code>objects</code> dizininin altında çok sayıda kayıt görüyoruz. <code>objects</code> dizininin içinde çok sayıda 2 harfli dizin, ve o dizinlerin altında da commit hash'lerimize benzeyen kayıtlar görüyoruz.</p>
+<p>Bu aşamada bu hash gibi ismi olan kayıtların hepsinin aslında bizim commit'lerimiz olduğunu düşünmek için bir varsayımda bulunabiliriz. Fakat kayıtların sayısı bizim repository'deki commit'lerimizin sayısından daha fazla gibi gözüküyor. Bu ön yargımız doğru mu? Bu önermemizin doğruluğunu ispatlamaya çalışalım.</p>
+<div class="admonition tip">
+<p class="admonition-title">Unix Bilgisi</p>
+<p>Buradaki ispatımızda <code>wc</code> isimli aracı kullanacağız. <code>wc</code> ismi <strong>word count</strong> kelimelerinin kısaltmasından gelmektedir. Kendisine beslenen girdi hakkında sayım bilgisi verir. Biz <code>-l</code> bayrağını kullanarak girdimizde kaç satır olduğunu göstereceğiz.</p>
+<p>Buna ek olarak <code>find</code> komutunu kullanarak <code>.git/objects</code> klasöründe <strong>recursive</strong> bir şekilde dosya listeleme yapacağız. <code>ls</code> yerine <code>find</code> aracını tercih etmemizin sebebi ise her satıra yalnızca bir dosya isminin basılmasına ihtiyaç duymamız. Bu ihtiyacı <code>ls</code> ile gerçekleştirmek bu aşama için gereksiz bir karmaşıklık meydana getirecektir. Buna ek olarak dizinleri basmamasını, yani sadece dosyaları basmasını istediğimiz için <code>-type f</code> bayrağını kullanacağız. Bu çıktıyı <code>wc</code> komutuna besleyerek dosya sayısını öğreneceğiz.</p>
+</div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>log<span class="w"> </span>--all<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+<span class="w">      </span><span class="m">13</span>
+<span class="c1">#     ^^ repository&#39;deki toplam commit sayimiz</span>
+
+$<span class="w"> </span>find<span class="w"> </span>.git/objects<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+<span class="w">      </span><span class="m">34</span>
+<span class="c1">#     ^^ repository&#39;deki toplam obje sayimiz</span>
+</code></pre></div>
+<p><code>git log</code> komutunun bize verdiği bilgiye göre repository'mizde sadece <code>13</code> adet commit bulunuyorken <code>.git/objects</code> dizininde <code>34</code> adet kayıt bulunmaktadır. Bu bulgulardan yola çıkarak repository'mizde mevcutta commit'lerimizden daha fazla objemizin olduğu sonucuna varıyoruz. Peki commit'lerimiz de bir obje sayılıyor mu? Objelerle birlikte mi saklanıyor?</p>
+<p>Dikkatli bakarsak <code>.git/objects</code> dizininin altında commit hash'lerimizi bulmamız mümkün. Fakat bunu yapmak için normalde yapacağımızdan farklı bir yöntem izlememiz gerekiyor. Aramak istediğimiz commit hash'imizin ilk iki karakterini alarak saklandığı dizini bulduktan sonra o dizin içindeki dosyalarda ismi commit hash'imizin son 38 karakterine eşit olan dosya bizim commit'imiz olacaktır.</p>
+<p>Örnek olarak <code>789492681e6b0d56b1fe142431bae464d630f2d3</code> hash'li commitimiz <code>.git/objects/78/9492681e6b0d56b1fe142431bae464d630f2d3</code> şeklinde saklanmaktadır.</p>
+<div class="admonition note">
+<p class="admonition-title">Objelerin alt dizinlere ayrılması</p>
+<p>Bir git repository'sinin yapısı gereği çok sayıda objeye sahip olması olağan bir durumdur. Git objeleri <code>objects</code> dizininde saklarken hash'lerinin ilk 2 karakterine göre alt dizinlere yerleştirir. Bu sayede büyük repository'lerde çok büyük sayılarda objeler olmasına rağmen objeler içinde arama yapmayı gerektiren işlemlerin zamansal karmaşıklığında iyileşme sağlanır. Bu işlem veritabanı sistemlerinde yapılan <strong>partition</strong> işlemiyle benzer bir yaklaşım ortaya koyar.</p>
+</div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>ls<span class="w"> </span>.git/objects/78/9492681e6b0d56b1fe142431bae464d630f2d3
+.git/objects/78/9492681e6b0d56b1fe142431bae464d630f2d3
+</code></pre></div>
+<p>Bu sayede commit'lerimizin bir dosya halinde <code>.git/objects</code> dizininin altında saklandığını göstermiş olduk. Bu noktada commit'lerimizin nasıl saklandığını, hangi formatta saklandığını ve içinde neler bulunduğunu da gösterelim.</p>
+<div class="admonition warning">
+<p class="admonition-title">Obje Dosyalarının Formatı</p>
+<p>Commit'imiz bir dosya halinde saklandığı için <code>cat</code> komutu ile terminalimize bastırabiliriz ancak git'in objeleri saklamak için kullandığı dosya biçimi <code>xml</code>, <code>json</code> veya <code>yaml</code> gibi insan tarafından kolaylıkla okunabilecek bir format olmadığı için, yani <strong>binary</strong> bir formatta olduğu için <code>cat</code> komutunu kullansak bile ekrana belli bir anlam taşıyan karakterler basmaktan farklı bir sonuca ulaşamayız.</p>
+</div>
+<p>Git'in kendi formatıyla sakladığı bir git objesinin içeriğinde ne olduğunu öğrenmek için git'ten yardım alarak <code>git cat-file</code> komutunu kullanmamız gerekmektedir. Bu komut ile birlikte git obje dosyasını açarak okunabilir bir formatta ekrana basacaktır. Bu komut yardımı ile mevcut commit'imizin anatomisini gözden geçirebiliriz.</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>cat-file<span class="w"> </span>commit<span class="w"> </span>789492681e6b0d56b1fe142431bae464d630f2d3
+tree<span class="w"> </span>eecd54119ac8e595f09320298ff46bab502d5861
+parent<span class="w"> </span>eb02546d739a068296f32e1340f4754bbbd3e922
+author<span class="w"> </span>&lt;username&gt;<span class="w"> </span>&lt;email&gt;<span class="w"> </span><span class="m">1746280401</span><span class="w"> </span>+0200
+committer<span class="w"> </span>&lt;username&gt;<span class="w"> </span>&lt;email&gt;<span class="w"> </span><span class="m">1746280401</span><span class="w"> </span>+0200
+
+squash<span class="w"> </span>merge<span class="w"> </span>dal-B
+</code></pre></div>
+<p>Buradan da açıkça görüldüğü üzere commit'imizi meydana getiren öğeler şunlardır:</p>
+<ul>
+<li>tree</li>
+<li>parent commit</li>
+<li>author kişi ve zamanı</li>
+<li>commiter kişi ve zamanı</li>
+<li>commit mesajı</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Author ve Commiter</p>
+<p>Bu aşamaya kadar bizim git'i kullanım biçimimiz gereği <code>author</code> ve <code>commiter</code> daima aynı kişiye işaret edecektir. Yazıya karmaşıklık eklemekten kaçınmak amacıyla bu iki öğenin farkını bu aşamada açıklamaktan kaçınmayı tercih ediyorum.</p>
+</div>
+<p>Burada listelenmiş öğelere, <code>tree</code> öğesi haricinde daha önce değinmiştik. Fakat commit'imizin repository'mizde meydana getirdiği değişiklikleri burada bir öğe olarak göremiyoruz. O halde commit'in yaptığı değişiklikler nerede saklanıyor?</p>
+<p>Kılavuzumuzda commit'lere değinirken commit'lerimizin repository'mizin o andaki halinin bir kopyasını sakladığından bahsetmiştik. Bu ifade ile commit'lerimizin aslında ayrı ayrı dosyalarda yaptığımız değişiklikleri saklamadığını dolaylı olarak ifade etmiş oluyoruz.</p>
+<p>Commit'ler repository'nin bir kopyasını saklıyor ifadesi doğrudan olmasa da dolaylı olarak doğru bir ifadedir. Bir commit aslında repository'mizin herhangi bir andaki dizin ağacına işaret etmektedir. Yukarıda listelediğimiz <code>tree</code> öğesi aslında repository'mizin commit'i attığımız andaki dizin yapısını recursive bir şekilde saklayan bir objeye işaret etmektedir.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../../commit-graph-relation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Commit Grafı / Soyağacı İlişkisi">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Commit Grafı / Soyağacı İlişkisi
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../tree/" class="md-footer__link md-footer__link--next" aria-label="Next: Tree">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Tree
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>

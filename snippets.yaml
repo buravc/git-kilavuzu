@@ -325,3 +325,28 @@
     commands:
       - run: CAT_FILE_HEAD_COMMIT="git cat-file commit $(git rev-parse HEAD)"
       - expand_echo_run_output: CAT_FILE_HEAD_COMMIT
+- tree:
+  - snippet: create-sub-dirs
+    commands:
+      - echo_run_output: mkdir alt-dizinim && echo "bu bir testtir" > alt-dizinim/alt-dosya.txt
+      - echo: ""
+      - echo_run_output: mkdir alt-dizinim/bir-baska-alt-dizin && echo "baska bir test" > alt-dizinim/bir-baska-alt-dizin/baska-alt-dosya.txt
+      - echo: ""
+      - echo_run_output: git add . && git commit -m "alt dizinlerle dosyalar olusturdum"
+      - echo: ""
+  - snippet: tree-sub-dirs
+    commands:
+      - echo: "# repository dizinimizin son haline bakalim"
+      - echo_run_output: tree .
+  - snippet: cat-file-tree-1
+    commands:
+      - run: CAT_FILE_HEAD_COMMIT="git cat-file -p $(git rev-parse --short HEAD)"
+      - expand_echo_run_output: CAT_FILE_HEAD_COMMIT
+      - echo: ""
+      - run: CAT_FILE_ROOT_TREE_1="git cat-file -p $(git show -s --format=%T $(git rev-parse --short HEAD))"
+      - expand_echo_run_output: CAT_FILE_ROOT_TREE_1
+  - snippet: alt-dizinim-cat-file
+    commands:
+      - run: ROOT_TREE="$(git cat-file -p $(git show -s --format=%T $(git rev-parse --short HEAD)))"
+      - run: CAT_FILE_SUB_TREE="git cat-file -p $(echo "$ROOT_TREE" | grep -F "alt-dizinim" | awk '{print $3}')"
+      - expand_echo_run_output: CAT_FILE_SUB_TREE

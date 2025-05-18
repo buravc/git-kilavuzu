@@ -35,6 +35,7 @@ nav:
   - "Commit Grafı / Soyağacı İlişkisi": commit-graph-relation.md
   - Objeler:
     - "Bir Commit'in Anatomisi": objeler/bir-commitin-anatomisi.md
+    - Tree: objeler/tree.md
 
 watch:
   - variables.yaml

@@ -15,6 +15,9 @@ Ornek olarak `test.txt` isimli dosyamizin meydana getirdigi blob'un hash'ini ell
 
 -8<- "blob.md:manual-hash"
 
+!!! tip "Unix Bilgisi"
+    Burada dosyanin boyutunu hesaplamak icin dosyayi `cat` ile okuyarak ciktisini `wc` komutuna yonlendirdik. `wc` komutunu `-c` bayragi ile kullanarak girdinin kac bayt oldugunu cikarttik. Ancak `wc` komutunun ciktisinda fazladan bosluk karakteri oldugu icin `tr -d ' '` ile bu karakterleri sildirdik. Aksi taktirde bu fazladan bosluk karakterleri hesaplayacagimiz hash'i etkileyerek farkli bir sonuc cikaracakti.
+
 Bunun yerine git'in `hash-object` komutunu kullanarak da ayni sonuca ulasabiliriz.
 
 -8<- "blob.md:git-hash"

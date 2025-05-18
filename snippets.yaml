@@ -302,4 +302,78 @@
         - echo: "# aksi taktirde `&&` kullansaydik sol taraftaki komut"
         - echo: "# 0'dan farkli bir kod ile cikis yapacagi icin sagdaki komut hic calismayacakti."
         - echo_run_output: git merge-base --is-ancestor dal-B dal-A || echo $?
-
+- bir_commitin_anatomisi:
+  - snippet: git-tree-1
+    commands:
+      - echo_run_output: tree .git
+  - snippet: commit-vs-object-count
+    commands:
+      - echo_run_output: git log --all --oneline | wc -l
+      - echo: "#     ^^ repository'deki toplam commit sayimiz"
+      - run: yq -Y -i ".bir_commitin_anatomisi.total_commit_count = \"$(git log --all --oneline | wc -l | xargs)\"" "$VARIABLES_FILE"
+      - echo: ""
+      - echo_run_output: find .git/objects -type f | wc -l
+      - echo: "#     ^^ repository'deki toplam obje sayimiz"
+      - run: yq -Y -i ".bir_commitin_anatomisi.total_object_count = \"$(find .git/objects -type f | wc -l | xargs)\"" "$VARIABLES_FILE"
+      - run: yq -Y -i ".bir_commitin_anatomisi.head_commit_hash = \"$(git rev-parse HEAD)\"" "$VARIABLES_FILE"
+      - run: yq -Y -i ".bir_commitin_anatomisi.head_commit_partitioned_path = \"$(git rev-parse HEAD | awk '{print substr($0,1,2) "/" substr($0,3)}')\"" "$VARIABLES_FILE"
+  - snippet: ls-commit-object
+    commands:
+      - run: LS_SORGU="ls .git/objects/$(git rev-parse HEAD | awk '{print substr($0,1,2) "/" substr($0,3)}')"
+      - expand_echo_run_output: LS_SORGU
+  - snippet: cat-file-head-commit
+    commands:
+      - run: CAT_FILE_HEAD_COMMIT="git cat-file commit $(git rev-parse HEAD)"
+      - expand_echo_run_output: CAT_FILE_HEAD_COMMIT
+- tree:
+  - snippet: create-sub-dirs
+    commands:
+      - echo_run_output: mkdir alt-dizinim && echo "bu bir testtir" > alt-dizinim/alt-dosya.txt
+      - echo: ""
+      - echo_run_output: mkdir alt-dizinim/bir-baska-alt-dizin && echo "baska bir test" > alt-dizinim/bir-baska-alt-dizin/baska-alt-dosya.txt
+      - echo: ""
+      - echo_run_output: git add . && git commit -m "alt dizinlerle dosyalar olusturdum"
+      - echo: ""
+  - snippet: tree-sub-dirs
+    commands:
+      - echo: "# repository dizinimizin son haline bakalim"
+      - echo_run_output: tree .
+  - snippet: cat-file-tree-1
+    commands:
+      - run: CAT_FILE_HEAD_COMMIT="git cat-file -p $(git rev-parse --short HEAD)"
+      - expand_echo_run_output: CAT_FILE_HEAD_COMMIT
+      - echo: ""
+      - run: CAT_FILE_ROOT_TREE_1="git cat-file -p $(git show -s --format=%T $(git rev-parse --short HEAD))"
+      - expand_echo_run_output: CAT_FILE_ROOT_TREE_1
+  - snippet: alt-dizinim-cat-file
+    commands:
+      - run: ROOT_TREE="$(git cat-file -p $(git show -s --format=%T $(git rev-parse --short HEAD)))"
+      - run: CAT_FILE_SUB_TREE="git cat-file -p $(echo "$ROOT_TREE" | grep -F "alt-dizinim" | awk '{print $3}')"
+      - expand_echo_run_output: CAT_FILE_SUB_TREE
+- blob:
+  - snippet: find-and-print-test-txt-blob
+    commands:
+      - run: CAT_FILE_ROOT_TREE_1="git cat-file -p $(git show -s --format=%T $(git rev-parse --short HEAD))"
+      - expand_echo_run_output: CAT_FILE_ROOT_TREE_1
+      - echo: "```"
+      - echo: "```bash"
+      - run: ROOT_TREE="$(git cat-file -p $(git show -s --format=%T $(git rev-parse --short HEAD)))"
+      - run: CAT_FILE_TEST_TXT_BLOB="git cat-file -p $(echo "$ROOT_TREE" | grep -F "test.txt" | awk '{print $3}')"
+      - expand_echo_run_output: CAT_FILE_TEST_TXT_BLOB
+  - snippet: manual-hash
+    commands:
+      - echo: "# blob hash'i icin olusturmamiz gereken format:"
+      - echo: "#"
+      - echo: "# blob <dosyanin-boyut>\\0<dosyanin-icerigi>\\n"
+      - echo: "#"
+      - echo: "# sonrasinda bu formatin sha1 ile hash'ini alacagiz"
+      - echo: $ BOYUT="$(cat test.txt | wc -c | tr -d ' ')"
+      - run: BOYUT="$(cat test.txt | wc -c | tr -d ' ')"
+      - echo: ""
+      - echo: $ ICERIK="$(cat test.txt)"
+      - run: ICERIK="$(cat test.txt)"
+      - echo: ""
+      - echo_run_output: printf "blob ${BOYUT}\0${ICERIK}\n" | sha1sum
+  - snippet: git-hash
+    commands:
+      - echo_run_output: git hash-object test.txt

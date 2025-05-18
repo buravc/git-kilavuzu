@@ -40,6 +40,10 @@ if [[ -f "$BUNDLE_FILE" ]]; then
     done
     git remote remove origin
     git checkout "$current_branch_name"
+    # Since we are cloning a bundle, this implies the resulting git objects will be packed together.
+    # This is unnatural for our repo, as we don't mention this behavior anytime.
+    # So we need to manually unpack objects, in order to preserve the repository structure.
+    mv .git/objects/pack ./PACKS && git unpack-objects < PACKS/pack-*.pack && rm -rf ./PACKS
 elif [[ -z "$START_STEP" ]]; then
     echo "no bundle is provided, creating new repo..."
     rm -rf "$REPO_DIR" || true;
@@ -58,11 +62,11 @@ create-snippet() {
 }
 
 append-snippet() {
-    sed -e "s|buravc|<username>|gI;s|avcii\.brk@gmail\.com|email|gI" >> "$1"
+    LC_ALL=C sed -e "s|buravc|<username>|gI;s|avcii\.brk@gmail\.com|email|gI" >> "$1"
 }
 
 finish-snippet() {
-    echo "\`\`\`" >> "$1"
+    { echo ""; echo "\`\`\`"; } >> "$1"
     echo "# --8<-- [end:$2]" >> "$1"
 }
 

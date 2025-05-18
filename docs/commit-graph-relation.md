@@ -1,4 +1,4 @@
-Önceki bölümlerde fast forward merge'ye değinirken bahsettiğimiz önemli bir durum vardı. Bir branch diğer branch'i kapsıyor mu? Bu sorgunun bizim için önemi fast forward merge bölümünde öne çıkmıştı. Fakat bu sorgunun ima ettiklerinin ayrı bir bölümde değinilmeyi gerektirdiğini düşünüyorum.
+Önceki bölümlerde fast-forward merge'ye değinirken bahsettiğimiz önemli bir durum vardı. Bir branch diğer branch'i kapsıyor mu? Bu sorgunun bizim için önemi fast-forward merge bölümünde öne çıkmıştı. Fakat bu sorgunun ima ettiklerinin ayrı bir bölümde değinilmeyi gerektirdiğini düşünüyorum.
 
 !!! note "Mental Model"
     Bu konuda git'i mental olarak modelleme biçimimizi tekrar gözden geçirmemizde fayda olacaktır. Bir branch bir commit'e işaret eden bir işaretçidir. Diğer bir deyişle **bir branch aynı anda birden çok commit'e değil, yalnızca tek bir commit'e işaret eder.**
@@ -21,7 +21,8 @@ Branch terimini ortadan kaldırıp yerine commit terimini kullanmaya başladığ
 
 -8<- "commit_graph_relation.md:git-log"
 
-#### İlk sorgumuz: Repository'deki ilk commit, mevcut commit'imizin atası mı?
+#### Sorgular
+##### Repository'deki ilk commit, mevcut commit'imizin atası mı?
 
 Repository'mizin mevcuttaki halinde bu sorgunun cevabı her zaman evet olacaktır. Ancak bunu bir komut ile doğrulayalım.
 
@@ -31,7 +32,7 @@ Repository'mizin mevcuttaki halinde bu sorgunun cevabı her zaman evet olacaktı
 ??? note "Birden çok **root commit**"  
     Bir git repository'sinde birden çok **root commit** bulunması mümkündür. Bunu gerçekleştirmenin yollarından birisi **orphan** bir branch oluşturmaktır. Bunu checkout yaparken `--orphan` bayrağı ile yeni bir branch oluşturarak gerçekleştirebiliriz.
 
-    Daha sonra log'u `--all --max-parents=0` bayrakları sadece **root commit**'leri gösterecek şekilde ayarlayarak birden çok **root commit**'imizin olduğunu doğrulayabiliriz.
+    Daha sonra log'u `--all --max-parents=0` bayrakları ile sadece **root commit**'leri gösterecek şekilde ayarlayarak birden çok **root commit**'imizin olduğunu doğrulayabiliriz.
     -8<- "commit_graph_relation.md:orphan-branch"
     Şimdi ise `git checkout dal-A` ile önceki branch'imize geri dönelim.
 
@@ -47,13 +48,13 @@ Repository'mizin mevcuttaki halinde bu sorgunun cevabı her zaman evet olacaktı
 
 Yukarıdaki komut ile mevcut history grafımızı yazdırdık ve `grep` ile bu grafı filtreleyerek repository'deki ilk commit mevcut history'mizde var mı yok mu sorgusuna cevabımızı "evet" olarak bulduk.
 
-#### İkinci sorgumuz: `yeni-branch` branch'inin baktığı commit, şu anki commit'imizin atası mı?
+##### `yeni-branch` isimli branch'in baktığı commit, şu anki commit'imizin atası mı?
 
 -8<- "commit_graph_relation.md:sorgu-2"
 
 `yeni-branch` isimli branch'i bir merge commit ile commit history'mize, diğer bir deyişle **soyağacımıza** bağlamıştık ve bunun sonucunda artık onun da mevcut commit'imizin bir atası olduğunu görebiliyoruz.
 
-#### Son sorgumuz: `dal-B` branch'inin baktığı commit, şu anki commit'imizin atası mı?
+##### `dal-B` branch'inin baktığı commit, şu anki commit'imizin atası mı?
 
 Hatırlarsanız `dal-B` branch'ine 2 yeni commit atıp onu daha sonra **squash merge** ile `dal-A` branch'imize merge etmiştik.
 
@@ -72,6 +73,6 @@ Buradan yola çıkarak ne zaman **squash merge** yapmak istediğimize dikkat etm
             Git komutlarından bahsederken insan tarafından okunabilmesi amaçlanan komutlara **porcelain** sıfatı kullanılır. `git log` bir **porselen** komut iken `rev-list` bir **porselen** komut değildir.
         -8<- "commit_graph_relation.md:alternatif-komut-rev-list"
 
-    - `merge-base` komutu `--is-ancestor` bayrağı ile kullanıldığı zaman bir commit diğerinin atasidir önermesi doğru ise `0` kodu ile, yanlış ise `0`'dan farklı bir kod ile çıkış yapar.
+    - `merge-base` komutu `--is-ancestor` bayrağı ile kullanıldığı zaman bir commit diğerinin atasıdir önermesi doğru ise `0` kodu ile, yanlış ise `0`'dan farklı bir kod ile çıkış yapar.
     -8<- "commit_graph_relation.md:alternatif-komut-merge-base-1"
     -8<- "commit_graph_relation.md:alternatif-komut-merge-base-2"

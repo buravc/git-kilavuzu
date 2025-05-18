@@ -21,3 +21,8 @@ fast_forward_merge:
   main_hash_after_ff: 'cef4e44'
 commit_graph_relation:
   root_commit: 95e7356
+bir_commitin_anatomisi:
+  total_commit_count: '13'
+  total_object_count: '34'
+  head_commit_hash: 789492681e6b0d56b1fe142431bae464d630f2d3
+  head_commit_partitioned_path: '78/9492681e6b0d56b1fe142431bae464d630f2d3'

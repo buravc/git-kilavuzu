@@ -36,6 +36,7 @@ nav:
   - Objeler:
     - "Bir Commit'in Anatomisi": objeler/bir-commitin-anatomisi.md
     - Tree: objeler/tree.md
+    - Blob: objeler/blob.md
 
 watch:
   - variables.yaml

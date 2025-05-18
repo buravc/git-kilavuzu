@@ -350,3 +350,13 @@
       - run: ROOT_TREE="$(git cat-file -p $(git show -s --format=%T $(git rev-parse --short HEAD)))"
       - run: CAT_FILE_SUB_TREE="git cat-file -p $(echo "$ROOT_TREE" | grep -F "alt-dizinim" | awk '{print $3}')"
       - expand_echo_run_output: CAT_FILE_SUB_TREE
+- blob:
+  - snippet: find-and-print-test-txt-blob
+    commands:
+      - run: CAT_FILE_ROOT_TREE_1="git cat-file -p $(git show -s --format=%T $(git rev-parse --short HEAD))"
+      - expand_echo_run_output: CAT_FILE_ROOT_TREE_1
+      - echo: "```"
+      - echo: "```bash"
+      - run: ROOT_TREE="$(git cat-file -p $(git show -s --format=%T $(git rev-parse --short HEAD)))"
+      - run: CAT_FILE_TEST_TXT_BLOB="git cat-file -p $(echo "$ROOT_TREE" | grep -F "test.txt" | awk '{print $3}')"
+      - expand_echo_run_output: CAT_FILE_TEST_TXT_BLOB

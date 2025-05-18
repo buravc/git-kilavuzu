@@ -33,6 +33,8 @@ nav:
     - "Conflict": merge/conflict.md
     - "Squash Merge": merge/squash-merge.md
   - "Commit Grafı / Soyağacı İlişkisi": commit-graph-relation.md
+  - Objeler:
+    - "Bir Commit'in Anatomisi": objeler/bir-commitin-anatomisi.md
 
 watch:
   - variables.yaml

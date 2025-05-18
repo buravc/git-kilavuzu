@@ -360,3 +360,20 @@
       - run: ROOT_TREE="$(git cat-file -p $(git show -s --format=%T $(git rev-parse --short HEAD)))"
       - run: CAT_FILE_TEST_TXT_BLOB="git cat-file -p $(echo "$ROOT_TREE" | grep -F "test.txt" | awk '{print $3}')"
       - expand_echo_run_output: CAT_FILE_TEST_TXT_BLOB
+  - snippet: manual-hash
+    commands:
+      - echo: "# blob hash'i icin olusturmamiz gereken format:"
+      - echo: "#"
+      - echo: "# blob <dosyanin-boyut>\\0<dosyanin-icerigi>\\n"
+      - echo: "#"
+      - echo: "# sonrasinda bu formatin sha1 ile hash'ini alacagiz"
+      - echo: $ BOYUT="$(cat test.txt | wc -c | tr -d ' ')"
+      - run: BOYUT="$(cat test.txt | wc -c | tr -d ' ')"
+      - echo: ""
+      - echo: $ ICERIK="$(cat test.txt)"
+      - run: ICERIK="$(cat test.txt)"
+      - echo: ""
+      - echo_run_output: printf "blob ${BOYUT}\0${ICERIK}\n" | sha1sum
+  - snippet: git-hash
+    commands:
+      - echo_run_output: git hash-object test.txt

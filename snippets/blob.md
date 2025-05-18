@@ -16,3 +16,26 @@ Degisiklik-2
 
 ```
 # --8<-- [end:find-and-print-test-txt-blob]
+# --8<-- [start:manual-hash]
+```bash 
+# blob hash'i icin olusturmamiz gereken format:
+#
+# blob <dosyanin-boyut>\0<dosyanin-icerigi>\n
+#
+# sonrasinda bu formatin sha1 ile hash'ini alacagiz
+$ BOYUT="$(cat test.txt | wc -c | tr -d ' ')"
+
+$ ICERIK="$(cat test.txt)"
+
+$ printf "blob ${BOYUT}\0${ICERIK}\n" | sha1sum
+52ac9288adff03447ba51676ca78a830d8b69ccb  -
+
+```
+# --8<-- [end:manual-hash]
+# --8<-- [start:git-hash]
+```bash 
+$ git hash-object test.txt
+52ac9288adff03447ba51676ca78a830d8b69ccb
+
+```
+# --8<-- [end:git-hash]

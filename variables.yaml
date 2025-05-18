@@ -20,7 +20,7 @@ fast_forward_merge:
   main_hash_before_ff: 'b5b6c09'
   main_hash_after_ff: 'cef4e44'
 commit_graph_relation:
-  root_commit: 1.7976931348623157e+308
+  root_commit: 95e7356
 bir_commitin_anatomisi:
   total_commit_count: '13'
   total_object_count: '34'
